@@ -28,7 +28,7 @@ typedef enum {
 	RS485_AD_MAX
 }RA485_ADDRESS;
 
-#define MY_RS485_ADDRESS RS485_AD_SLEVE01
+#define MY_RS485_ADDRESS RS485_AD_SLEVE02
 
 #define SLV_VERSION     0x0110
 
@@ -241,7 +241,7 @@ COM_STEP command_rcv(void)
 //    if(UART485_RCIF){
 //        dt = UART485_RCREG;
   
-    if( rcvnum > 0 ){
+    while( rcvnum > 0 ){
         dt = Get_rcv_data();
         
         switch( com_step_flg ){
@@ -296,9 +296,9 @@ COM_STEP command_rcv(void)
                 break;
             case COM_RCV_CSUM_ID:
 
-                i = 0;
+
                 sum = 0;
-                while(cmd_mesg[i] != '$'){
+                for( i = 0; i< (cmd_ptr -1); i++){
                     sum += cmd_mesg[i];
                 }
                 
@@ -328,7 +328,7 @@ COM_STEP command_rcv(void)
                 break;
         }
 
-        printf("dt=0x%02x, com_step_flg=%d\r\n", dt, com_step_flg);
+        printf("dt=0x%02x, com_step_flg=%d,rcvnum=%d\r\n", dt, com_step_flg,rcvnum);
         
     }
 
@@ -342,6 +342,17 @@ void Send_RS485(uint8_t *msg, uint8_t num)
 {
     uint8_t     i;
 
+    printf("Send_RS485()\r\n");
+    printf("Res_msg = ");
+    
+    for( i=0; i < num; i++){
+        printf("%02x ",msg[i]);
+        cmd_char[i] = ((msg[i]<0x20||msg[i]>=0x7f)? '.': msg[i]);
+    }
+    cmd_char[i] = '\0';
+    printf(" :: %s\r\n", cmd_char);
+    
+    
     UART485_CTRL  = 1;    
     for( i=0; i < num; i++){
         while (!UART485_TXSTA_TRMT); // 送信バッファが空になるまで待機
@@ -372,6 +383,7 @@ void rs485_com_task(void)
         if( cmd_mesg[RS485_ADD_ID+1] == MY_RS485_ADDRESS ){
            switch( cmd_mesg[RS485_CMD_ID+1] ){
             case RS485_CMD_STATUS:
+                printf("RS485_CMD_STATUS\r\n");
                 Res_mesg[num++] = '#';
                 Res_mesg[num++] = RS485_AD_MASTER;
                 Res_mesg[num++] = MY_RS485_ADDRESS;
@@ -393,8 +405,12 @@ void rs485_com_task(void)
 
                 Send_RS485(Res_mesg, num);
                 
+                com_step_flg = COM_RCV_INIT;
+                cmd_ptr = 0;
+                
                 break;
             case RS485_CMD_VERSION:
+                printf("RS485_CMD_VERSION\r\n");
                 i = 0;
                 Res_mesg[num++] = '#';
                 Res_mesg[num++] = RS485_AD_MASTER;
@@ -418,8 +434,12 @@ void rs485_com_task(void)
 
                 Send_RS485(Res_mesg, num);
 
+                com_step_flg = COM_RCV_INIT;
+                cmd_ptr = 0;
+
                 break;
             case RS485_CMD_MESUR:
+                printf("RS485_CMD_MESUR\r\n");
                 i = 0;
                 Res_mesg[num++] = '#';
                 Res_mesg[num++] = RS485_AD_MASTER;
@@ -439,8 +459,12 @@ void rs485_com_task(void)
 
                 Send_RS485(Res_mesg, num);
 
+                com_step_flg = COM_RCV_INIT;
+                cmd_ptr = 0;
+
                 break;
             case RS485_CMD_MESUR_DATA:
+                printf("RS485_CMD_MESUR_DATA\r\n");
                 i = 0;
                 Res_mesg[num++] = '#';
                 Res_mesg[num++] = RS485_AD_MASTER;
@@ -463,6 +487,9 @@ void rs485_com_task(void)
                 Res_mesg[num++] = sum;
 
                 Send_RS485(Res_mesg, num);
+
+                com_step_flg = COM_RCV_INIT;
+                cmd_ptr = 0;
                 
                 break;
             default:

@@ -71,12 +71,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13603
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13603: extern volatile unsigned char TXREG1 __attribute__((address(0xFAE)));
 [v _TXREG1 `Vuc ~T0 @X0 0 e@4014 ]
-"383 usr_rs485_main.c
-[; ;usr_rs485_main.c: 383:                 Res_mesg[num++] = SLV_STATUS_IDLE;
+"395 usr_rs485_main.c
+[; ;usr_rs485_main.c: 395:                 Res_mesg[num++] = SLV_STATUS_IDLE;
 [c E7174 0 1 2 .. ]
 [n E7174 . SLV_STATUS_IDLE SLV_STATUS_MESURING SLV_STATUS_ERROR  ]
-"385
-[; ;usr_rs485_main.c: 385:                 Res_mesg[num++] = SENS_NON;
+"397
+[; ;usr_rs485_main.c: 397:                 Res_mesg[num++] = SENS_NON;
 [c E7179 0 1 2 .. ]
 [n E7179 . SENS_NON SENS_VL530X SENS_SONIX  ]
 "55 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
@@ -1356,22 +1356,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 927 ]
 "244
-[; ;usr_rs485_main.c: 244:     if( rcvnum > 0 ){
-[e $ ! > -> _rcvnum `i -> 0 `i 928  ]
+[; ;usr_rs485_main.c: 244:     while( rcvnum > 0 ){
+[e $U 928  ]
+[e :U 929 ]
 {
 "245
 [; ;usr_rs485_main.c: 245:         dt = Get_rcv_data();
 [e = _dt ( _Get_rcv_data ..  ]
 "247
 [; ;usr_rs485_main.c: 247:         switch( com_step_flg ){
-[e $U 930  ]
+[e $U 932  ]
 {
 "248
 [; ;usr_rs485_main.c: 248:             case COM_RCV_INIT:
-[e :U 931 ]
+[e :U 933 ]
 "249
 [; ;usr_rs485_main.c: 249:                 if( dt == '#' ){
-[e $ ! == -> _dt `ui -> 35 `ui 932  ]
+[e $ ! == -> _dt `ui -> 35 `ui 934  ]
 {
 "250
 [; ;usr_rs485_main.c: 250:                     cmd_mesg[cmd_ptr] = dt;
@@ -1385,13 +1386,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "253
 [; ;usr_rs485_main.c: 253:                 }
 }
-[e :U 932 ]
+[e :U 934 ]
 "254
 [; ;usr_rs485_main.c: 254:                 break;
-[e $U 929  ]
+[e $U 931  ]
 "255
 [; ;usr_rs485_main.c: 255:             case COM_RCV_ADD_ID:
-[e :U 933 ]
+[e :U 935 ]
 "256
 [; ;usr_rs485_main.c: 256:                 cmd_mesg[cmd_ptr] = dt;
 [e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
@@ -1403,10 +1404,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _cmd_ptr -> -> 1 `i `uc ]
 "259
 [; ;usr_rs485_main.c: 259:                 break;
-[e $U 929  ]
+[e $U 931  ]
 "261
 [; ;usr_rs485_main.c: 261:             case COM_RCV_ADD_ID_DIST:
-[e :U 934 ]
+[e :U 936 ]
 "262
 [; ;usr_rs485_main.c: 262:                 cmd_mesg[cmd_ptr] = dt;
 [e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
@@ -1418,13 +1419,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _cmd_ptr -> -> 1 `i `uc ]
 "265
 [; ;usr_rs485_main.c: 265:                 break;
-[e $U 929  ]
+[e $U 931  ]
 "267
 [; ;usr_rs485_main.c: 267:             case COM_RCV_ADD_ID_SOURCE:
-[e :U 935 ]
+[e :U 937 ]
 "268
 [; ;usr_rs485_main.c: 268:                 if( dt == '*' ){
-[e $ ! == -> _dt `ui -> 42 `ui 936  ]
+[e $ ! == -> _dt `ui -> 42 `ui 938  ]
 {
 "269
 [; ;usr_rs485_main.c: 269:                     cmd_mesg[cmd_ptr] = dt;
@@ -1438,10 +1439,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "272
 [; ;usr_rs485_main.c: 272:                 }
 }
-[e $U 937  ]
+[e $U 939  ]
 "273
 [; ;usr_rs485_main.c: 273:                 else{
-[e :U 936 ]
+[e :U 938 ]
 {
 "274
 [; ;usr_rs485_main.c: 274:                     com_step_flg = COM_RCV_INIT;
@@ -1452,13 +1453,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "276
 [; ;usr_rs485_main.c: 276:                 }
 }
-[e :U 937 ]
+[e :U 939 ]
 "277
 [; ;usr_rs485_main.c: 277:                 break;
-[e $U 929  ]
+[e $U 931  ]
 "279
 [; ;usr_rs485_main.c: 279:             case COM_RCV_CMD_ID:
-[e :U 938 ]
+[e :U 940 ]
 "280
 [; ;usr_rs485_main.c: 280:                 cmd_mesg[cmd_ptr] = dt;
 [e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
@@ -1470,13 +1471,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _cmd_ptr -> -> 1 `i `uc ]
 "283
 [; ;usr_rs485_main.c: 283:                 break;
-[e $U 929  ]
+[e $U 931  ]
 "285
 [; ;usr_rs485_main.c: 285:             case COM_RCV_COMMAND:
-[e :U 939 ]
+[e :U 941 ]
 "286
 [; ;usr_rs485_main.c: 286:                 if( dt == '$' ){
-[e $ ! == -> _dt `ui -> 36 `ui 940  ]
+[e $ ! == -> _dt `ui -> 36 `ui 942  ]
 {
 "287
 [; ;usr_rs485_main.c: 287:                     cmd_mesg[cmd_ptr] = dt;
@@ -1490,10 +1491,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "290
 [; ;usr_rs485_main.c: 290:                 }
 }
-[e $U 941  ]
+[e $U 943  ]
 "291
 [; ;usr_rs485_main.c: 291:                 else{
-[e :U 940 ]
+[e :U 942 ]
 {
 "292
 [; ;usr_rs485_main.c: 292:                     cmd_mesg[cmd_ptr] = dt;
@@ -1507,23 +1508,22 @@ Version 4.0 HI-TECH Software Intermediate Code
 "295
 [; ;usr_rs485_main.c: 295:                 }
 }
-[e :U 941 ]
+[e :U 943 ]
 "296
 [; ;usr_rs485_main.c: 296:                 break;
-[e $U 929  ]
+[e $U 931  ]
 "297
 [; ;usr_rs485_main.c: 297:             case COM_RCV_CSUM_ID:
-[e :U 942 ]
-"299
-[; ;usr_rs485_main.c: 299:                 i = 0;
-[e = _i -> -> 0 `i `uc ]
+[e :U 944 ]
 "300
 [; ;usr_rs485_main.c: 300:                 sum = 0;
 [e = _sum -> -> 0 `i `uc ]
 "301
-[; ;usr_rs485_main.c: 301:                 while(cmd_mesg[i] != '$'){
-[e $U 943  ]
-[e :U 944 ]
+[; ;usr_rs485_main.c: 301:                 for( i = 0; i< (cmd_ptr -1); i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 948  ]
+[e :U 945 ]
 {
 "302
 [; ;usr_rs485_main.c: 302:                     sum += cmd_mesg[i];
@@ -1531,14 +1531,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "303
 [; ;usr_rs485_main.c: 303:                 }
 }
-[e :U 943 ]
-"301
-[; ;usr_rs485_main.c: 301:                 while(cmd_mesg[i] != '$'){
-[e $ != -> *U + &U _cmd_mesg * -> _i `ux -> -> # *U &U _cmd_mesg `ui `ux `ui -> 36 `ui 944  ]
-[e :U 945 ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 948 ]
+[e $ < -> _i `i - -> _cmd_ptr `i -> 1 `i 945  ]
+[e :U 946 ]
+}
 "305
 [; ;usr_rs485_main.c: 305:                 if( sum == dt ){
-[e $ ! == -> _sum `i -> _dt `i 946  ]
+[e $ ! == -> _sum `i -> _dt `i 949  ]
 {
 "306
 [; ;usr_rs485_main.c: 306:                     cmd_mesg[cmd_ptr] = dt;
@@ -1556,8 +1556,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;usr_rs485_main.c: 312:                     for( i=0; i<cmd_ptr; i++ ){
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 950  ]
-[e :U 947 ]
+[e $U 953  ]
+[e :U 950 ]
 {
 "313
 [; ;usr_rs485_main.c: 313:                         printf("%02x ",cmd_mesg[i]);
@@ -1569,9 +1569,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;usr_rs485_main.c: 315:                     }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e :U 950 ]
-[e $ < -> _i `i -> _cmd_ptr `i 947  ]
-[e :U 948 ]
+[e :U 953 ]
+[e $ < -> _i `i -> _cmd_ptr `i 950  ]
+[e :U 951 ]
 }
 "316
 [; ;usr_rs485_main.c: 316:                     cmd_char[i+1] = '\0';
@@ -1582,10 +1582,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "320
 [; ;usr_rs485_main.c: 320:                 }
 }
-[e $U 951  ]
+[e $U 954  ]
 "321
 [; ;usr_rs485_main.c: 321:                 else{
-[e :U 946 ]
+[e :U 949 ]
 {
 "322
 [; ;usr_rs485_main.c: 322:                     com_step_flg = COM_RCV_INIT;
@@ -1596,38 +1596,42 @@ Version 4.0 HI-TECH Software Intermediate Code
 "324
 [; ;usr_rs485_main.c: 324:                 }
 }
-[e :U 951 ]
+[e :U 954 ]
 "326
 [; ;usr_rs485_main.c: 326:             case COM_RCV_COMPLITE:
-[e :U 952 ]
+[e :U 955 ]
 "327
 [; ;usr_rs485_main.c: 327:             default:
-[e :U 953 ]
+[e :U 956 ]
 "328
 [; ;usr_rs485_main.c: 328:                 break;
-[e $U 929  ]
+[e $U 931  ]
 "329
 [; ;usr_rs485_main.c: 329:         }
 }
-[e $U 929  ]
-[e :U 930 ]
-[e [\ -> _com_step_flg `ui , $ -> . `E7190 0 `ui 931
- , $ -> . `E7190 1 `ui 933
- , $ -> . `E7190 2 `ui 934
- , $ -> . `E7190 3 `ui 935
- , $ -> . `E7190 4 `ui 938
- , $ -> . `E7190 5 `ui 939
- , $ -> . `E7190 6 `ui 942
- , $ -> . `E7190 8 `ui 952
- 953 ]
-[e :U 929 ]
+[e $U 931  ]
+[e :U 932 ]
+[e [\ -> _com_step_flg `ui , $ -> . `E7190 0 `ui 933
+ , $ -> . `E7190 1 `ui 935
+ , $ -> . `E7190 2 `ui 936
+ , $ -> . `E7190 3 `ui 937
+ , $ -> . `E7190 4 `ui 940
+ , $ -> . `E7190 5 `ui 941
+ , $ -> . `E7190 6 `ui 944
+ , $ -> . `E7190 8 `ui 955
+ 956 ]
+[e :U 931 ]
 "331
-[; ;usr_rs485_main.c: 331:         printf("dt=0x%02x, com_step_flg=%d\r\n", dt, com_step_flg);
-[e ( _printf , , (. :s 6C -> _dt `i -> _com_step_flg `ui ]
+[; ;usr_rs485_main.c: 331:         printf("dt=0x%02x, com_step_flg=%d,rcvnum=%d\r\n", dt, com_step_flg,rcvnum);
+[e ( _printf , , , (. :s 6C -> _dt `i -> _com_step_flg `ui -> _rcvnum `i ]
 "333
 [; ;usr_rs485_main.c: 333:     }
 }
 [e :U 928 ]
+"244
+[; ;usr_rs485_main.c: 244:     while( rcvnum > 0 ){
+[e $ > -> _rcvnum `i -> 0 `i 929  ]
+[e :U 930 ]
 "335
 [; ;usr_rs485_main.c: 335:     return com_step_flg;
 [e ) _com_step_flg ]
@@ -1654,382 +1658,459 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;usr_rs485_main.c: 343:     uint8_t i;
 [v _i `uc ~T0 @X0 1 a ]
 "345
-[; ;usr_rs485_main.c: 345:     LATAbits.LATA2 = 1;
-[e = . . _LATAbits 0 2 -> -> 1 `i `uc ]
+[; ;usr_rs485_main.c: 345:     printf("Send_RS485()\r\n");
+[e ( _printf :s 7C ]
 "346
-[; ;usr_rs485_main.c: 346:     for( i=0; i < num; i++){
+[; ;usr_rs485_main.c: 346:     printf("Res_msg = ");
+[e ( _printf :s 8C ]
+"348
+[; ;usr_rs485_main.c: 348:     for( i=0; i < num; i++){
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 958  ]
-[e :U 955 ]
+[e $U 961  ]
+[e :U 958 ]
 {
-"347
-[; ;usr_rs485_main.c: 347:         while (!TXSTA1bits.TRMT);
-[e $U 959  ]
-[e :U 960 ]
-[e :U 959 ]
-[e $ ! != -> . . _TXSTA1bits 0 1 `i -> 0 `i 960  ]
-[e :U 961 ]
-"348
-[; ;usr_rs485_main.c: 348:         TXREG1 = msg[i];
-[e = _TXREG1 *U + _msg * -> _i `ux -> -> # *U _msg `ui `ux ]
 "349
-[; ;usr_rs485_main.c: 349:     }
+[; ;usr_rs485_main.c: 349:         printf("%02x ",msg[i]);
+[e ( _printf , (. :s 9C -> *U + _msg * -> _i `ux -> -> # *U _msg `ui `ux `i ]
+"350
+[; ;usr_rs485_main.c: 350:         cmd_char[i] = ((msg[i]<0x20||msg[i]>=0x7f)? '.': msg[i]);
+[e = *U + &U _cmd_char * -> _i `ux -> -> # *U &U _cmd_char `ui `ux -> ? || < -> *U + _msg * -> _i `ux -> -> # *U _msg `ui `ux `i -> 32 `i >= -> *U + _msg * -> _i `ux -> -> # *U _msg `ui `ux `i -> 127 `i : -> 46 `ui -> *U + _msg * -> _i `ux -> -> # *U _msg `ui `ux `ui `uc ]
+"351
+[; ;usr_rs485_main.c: 351:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e :U 958 ]
-[e $ < -> _i `i -> _num `i 955  ]
-[e :U 956 ]
+[e :U 961 ]
+[e $ < -> _i `i -> _num `i 958  ]
+[e :U 959 ]
 }
-"350
-[; ;usr_rs485_main.c: 350:     while (!TXSTA1bits.TRMT);
-[e $U 962  ]
-[e :U 963 ]
-[e :U 962 ]
-[e $ ! != -> . . _TXSTA1bits 0 1 `i -> 0 `i 963  ]
-[e :U 964 ]
-"351
-[; ;usr_rs485_main.c: 351:     LATAbits.LATA2 = 0;
-[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
 "352
-[; ;usr_rs485_main.c: 352: }
-[e :UE 954 ]
-}
+[; ;usr_rs485_main.c: 352:     cmd_char[i] = '\0';
+[e = *U + &U _cmd_char * -> _i `ux -> -> # *U &U _cmd_char `ui `ux -> -> 0 `ui `uc ]
+"353
+[; ;usr_rs485_main.c: 353:     printf(" :: %s\r\n", cmd_char);
+[e ( _printf , (. :s 10C &U _cmd_char ]
+"356
+[; ;usr_rs485_main.c: 356:     LATAbits.LATA2 = 1;
+[e = . . _LATAbits 0 2 -> -> 1 `i `uc ]
+"357
+[; ;usr_rs485_main.c: 357:     for( i=0; i < num; i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 965  ]
+[e :U 962 ]
+{
 "358
-[; ;usr_rs485_main.c: 358: void rs485_com_task(void)
-[v _rs485_com_task `(v ~T0 @X0 1 ef ]
+[; ;usr_rs485_main.c: 358:         while (!TXSTA1bits.TRMT);
+[e $U 966  ]
+[e :U 967 ]
+[e :U 966 ]
+[e $ ! != -> . . _TXSTA1bits 0 1 `i -> 0 `i 967  ]
+[e :U 968 ]
 "359
-[; ;usr_rs485_main.c: 359: {
+[; ;usr_rs485_main.c: 359:         TXREG1 = msg[i];
+[e = _TXREG1 *U + _msg * -> _i `ux -> -> # *U _msg `ui `ux ]
+"360
+[; ;usr_rs485_main.c: 360:     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 965 ]
+[e $ < -> _i `i -> _num `i 962  ]
+[e :U 963 ]
+}
+"361
+[; ;usr_rs485_main.c: 361:     while (!TXSTA1bits.TRMT);
+[e $U 969  ]
+[e :U 970 ]
+[e :U 969 ]
+[e $ ! != -> . . _TXSTA1bits 0 1 `i -> 0 `i 970  ]
+[e :U 971 ]
+"362
+[; ;usr_rs485_main.c: 362:     LATAbits.LATA2 = 0;
+[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
+"363
+[; ;usr_rs485_main.c: 363: }
+[e :UE 957 ]
+}
+"369
+[; ;usr_rs485_main.c: 369: void rs485_com_task(void)
+[v _rs485_com_task `(v ~T0 @X0 1 ef ]
+"370
+[; ;usr_rs485_main.c: 370: {
 {
 [e :U _rs485_com_task ]
 [f ]
-"361
-[; ;usr_rs485_main.c: 361:     uint8_t i = 0;
+"372
+[; ;usr_rs485_main.c: 372:     uint8_t i = 0;
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-"362
-[; ;usr_rs485_main.c: 362:     uint8_t num = 0;
+"373
+[; ;usr_rs485_main.c: 373:     uint8_t num = 0;
 [v _num `uc ~T0 @X0 1 a ]
 [e = _num -> -> 0 `i `uc ]
-"364
-[; ;usr_rs485_main.c: 364:     uint8_t sum = 0;
+"375
+[; ;usr_rs485_main.c: 375:     uint8_t sum = 0;
 [v _sum `uc ~T0 @X0 1 a ]
 [e = _sum -> -> 0 `i `uc ]
-"365
-[; ;usr_rs485_main.c: 365:     float dt = 10.25;
+"376
+[; ;usr_rs485_main.c: 376:     float dt = 10.25;
 [v _dt `f ~T0 @X0 1 a ]
 [e = _dt -> .10.25 `f ]
-"366
-[; ;usr_rs485_main.c: 366:     uint32_t dt32;
-[v _dt32 `ul ~T0 @X0 1 a ]
-"368
-[; ;usr_rs485_main.c: 368:     dt32 = (uint32_t)dt;
-[e = _dt32 -> _dt `ul ]
-"371
-[; ;usr_rs485_main.c: 371:     if( command_rcv() == COM_RCV_COMPLITE){
-[e $ ! == -> ( _command_rcv ..  `ui -> . `E7190 8 `ui 966  ]
-{
-"372
-[; ;usr_rs485_main.c: 372:         if( cmd_mesg[0x00 +1] == RS485_AD_SLEVE01 ){
-[e $ ! == -> *U + &U _cmd_mesg * -> -> + -> 0 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux `i -> . `E7157 1 `i 967  ]
-{
-"373
-[; ;usr_rs485_main.c: 373:            switch( cmd_mesg[0x03 +1] ){
-[e $U 969  ]
-{
-"374
-[; ;usr_rs485_main.c: 374:             case RS485_CMD_STATUS:
-[e :U 970 ]
-"375
-[; ;usr_rs485_main.c: 375:                 Res_mesg[num++] = '#';
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
-"376
-[; ;usr_rs485_main.c: 376:                 Res_mesg[num++] = RS485_AD_MASTER;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
 "377
-[; ;usr_rs485_main.c: 377:                 Res_mesg[num++] = RS485_AD_SLEVE01;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
+[; ;usr_rs485_main.c: 377:     uint32_t dt32;
+[v _dt32 `ul ~T0 @X0 1 a ]
 "379
-[; ;usr_rs485_main.c: 379:                 Res_mesg[num++] = '*';
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
-"380
-[; ;usr_rs485_main.c: 380:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
-"381
-[; ;usr_rs485_main.c: 381:                 Res_mesg[num++] = 0;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+[; ;usr_rs485_main.c: 379:     dt32 = (uint32_t)dt;
+[e = _dt32 -> _dt `ul ]
+"382
+[; ;usr_rs485_main.c: 382:     if( command_rcv() == COM_RCV_COMPLITE){
+[e $ ! == -> ( _command_rcv ..  `ui -> . `E7190 8 `ui 973  ]
+{
 "383
-[; ;usr_rs485_main.c: 383:                 Res_mesg[num++] = SLV_STATUS_IDLE;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7174 0 `uc ]
+[; ;usr_rs485_main.c: 383:         if( cmd_mesg[0x00 +1] == RS485_AD_SLEVE02 ){
+[e $ ! == -> *U + &U _cmd_mesg * -> -> + -> 0 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux `i -> . `E7157 2 `i 974  ]
+{
 "384
-[; ;usr_rs485_main.c: 384:                 Res_mesg[num++] = 0;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+[; ;usr_rs485_main.c: 384:            switch( cmd_mesg[0x03 +1] ){
+[e $U 976  ]
+{
 "385
-[; ;usr_rs485_main.c: 385:                 Res_mesg[num++] = SENS_NON;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7179 0 `uc ]
-"387
-[; ;usr_rs485_main.c: 387:                 for( i=0; i < num; i++){
-{
-[e = _i -> -> 0 `i `uc ]
-[e $U 974  ]
-[e :U 971 ]
-{
-"388
-[; ;usr_rs485_main.c: 388:                     sum += Res_mesg[i];
-[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
-"389
-[; ;usr_rs485_main.c: 389:                 }
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 974 ]
-[e $ < -> _i `i -> _num `i 971  ]
-[e :U 972 ]
-}
-"391
-[; ;usr_rs485_main.c: 391:                 Res_mesg[num++] = '$';
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
-"392
-[; ;usr_rs485_main.c: 392:                 Res_mesg[num++] = sum;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
-"394
-[; ;usr_rs485_main.c: 394:                 Send_RS485(Res_mesg, num);
-[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
-"396
-[; ;usr_rs485_main.c: 396:                 break;
-[e $U 968  ]
-"397
-[; ;usr_rs485_main.c: 397:             case RS485_CMD_VERSION:
-[e :U 975 ]
-"398
-[; ;usr_rs485_main.c: 398:                 i = 0;
-[e = _i -> -> 0 `i `uc ]
-"399
-[; ;usr_rs485_main.c: 399:                 Res_mesg[num++] = '#';
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
-"400
-[; ;usr_rs485_main.c: 400:                 Res_mesg[num++] = RS485_AD_MASTER;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
-"401
-[; ;usr_rs485_main.c: 401:                 Res_mesg[num++] = RS485_AD_SLEVE01;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
-"403
-[; ;usr_rs485_main.c: 403:                 Res_mesg[num++] = '*';
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
-"404
-[; ;usr_rs485_main.c: 404:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
-"405
-[; ;usr_rs485_main.c: 405:                 Res_mesg[num++] = 0;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
-"407
-[; ;usr_rs485_main.c: 407:                 Res_mesg[num++] = 0x0110 & 0x00ff;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> & -> 272 `i -> 255 `i `uc ]
-"408
-[; ;usr_rs485_main.c: 408:                 Res_mesg[num++] = 0x0110 >> 8;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> -> 272 `i -> 8 `i `uc ]
-"409
-[; ;usr_rs485_main.c: 409:                 Res_mesg[num++] = 0;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
-"410
-[; ;usr_rs485_main.c: 410:                 Res_mesg[num++] = 0;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
-"412
-[; ;usr_rs485_main.c: 412:                 for( i=0; i < num; i++){
-{
-[e = _i -> -> 0 `i `uc ]
-[e $U 979  ]
-[e :U 976 ]
-{
-"413
-[; ;usr_rs485_main.c: 413:                     sum += Res_mesg[i];
-[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
-"414
-[; ;usr_rs485_main.c: 414:                 }
-}
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 979 ]
-[e $ < -> _i `i -> _num `i 976  ]
+[; ;usr_rs485_main.c: 385:             case RS485_CMD_STATUS:
 [e :U 977 ]
-}
-"416
-[; ;usr_rs485_main.c: 416:                 Res_mesg[num++] = '$';
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
-"417
-[; ;usr_rs485_main.c: 417:                 Res_mesg[num++] = sum;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
-"419
-[; ;usr_rs485_main.c: 419:                 Send_RS485(Res_mesg, num);
-[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
-"421
-[; ;usr_rs485_main.c: 421:                 break;
-[e $U 968  ]
-"422
-[; ;usr_rs485_main.c: 422:             case RS485_CMD_MESUR:
-[e :U 980 ]
-"423
-[; ;usr_rs485_main.c: 423:                 i = 0;
-[e = _i -> -> 0 `i `uc ]
-"424
-[; ;usr_rs485_main.c: 424:                 Res_mesg[num++] = '#';
+"386
+[; ;usr_rs485_main.c: 386:                 printf("RS485_CMD_STATUS\r\n");
+[e ( _printf :s 11C ]
+"387
+[; ;usr_rs485_main.c: 387:                 Res_mesg[num++] = '#';
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
-"425
-[; ;usr_rs485_main.c: 425:                 Res_mesg[num++] = RS485_AD_MASTER;
+"388
+[; ;usr_rs485_main.c: 388:                 Res_mesg[num++] = RS485_AD_MASTER;
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
-"426
-[; ;usr_rs485_main.c: 426:                 Res_mesg[num++] = RS485_AD_SLEVE01;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
-"428
-[; ;usr_rs485_main.c: 428:                 Res_mesg[num++] = '*';
+"389
+[; ;usr_rs485_main.c: 389:                 Res_mesg[num++] = RS485_AD_SLEVE02;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 2 `uc ]
+"391
+[; ;usr_rs485_main.c: 391:                 Res_mesg[num++] = '*';
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
-"429
-[; ;usr_rs485_main.c: 429:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+"392
+[; ;usr_rs485_main.c: 392:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
-"430
-[; ;usr_rs485_main.c: 430:                 Res_mesg[num++] = 0;
+"393
+[; ;usr_rs485_main.c: 393:                 Res_mesg[num++] = 0;
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
-"433
-[; ;usr_rs485_main.c: 433:                 for( i=0; i < num; i++){
+"395
+[; ;usr_rs485_main.c: 395:                 Res_mesg[num++] = SLV_STATUS_IDLE;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7174 0 `uc ]
+"396
+[; ;usr_rs485_main.c: 396:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"397
+[; ;usr_rs485_main.c: 397:                 Res_mesg[num++] = SENS_NON;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7179 0 `uc ]
+"399
+[; ;usr_rs485_main.c: 399:                 for( i=0; i < num; i++){
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 984  ]
-[e :U 981 ]
+[e $U 981  ]
+[e :U 978 ]
 {
-"434
-[; ;usr_rs485_main.c: 434:                     sum += Res_mesg[i];
+"400
+[; ;usr_rs485_main.c: 400:                     sum += Res_mesg[i];
 [e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
-"435
-[; ;usr_rs485_main.c: 435:                 }
+"401
+[; ;usr_rs485_main.c: 401:                 }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e :U 984 ]
-[e $ < -> _i `i -> _num `i 981  ]
-[e :U 982 ]
+[e :U 981 ]
+[e $ < -> _i `i -> _num `i 978  ]
+[e :U 979 ]
 }
-"437
-[; ;usr_rs485_main.c: 437:                 Res_mesg[num++] = '$';
+"403
+[; ;usr_rs485_main.c: 403:                 Res_mesg[num++] = '$';
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
-"438
-[; ;usr_rs485_main.c: 438:                 Res_mesg[num++] = sum;
+"404
+[; ;usr_rs485_main.c: 404:                 Res_mesg[num++] = sum;
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
-"440
-[; ;usr_rs485_main.c: 440:                 Send_RS485(Res_mesg, num);
+"406
+[; ;usr_rs485_main.c: 406:                 Send_RS485(Res_mesg, num);
 [e ( _Send_RS485 (2 , &U _Res_mesg _num ]
-"442
-[; ;usr_rs485_main.c: 442:                 break;
-[e $U 968  ]
-"443
-[; ;usr_rs485_main.c: 443:             case RS485_CMD_MESUR_DATA:
-[e :U 985 ]
-"444
-[; ;usr_rs485_main.c: 444:                 i = 0;
+"408
+[; ;usr_rs485_main.c: 408:                 com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"409
+[; ;usr_rs485_main.c: 409:                 cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"411
+[; ;usr_rs485_main.c: 411:                 break;
+[e $U 975  ]
+"412
+[; ;usr_rs485_main.c: 412:             case RS485_CMD_VERSION:
+[e :U 982 ]
+"413
+[; ;usr_rs485_main.c: 413:                 printf("RS485_CMD_VERSION\r\n");
+[e ( _printf :s 12C ]
+"414
+[; ;usr_rs485_main.c: 414:                 i = 0;
 [e = _i -> -> 0 `i `uc ]
-"445
-[; ;usr_rs485_main.c: 445:                 Res_mesg[num++] = '#';
+"415
+[; ;usr_rs485_main.c: 415:                 Res_mesg[num++] = '#';
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
-"446
-[; ;usr_rs485_main.c: 446:                 Res_mesg[num++] = RS485_AD_MASTER;
+"416
+[; ;usr_rs485_main.c: 416:                 Res_mesg[num++] = RS485_AD_MASTER;
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
-"447
-[; ;usr_rs485_main.c: 447:                 Res_mesg[num++] = RS485_AD_SLEVE01;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
-"449
-[; ;usr_rs485_main.c: 449:                 Res_mesg[num++] = '*';
+"417
+[; ;usr_rs485_main.c: 417:                 Res_mesg[num++] = RS485_AD_SLEVE02;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 2 `uc ]
+"419
+[; ;usr_rs485_main.c: 419:                 Res_mesg[num++] = '*';
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
-"450
-[; ;usr_rs485_main.c: 450:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+"420
+[; ;usr_rs485_main.c: 420:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
-"451
-[; ;usr_rs485_main.c: 451:                 Res_mesg[num++] = 0;
+"421
+[; ;usr_rs485_main.c: 421:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"423
+[; ;usr_rs485_main.c: 423:                 Res_mesg[num++] = 0x0110 & 0x00ff;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> & -> 272 `i -> 255 `i `uc ]
+"424
+[; ;usr_rs485_main.c: 424:                 Res_mesg[num++] = 0x0110 >> 8;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> -> 272 `i -> 8 `i `uc ]
+"425
+[; ;usr_rs485_main.c: 425:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"426
+[; ;usr_rs485_main.c: 426:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"428
+[; ;usr_rs485_main.c: 428:                 for( i=0; i < num; i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 986  ]
+[e :U 983 ]
+{
+"429
+[; ;usr_rs485_main.c: 429:                     sum += Res_mesg[i];
+[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
+"430
+[; ;usr_rs485_main.c: 430:                 }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 986 ]
+[e $ < -> _i `i -> _num `i 983  ]
+[e :U 984 ]
+}
+"432
+[; ;usr_rs485_main.c: 432:                 Res_mesg[num++] = '$';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
+"433
+[; ;usr_rs485_main.c: 433:                 Res_mesg[num++] = sum;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
+"435
+[; ;usr_rs485_main.c: 435:                 Send_RS485(Res_mesg, num);
+[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
+"437
+[; ;usr_rs485_main.c: 437:                 com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"438
+[; ;usr_rs485_main.c: 438:                 cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"440
+[; ;usr_rs485_main.c: 440:                 break;
+[e $U 975  ]
+"441
+[; ;usr_rs485_main.c: 441:             case RS485_CMD_MESUR:
+[e :U 987 ]
+"442
+[; ;usr_rs485_main.c: 442:                 printf("RS485_CMD_MESUR\r\n");
+[e ( _printf :s 13C ]
+"443
+[; ;usr_rs485_main.c: 443:                 i = 0;
+[e = _i -> -> 0 `i `uc ]
+"444
+[; ;usr_rs485_main.c: 444:                 Res_mesg[num++] = '#';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
+"445
+[; ;usr_rs485_main.c: 445:                 Res_mesg[num++] = RS485_AD_MASTER;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
+"446
+[; ;usr_rs485_main.c: 446:                 Res_mesg[num++] = RS485_AD_SLEVE02;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 2 `uc ]
+"448
+[; ;usr_rs485_main.c: 448:                 Res_mesg[num++] = '*';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
+"449
+[; ;usr_rs485_main.c: 449:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
+"450
+[; ;usr_rs485_main.c: 450:                 Res_mesg[num++] = 0;
 [e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
 "453
-[; ;usr_rs485_main.c: 453:                 Res_mesg[num++] = (uint8_t) dt32;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> _dt32 `uc ]
-"454
-[; ;usr_rs485_main.c: 454:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 8 );
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 8 `i `uc ]
-"455
-[; ;usr_rs485_main.c: 455:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 16 );
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 16 `i `uc ]
-"456
-[; ;usr_rs485_main.c: 456:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 24 );
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 24 `i `uc ]
-"458
-[; ;usr_rs485_main.c: 458:                 for( i=0; i < num; i++){
+[; ;usr_rs485_main.c: 453:                 for( i=0; i < num; i++){
 {
 [e = _i -> -> 0 `i `uc ]
-[e $U 989  ]
-[e :U 986 ]
+[e $U 991  ]
+[e :U 988 ]
 {
-"459
-[; ;usr_rs485_main.c: 459:                     sum += Res_mesg[i];
+"454
+[; ;usr_rs485_main.c: 454:                     sum += Res_mesg[i];
 [e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
-"460
-[; ;usr_rs485_main.c: 460:                 }
+"455
+[; ;usr_rs485_main.c: 455:                 }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e :U 989 ]
-[e $ < -> _i `i -> _num `i 986  ]
-[e :U 987 ]
-}
-"462
-[; ;usr_rs485_main.c: 462:                 Res_mesg[num++] = '$';
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
-"463
-[; ;usr_rs485_main.c: 463:                 Res_mesg[num++] = sum;
-[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
-"465
-[; ;usr_rs485_main.c: 465:                 Send_RS485(Res_mesg, num);
-[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
-"467
-[; ;usr_rs485_main.c: 467:                 break;
-[e $U 968  ]
-"468
-[; ;usr_rs485_main.c: 468:             default:
-[e :U 990 ]
-"469
-[; ;usr_rs485_main.c: 469:                 break;
-[e $U 968  ]
-"470
-[; ;usr_rs485_main.c: 470:            }
-}
-[e $U 968  ]
-[e :U 969 ]
-[e [\ -> *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux `i , $ . `E7163 0 970
- , $ . `E7163 1 975
- , $ . `E7163 2 980
- , $ . `E7163 3 985
- 990 ]
-[e :U 968 ]
-"472
-[; ;usr_rs485_main.c: 472:         }
-}
-[e $U 991  ]
-"473
-[; ;usr_rs485_main.c: 473:         else{
-[e :U 967 ]
-{
-"474
-[; ;usr_rs485_main.c: 474:             com_step_flg = COM_RCV_INIT;
-[e = _com_step_flg . `E7190 0 ]
-"475
-[; ;usr_rs485_main.c: 475:             cmd_ptr = 0;
-[e = _cmd_ptr -> -> 0 `i `uc ]
-"476
-[; ;usr_rs485_main.c: 476:         }
-}
 [e :U 991 ]
-"477
-[; ;usr_rs485_main.c: 477:     }
+[e $ < -> _i `i -> _num `i 988  ]
+[e :U 989 ]
 }
-[e :U 966 ]
+"457
+[; ;usr_rs485_main.c: 457:                 Res_mesg[num++] = '$';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
+"458
+[; ;usr_rs485_main.c: 458:                 Res_mesg[num++] = sum;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
+"460
+[; ;usr_rs485_main.c: 460:                 Send_RS485(Res_mesg, num);
+[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
+"462
+[; ;usr_rs485_main.c: 462:                 com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"463
+[; ;usr_rs485_main.c: 463:                 cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"465
+[; ;usr_rs485_main.c: 465:                 break;
+[e $U 975  ]
+"466
+[; ;usr_rs485_main.c: 466:             case RS485_CMD_MESUR_DATA:
+[e :U 992 ]
+"467
+[; ;usr_rs485_main.c: 467:                 printf("RS485_CMD_MESUR_DATA\r\n");
+[e ( _printf :s 14C ]
+"468
+[; ;usr_rs485_main.c: 468:                 i = 0;
+[e = _i -> -> 0 `i `uc ]
+"469
+[; ;usr_rs485_main.c: 469:                 Res_mesg[num++] = '#';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
+"470
+[; ;usr_rs485_main.c: 470:                 Res_mesg[num++] = RS485_AD_MASTER;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
+"471
+[; ;usr_rs485_main.c: 471:                 Res_mesg[num++] = RS485_AD_SLEVE02;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 2 `uc ]
+"473
+[; ;usr_rs485_main.c: 473:                 Res_mesg[num++] = '*';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
+"474
+[; ;usr_rs485_main.c: 474:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
+"475
+[; ;usr_rs485_main.c: 475:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"477
+[; ;usr_rs485_main.c: 477:                 Res_mesg[num++] = (uint8_t) dt32;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> _dt32 `uc ]
 "478
-[; ;usr_rs485_main.c: 478: }
-[e :UE 965 ]
+[; ;usr_rs485_main.c: 478:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 8 );
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 8 `i `uc ]
+"479
+[; ;usr_rs485_main.c: 479:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 16 );
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 16 `i `uc ]
+"480
+[; ;usr_rs485_main.c: 480:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 24 );
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 24 `i `uc ]
+"482
+[; ;usr_rs485_main.c: 482:                 for( i=0; i < num; i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 996  ]
+[e :U 993 ]
+{
+"483
+[; ;usr_rs485_main.c: 483:                     sum += Res_mesg[i];
+[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
+"484
+[; ;usr_rs485_main.c: 484:                 }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 996 ]
+[e $ < -> _i `i -> _num `i 993  ]
+[e :U 994 ]
+}
+"486
+[; ;usr_rs485_main.c: 486:                 Res_mesg[num++] = '$';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
+"487
+[; ;usr_rs485_main.c: 487:                 Res_mesg[num++] = sum;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
+"489
+[; ;usr_rs485_main.c: 489:                 Send_RS485(Res_mesg, num);
+[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
+"491
+[; ;usr_rs485_main.c: 491:                 com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"492
+[; ;usr_rs485_main.c: 492:                 cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"494
+[; ;usr_rs485_main.c: 494:                 break;
+[e $U 975  ]
+"495
+[; ;usr_rs485_main.c: 495:             default:
+[e :U 997 ]
+"496
+[; ;usr_rs485_main.c: 496:                 break;
+[e $U 975  ]
+"497
+[; ;usr_rs485_main.c: 497:            }
+}
+[e $U 975  ]
+[e :U 976 ]
+[e [\ -> *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux `i , $ . `E7163 0 977
+ , $ . `E7163 1 982
+ , $ . `E7163 2 987
+ , $ . `E7163 3 992
+ 997 ]
+[e :U 975 ]
+"499
+[; ;usr_rs485_main.c: 499:         }
+}
+[e $U 998  ]
+"500
+[; ;usr_rs485_main.c: 500:         else{
+[e :U 974 ]
+{
+"501
+[; ;usr_rs485_main.c: 501:             com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"502
+[; ;usr_rs485_main.c: 502:             cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"503
+[; ;usr_rs485_main.c: 503:         }
+}
+[e :U 998 ]
+"504
+[; ;usr_rs485_main.c: 504:     }
+}
+[e :U 973 ]
+"505
+[; ;usr_rs485_main.c: 505: }
+[e :UE 972 ]
 }
 [p f _printf 12877956 ]
 [a 4C 37 48 50 120 32 0 ]
+[a 9C 37 48 50 120 32 0 ]
 [a 3C 99 109 100 95 109 101 115 103 61 32 0 ]
+[a 8C 82 101 115 95 109 115 103 32 61 32 0 ]
 [a 2C 85 65 82 84 52 56 53 95 84 88 83 84 65 61 37 48 50 120 13 10 0 ]
 [a 1C 85 65 82 84 52 56 53 95 82 67 83 84 65 61 37 48 50 120 13 10 0 ]
 [a 5C 32 58 58 32 37 115 13 10 0 ]
-[a 6C 100 116 61 48 120 37 48 50 120 44 32 99 111 109 95 115 116 101 112 95 102 108 103 61 37 100 13 10 0 ]
+[a 10C 32 58 58 32 37 115 13 10 0 ]
+[a 6C 100 116 61 48 120 37 48 50 120 44 32 99 111 109 95 115 116 101 112 95 102 108 103 61 37 100 44 114 99 118 110 117 109 61 37 100 13 10 0 ]
+[a 11C 82 83 52 56 53 95 67 77 68 95 83 84 65 84 85 83 13 10 0 ]
+[a 13C 82 83 52 56 53 95 67 77 68 95 77 69 83 85 82 13 10 0 ]
+[a 12C 82 83 52 56 53 95 67 77 68 95 86 69 82 83 73 79 78 13 10 0 ]
+[a 14C 82 83 52 56 53 95 67 77 68 95 77 69 83 85 82 95 68 65 84 65 13 10 0 ]
+[a 7C 83 101 110 100 95 82 83 52 56 53 40 41 13 10 0 ]

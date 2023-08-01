@@ -198,7 +198,7 @@ MAIN_RETURN main(void)
     uart_start_dispg();
 
     uart485_init();
-    uart485_start_dispg();
+    //uart485_start_dispg();
 
     log_init();
     
