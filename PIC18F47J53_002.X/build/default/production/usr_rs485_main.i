@@ -1,4 +1,4 @@
-# 1 "usb/usb_descriptors.c"
+# 1 "usr_rs485_main.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,10 +6,13 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "usb/usb_descriptors.c" 2
-# 139 "usb/usb_descriptors.c"
-# 1 ".\\system.h" 1
-# 23 ".\\system.h"
+# 1 "usr_rs485_main.c" 2
+# 14 "usr_rs485_main.c"
+# 1 "./main.h" 1
+# 14 "usr_rs485_main.c" 2
+
+# 1 "./system.h" 1
+# 23 "./system.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -11608,7 +11611,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\\pic\\include\\xc.h" 2 3
-# 23 ".\\system.h" 2
+# 23 "./system.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdio.h" 1 3
 # 24 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdio.h" 3
@@ -11756,10 +11759,10 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 24 ".\\system.h" 2
+# 24 "./system.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdbool.h" 1 3
-# 25 ".\\system.h" 2
+# 25 "./system.h" 2
 
 
 # 1 "bsp\\buttons.h" 1
@@ -11774,7 +11777,7 @@ typedef enum
 _Bool BUTTON_IsPressed(BUTTON button);
 # 70 "bsp\\buttons.h"
 void BUTTON_Enable(BUTTON button);
-# 27 ".\\system.h" 2
+# 27 "./system.h" 2
 
 # 1 "bsp\\leds.h" 1
 # 29 "bsp\\leds.h"
@@ -11794,7 +11797,7 @@ void LED_Toggle(LED led);
 _Bool LED_Get(LED led);
 # 125 "bsp\\leds.h"
 void LED_Enable(LED led);
-# 28 ".\\system.h" 2
+# 28 "./system.h" 2
 
 
 # 1 "./io_mapping.h" 1
@@ -11847,1153 +11850,428 @@ void Rel_Timer(int sel);
 void Init_Timer(void);
 
 void Wait(uint16_t num);
-# 139 "usb/usb_descriptors.c" 2
-# 150 "usb/usb_descriptors.c"
-# 1 "usb/usb.h" 1
-# 45 "usb/usb.h"
-# 1 "usb/usb_config.h" 1
-# 45 "usb/usb.h" 2
+# 15 "usr_rs485_main.c" 2
 
 
-# 1 "usb/usb_common.h" 1
-# 46 "usb/usb_common.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\limits.h" 1 3
-# 10 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\limits.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\bits/limits.h" 1 3
-# 11 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\limits.h" 2 3
-# 46 "usb/usb_common.h" 2
-# 132 "usb/usb_common.h"
-typedef union
-{
-    uint8_t bitmap;
-    struct
-    {
-        uint8_t ep_num: 4;
-        uint8_t zero_pkt: 1;
-        uint8_t dts: 1;
-        uint8_t force_dts: 1;
-        uint8_t direction: 1;
-    }field;
 
-} TRANSFER_FLAGS;
-# 206 "usb/usb_common.h"
-typedef enum
-{
 
-    EVENT_NONE = 0,
 
-    EVENT_DEVICE_STACK_BASE = 1,
 
-    EVENT_HOST_STACK_BASE = 100,
 
+typedef enum {
+ RS485_AD_MASTER = 0,
+ RS485_AD_SLEVE01,
+ RS485_AD_SLEVE02,
 
-    EVENT_HUB_ATTACH,
 
+ RS485_AD_MAX
+}RA485_ADDRESS;
 
-    EVENT_STALL,
 
 
-    EVENT_VBUS_SES_REQUEST,
 
 
+typedef enum {
+ RS485_CMD_STATUS = 1,
+ RS485_CMD_VERSION,
+ RS485_CMD_MESUR,
+ RS485_CMD_MESUR_DATA,
 
+ RS485_CMD_MAX
+}RA485_COMMAND;
 
-    EVENT_VBUS_OVERCURRENT,
+typedef enum {
+ RET_FALSE = 0,
+ RET_TRUE
 
+}RETURN_STATUS;
 
+typedef enum {
+ SLV_STATUS_IDLE = 0,
+ SLV_STATUS_MESURING,
+ SLV_STATUS_ERROR,
 
+}SLV_STATUS;
 
+typedef enum {
+ SENS_NON = 0,
+    SENS_VL530X = 0x01,
+    SENS_SONIX = 0x02
 
-    EVENT_VBUS_REQUEST_POWER,
+}SENS_KIND;
+# 85 "usr_rs485_main.c"
+typedef struct{
+ RA485_COMMAND command;
+ RA485_ADDRESS address;
+ uint8_t sub1;
+ uint8_t rcv_byte;
+} CMD_MSG;
+# 111 "usr_rs485_main.c"
+typedef enum {
+    COM_RCV_INIT = 0,
+    COM_RCV_ADD_ID,
+    COM_RCV_ADD_ID_DIST,
+    COM_RCV_ADD_ID_SOURCE,
+    COM_RCV_CMD_ID,
+    COM_RCV_COMMAND,
+    COM_RCV_CSUM_ID,
+    COM_RCV_CSUM,
+    COM_RCV_COMPLITE
 
+}COM_STEP;
 
+COM_STEP com_step_flg;
 
 
-    EVENT_VBUS_RELEASE_POWER,
-# 247 "usb/usb_common.h"
-    EVENT_VBUS_POWER_AVAILABLE,
+typedef struct {
 
+ uint8_t resp_dt;
+ uint8_t status;
+ uint8_t status_err;
+ uint8_t sens_kind;
 
+ uint16_t slv_ver;
+ uint16_t sens_ver;
+ float sens_dt;
 
-    EVENT_UNSUPPORTED_DEVICE,
+}SLAVE_DATA;
 
+SLAVE_DATA slv_dt[RS485_AD_MAX];
 
 
-    EVENT_CANNOT_ENUMERATE,
 
 
+uint8_t rcvbuf[128];
+uint8_t rcvnum = 0;
+uint8_t rcv_wpt = 0;
+uint8_t rcv_rpt = 0;
 
-    EVENT_CLIENT_INIT_ERROR,
 
 
 
 
 
-    EVENT_OUT_OF_MEMORY,
 
+uint8_t cmd_mesg[20];
+uint8_t Res_mesg[20];
+uint8_t cmd_char[20];
+uint8_t cmd_ptr = 0;
 
-    EVENT_UNSPECIFIED_ERROR,
+uint8_t rcsta;
+uint8_t txsta;
 
 
 
-    EVENT_DETACH,
 
 
 
-
-    EVENT_TRANSFER,
-
-
-
-    EVENT_SOF,
-
-
-    EVENT_RESUME,
-
-
-
-    EVENT_SUSPEND,
-
-
-
-    EVENT_RESET,
-
-
-
-
-
-    EVENT_DATA_ISOC_READ,
-
-
-
-
-
-    EVENT_DATA_ISOC_WRITE,
-# 314 "usb/usb_common.h"
-    EVENT_OVERRIDE_CLIENT_DRIVER_SELECTION,
-
-
-
-
-
-
-
-    EVENT_1MS,
-
-
-
-
-
-    EVENT_ALT_INTERFACE,
-
-
-
-
-
-
-    EVENT_HOLD_BEFORE_CONFIGURATION,
-
-
-    EVENT_GENERIC_BASE = 400,
-
-    EVENT_MSD_BASE = 500,
-
-    EVENT_HID_BASE = 600,
-
-    EVENT_PRINTER_BASE = 700,
-
-    EVENT_CDC_BASE = 800,
-
-    EVENT_CHARGER_BASE = 900,
-
-    EVENT_AUDIO_BASE = 1000,
-
- EVENT_USER_BASE = 10000,
-
-
-
-
-    EVENT_BUS_ERROR = 0x7fff
-
-} USB_EVENT;
-# 371 "usb/usb_common.h"
-typedef struct _transfer_event_data
-{
-    TRANSFER_FLAGS flags;
-    uint32_t size;
-    uint8_t pid;
-
-} USB_TRANSFER_EVENT_DATA;
-# 388 "usb/usb_common.h"
-typedef struct _vbus_power_data
-{
-    uint8_t port;
-    uint8_t current;
-} USB_VBUS_POWER_EVENT_DATA;
-# 401 "usb/usb_common.h"
-typedef struct _override_client_driver_data
-{
-    uint16_t idVendor;
-    uint16_t idProduct;
-    uint8_t bDeviceClass;
-    uint8_t bDeviceSubClass;
-    uint8_t bDeviceProtocol;
-} USB_OVERRIDE_CLIENT_DRIVER_EVENT_DATA;
-# 463 "usb/usb_common.h"
-typedef _Bool (*USB_EVENT_HANDLER) ( USB_EVENT event, void *data, unsigned int size );
-# 47 "usb/usb.h" 2
-
-# 1 "usb/usb_ch9.h" 1
-# 71 "usb/usb_ch9.h"
-typedef struct _USB_DEVICE_DESCRIPTOR
-{
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint16_t bcdUSB;
-    uint8_t bDeviceClass;
-    uint8_t bDeviceSubClass;
-    uint8_t bDeviceProtocol;
-    uint8_t bMaxPacketSize0;
-    uint16_t idVendor;
-    uint16_t idProduct;
-    uint16_t bcdDevice;
-    uint8_t iManufacturer;
-    uint8_t iProduct;
-    uint8_t iSerialNumber;
-    uint8_t bNumConfigurations;
-} USB_DEVICE_DESCRIPTOR;
-
-
-
-
-
-
-
-typedef struct _USB_CONFIGURATION_DESCRIPTOR
-{
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint16_t wTotalLength;
-    uint8_t bNumInterfaces;
-    uint8_t bConfigurationValue;
-    uint8_t iConfiguration;
-    uint8_t bmAttributes;
-    uint8_t bMaxPower;
-} USB_CONFIGURATION_DESCRIPTOR;
-# 118 "usb/usb_ch9.h"
-typedef struct _USB_INTERFACE_DESCRIPTOR
-{
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint8_t bInterfaceNumber;
-    uint8_t bAlternateSetting;
-    uint8_t bNumEndpoints;
-    uint8_t bInterfaceClass;
-    uint8_t bInterfaceSubClass;
-    uint8_t bInterfaceProtocol;
-    uint8_t iInterface;
-} USB_INTERFACE_DESCRIPTOR;
-
-
-
-
-
-
-
-typedef struct _USB_ENDPOINT_DESCRIPTOR
-{
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint8_t bEndpointAddress;
-    uint8_t bmAttributes;
-    uint16_t wMaxPacketSize;
-    uint8_t bInterval;
-} USB_ENDPOINT_DESCRIPTOR;
-# 187 "usb/usb_ch9.h"
-typedef struct
-{
-    uint8_t index;
-    uint8_t type;
-    uint16_t language_id;
-
-} DESCRIPTOR_ID;
-# 202 "usb/usb_ch9.h"
-typedef struct _USB_OTG_DESCRIPTOR
-{
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint8_t bmAttributes;
-} USB_OTG_DESCRIPTOR;
-# 226 "usb/usb_ch9.h"
-typedef struct _USB_STRING_DSC
-{
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-
-} USB_STRING_DESCRIPTOR;
-# 245 "usb/usb_ch9.h"
-typedef struct _USB_DEVICE_QUALIFIER_DESCRIPTOR
-{
-    uint8_t bLength;
-    uint8_t bType;
-    uint16_t bcdUSB;
-    uint8_t bDeviceClass;
-    uint8_t bDeviceSubClass;
-    uint8_t bDeviceProtocol;
-    uint8_t bMaxPacketSize0;
-    uint8_t bNumConfigurations;
-    uint8_t bReserved;
-
-} USB_DEVICE_QUALIFIER_DESCRIPTOR;
-# 268 "usb/usb_ch9.h"
-typedef union
-{
-
-    struct
-    {
-        uint8_t bmRequestType;
-        uint8_t bRequest;
-        uint16_t wValue;
-        uint16_t wIndex;
-        uint16_t wLength;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        union
-        {
-            uint16_t Val;
-            uint8_t v[2];
-            struct
-            {
-                uint8_t LB;
-                uint8_t HB;
-            } byte;
-        } W_Value;
-
-        union
-        {
-            uint16_t Val;
-            uint8_t v[2];
-            struct
-            {
-                uint8_t LB;
-                uint8_t HB;
-            } byte;
-        } W_Index;
-
-        union
-        {
-            uint16_t Val;
-            uint8_t v[2];
-            struct
-            {
-                uint8_t LB;
-                uint8_t HB;
-            } byte;
-        } W_Length;
-    };
-    struct
-    {
-        unsigned Recipient:5;
-        unsigned RequestType:2;
-        unsigned DataDir:1;
-        unsigned :8;
-        uint8_t bFeature;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-    };
-    struct
-    {
-        union
-        {
-            uint8_t bmRequestType;
-            struct
-            {
-                uint8_t recipient: 5;
-                uint8_t type: 2;
-                uint8_t direction: 1;
-            };
-        }requestInfo;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        uint8_t bDscIndex;
-        uint8_t bDescriptorType;
-        uint16_t wLangID;
-        unsigned :8;
-        unsigned :8;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        uint8_t bDevADR;
-        uint8_t bDevADRH;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        uint8_t bConfigurationValue;
-        uint8_t bCfgRSD;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        uint8_t bAltID;
-        uint8_t bAltID_H;
-        uint8_t bIntfID;
-        uint8_t bIntfID_H;
-        unsigned :8;
-        unsigned :8;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        uint8_t bEPID;
-        uint8_t bEPID_H;
-        unsigned :8;
-        unsigned :8;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-        unsigned EPNum:4;
-        unsigned :3;
-        unsigned EPDir:1;
-        unsigned :8;
-        unsigned :8;
-        unsigned :8;
-    };
-
-
-
-} CTRL_TRF_SETUP, SETUP_PKT, *PSETUP_PKT;
-# 48 "usb/usb.h" 2
-
-
-
-# 1 "usb/usb_device.h" 1
-# 87 "usb/usb_device.h"
-typedef enum
-{
-# 98 "usb/usb_device.h"
-    DETACHED_STATE
-                            = 0x00 ,
-
-
-
-
-
-
-
-    ATTACHED_STATE
-                            = 0x01 ,
-
-
-
-
-
-
-
-    POWERED_STATE
-                            = 0x02 ,
-
-
-
-
-
-    DEFAULT_STATE
-                            = 0x04 ,
-# 138 "usb/usb_device.h"
-    ADR_PENDING_STATE
-                            = 0x08 ,
-
-
-
-
-
-    ADDRESS_STATE
-                            = 0x10 ,
-# 157 "usb/usb_device.h"
-    CONFIGURED_STATE
-                            = 0x20
-
-} USB_DEVICE_STATE;
-
-
-
-typedef enum
-{
-
-    EVENT_CONFIGURED
-                            = EVENT_DEVICE_STACK_BASE ,
-
-
-    EVENT_SET_DESCRIPTOR,
-
-
-
-
-
-    EVENT_EP0_REQUEST,
-# 206 "usb/usb_device.h"
-    EVENT_ATTACH,
-
-
-
-
-    EVENT_TRANSFER_TERMINATED
-
-} USB_DEVICE_STACK_EVENTS;
-# 245 "usb/usb_device.h"
-void USBDeviceInit(void);
-# 349 "usb/usb_device.h"
-void USBDeviceTasks(void);
-# 401 "usb/usb_device.h"
-void USBEnableEndpoint(uint8_t ep, uint8_t options);
-# 494 "usb/usb_device.h"
-void* USBTransferOnePacket(uint8_t ep,uint8_t dir,uint8_t* data,uint8_t len);
-# 519 "usb/usb_device.h"
-void USBStallEndpoint(uint8_t ep, uint8_t dir);
-# 543 "usb/usb_device.h"
-void USBCancelIO(uint8_t endpoint);
-# 640 "usb/usb_device.h"
-void USBDeviceDetach(void);
-# 685 "usb/usb_device.h"
-void USBDeviceAttach(void);
-# 724 "usb/usb_device.h"
-void USBCtrlEPAllowStatusStage(void);
-# 754 "usb/usb_device.h"
-void USBCtrlEPAllowDataStage(void);
-# 830 "usb/usb_device.h"
-void USBDeferOUTDataStage(void);
-extern volatile _Bool USBDeferOUTDataStagePackets;
-# 900 "usb/usb_device.h"
-void USBDeferStatusStage(void);
-extern volatile _Bool USBDeferStatusStagePacket;
-# 952 "usb/usb_device.h"
-_Bool USBOUTDataStageDeferred(void);
-# 1035 "usb/usb_device.h"
-void USBDeferINDataStage(void);
-extern volatile _Bool USBDeferINDataStagePackets;
-# 1089 "usb/usb_device.h"
-_Bool USBINDataStageDeferred(void);
-# 1159 "usb/usb_device.h"
-_Bool USBGetRemoteWakeupStatus(void);
-# 1216 "usb/usb_device.h"
-USB_DEVICE_STATE USBGetDeviceState(void);
-# 1272 "usb/usb_device.h"
-_Bool USBGetSuspendState(void);
-# 1307 "usb/usb_device.h"
-_Bool USBIsDeviceSuspended(void);
-# 1350 "usb/usb_device.h"
-_Bool USBIsBusSuspended(void);
-# 1376 "usb/usb_device.h"
-void USBSoftDetach(void);
-# 1414 "usb/usb_device.h"
-_Bool USBHandleBusy(void* handle);
-# 1452 "usb/usb_device.h"
-uint16_t USBHandleGetLength(void* handle);
-# 1484 "usb/usb_device.h"
-uint16_t USBHandleGetAddr(void*);
-# 1584 "usb/usb_device.h"
-void* USBGetNextHandle(uint8_t ep_num, uint8_t ep_dir);
-# 1617 "usb/usb_device.h"
-void USBEP0Transmit(uint8_t options);
-# 1645 "usb/usb_device.h"
-void USBEP0SendRAMPtr(uint8_t* src, uint16_t size, uint8_t Options);
-# 1677 "usb/usb_device.h"
-void USBEP0SendROMPtr(uint8_t* src, uint16_t size, uint8_t Options);
-# 1705 "usb/usb_device.h"
-void USBEP0Receive(uint8_t* dest, uint16_t size, void (*function));
-# 1740 "usb/usb_device.h"
-void* USBTxOnePacket(uint8_t ep, uint8_t* data, uint16_t len);
-# 1777 "usb/usb_device.h"
-void* USBRxOnePacket(uint8_t ep, uint8_t* data, uint16_t len);
-# 1809 "usb/usb_device.h"
-_Bool USB_APPLICATION_EVENT_HANDLER(uint8_t address, USB_EVENT event, void *pdata, uint16_t size);
-# 1854 "usb/usb_device.h"
-void USBIncrement1msInternalTimers(void);
-# 1913 "usb/usb_device.h"
-uint32_t USBGet1msTickCount(void);
-# 1954 "usb/usb_device.h"
-uint8_t USBGetTicksSinceSuspendEnd(void);
-# 2026 "usb/usb_device.h"
-typedef union
-{
-    uint16_t Val;
-    uint8_t v[2];
-    struct
-    {
-        uint8_t LB;
-        uint8_t HB;
-    } byte;
-} uint16_t_VAL;
-
-
-
-
-typedef struct
-{
-    union
-    {
-
-
-        uint8_t *bRam;
-        const uint8_t *bRom;
-        uint16_t *wRam;
-        const uint16_t *wRom;
-    }pSrc;
-    union
-    {
-        struct
-        {
-
-            uint8_t ctrl_trf_mem :1;
-            uint8_t reserved :5;
-
-
-            uint8_t includeZero :1;
-
-            uint8_t busy :1;
-        }bits;
-        uint8_t Val;
-    }info;
-    uint16_t_VAL wCount;
-}IN_PIPE;
-
-extern volatile IN_PIPE inPipes[];
-
-typedef struct
-{
-    union
-    {
-
-
-        uint8_t *bRam;
-        uint16_t *wRam;
-    }pDst;
-    union
-    {
-        struct
-        {
-            uint8_t reserved :7;
-
-            uint8_t busy :1;
-        }bits;
-        uint8_t Val;
-    }info;
-    uint16_t_VAL wCount;
-    void (*pFunc)(void);
-}OUT_PIPE;
-
-extern volatile _Bool RemoteWakeup;
-extern volatile _Bool USBBusIsSuspended;
-extern volatile USB_DEVICE_STATE USBDeviceState;
-extern volatile uint8_t USBActiveConfiguration;
-extern volatile uint8_t USBTicksSinceSuspendEnd;
-
-
-
-
-# 1 "usb/usb_hal.h" 1
-# 36 "usb/usb_hal.h"
-# 1 "usb/usb_hal_pic18.h" 1
-# 48 "usb/usb_hal_pic18.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 1 3
-# 25 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 411 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct __locale_struct * locale_t;
-# 26 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 2 3
-
-void *memcpy (void *restrict, const void *restrict, size_t);
-void *memmove (void *, const void *, size_t);
-void *memset (void *, int, size_t);
-int memcmp (const void *, const void *, size_t);
-void *memchr (const void *, int, size_t);
-
-char *strcpy (char *restrict, const char *restrict);
-char *strncpy (char *restrict, const char *restrict, size_t);
-
-char *strcat (char *restrict, const char *restrict);
-char *strncat (char *restrict, const char *restrict, size_t);
-
-int strcmp (const char *, const char *);
-int strncmp (const char *, const char *, size_t);
-
-int strcoll (const char *, const char *);
-size_t strxfrm (char *restrict, const char *restrict, size_t);
-
-char *strchr (const char *, int);
-char *strrchr (const char *, int);
-
-size_t strcspn (const char *, const char *);
-size_t strspn (const char *, const char *);
-char *strpbrk (const char *, const char *);
-char *strstr (const char *, const char *);
-char *strtok (char *restrict, const char *restrict);
-
-size_t strlen (const char *);
-
-char *strerror (int);
-
-
-
-
-char *strtok_r (char *restrict, const char *restrict, char **restrict);
-int strerror_r (int, char *, size_t);
-char *stpcpy(char *restrict, const char *restrict);
-char *stpncpy(char *restrict, const char *restrict, size_t);
-size_t strnlen (const char *, size_t);
-char *strdup (const char *);
-char *strndup (const char *, size_t);
-char *strsignal(int);
-char *strerror_l (int, locale_t);
-int strcoll_l (const char *, const char *, locale_t);
-size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
-
-
-
-
-void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 48 "usb/usb_hal_pic18.h" 2
-# 268 "usb/usb_hal_pic18.h"
-typedef union _BD_STAT
-{
-    uint8_t Val;
-    struct{
-
-        unsigned BC8:1;
-        unsigned BC9:1;
-        unsigned BSTALL:1;
-        unsigned DTSEN:1;
-        unsigned INCDIS:1;
-        unsigned KEN:1;
-        unsigned DTS:1;
-        unsigned UOWN:1;
-    };
-    struct{
-
-
-        unsigned :2;
-        unsigned PID0:1;
-        unsigned PID1:1;
-        unsigned PID2:1;
-        unsigned PID3:1;
-        unsigned :1;
-    };
-    struct{
-        unsigned :2;
-        unsigned PID:4;
-        unsigned :2;
-    };
-} BD_STAT;
-
-
-typedef union __BDT
-{
-    struct
-    {
-        BD_STAT STAT;
-        uint8_t CNT;
-        uint8_t ADRL;
-        uint8_t ADRH;
-    };
-    struct
-    {
-        unsigned :8;
-        unsigned :8;
-        uint16_t ADR;
-    };
-    uint32_t Val;
-    uint8_t v[4];
-} BDT_ENTRY;
-
-
-typedef union __USTAT
-{
-    struct
-    {
-        unsigned char filler1:1;
-        unsigned char ping_pong:1;
-        unsigned char direction:1;
-        unsigned char endpoint_number:4;
-    };
-    uint8_t Val;
-} USTAT_FIELDS;
-
-
-
-
-
-
-
-typedef union _POINTER
-{
-    struct
-    {
-        uint8_t bLow;
-        uint8_t bHigh;
-
-    };
-    uint16_t _word;
-
-
-
-    uint8_t* bRam;
-
-    uint16_t* wRam;
-
-
-    const uint8_t* bRom;
-    const uint16_t* wRom;
-
-
-
-
-} POINTER;
-# 608 "usb/usb_hal_pic18.h"
-    extern volatile uint8_t USBActiveConfiguration;
-    extern volatile IN_PIPE inPipes[1];
-    extern volatile OUT_PIPE outPipes[1];
-
-
-extern volatile BDT_ENTRY* pBDTEntryOut[2 +1];
-extern volatile BDT_ENTRY* pBDTEntryIn[2 +1];
-# 36 "usb/usb_hal.h" 2
-# 167 "usb/usb_hal.h"
-void OTGCORE_SetDeviceAddr( uint8_t addr );
-# 203 "usb/usb_hal.h"
-    void USBHALControlUsbResistors( uint8_t flags );
-# 237 "usb/usb_hal.h"
-_Bool USBHALSessionIsValid( void );
-# 263 "usb/usb_hal.h"
-_Bool USBHALControlBusPower( uint8_t cmd );
-# 293 "usb/usb_hal.h"
-unsigned long USBHALGetLastError( void );
-# 326 "usb/usb_hal.h"
-void USBHALHandleBusEvent ( void );
-# 367 "usb/usb_hal.h"
-_Bool OTGCORE_StallPipe( TRANSFER_FLAGS pipe );
-# 404 "usb/usb_hal.h"
-_Bool OTGCORE_UnstallPipe( TRANSFER_FLAGS pipe );
-# 438 "usb/usb_hal.h"
-uint16_t OTGCORE_GetStalledEndpoints ( void );
-# 475 "usb/usb_hal.h"
-_Bool USBHALFlushPipe( TRANSFER_FLAGS pipe );
-# 535 "usb/usb_hal.h"
-_Bool USBHALTransferData ( TRANSFER_FLAGS flags,
-                          void *buffer,
-                          unsigned int size );
-# 575 "usb/usb_hal.h"
-_Bool USBHALSetEpConfiguration ( uint8_t ep_num, uint16_t max_pkt_size, uint16_t flags );
-# 603 "usb/usb_hal.h"
-_Bool USBHALInitialize ( unsigned long flags );
-# 2102 "usb/usb_device.h" 2
-# 51 "usb/usb.h" 2
-# 150 "usb/usb_descriptors.c" 2
-
-# 1 "usb/usb_device_cdc.h" 1
-# 536 "usb/usb_device_cdc.h"
-void CDCInitEP(void);
-# 562 "usb/usb_device_cdc.h"
-void USBCheckCDCRequest(void);
-# 580 "usb/usb_device_cdc.h"
-void CDCNotificationHandler(void);
-# 606 "usb/usb_device_cdc.h"
-_Bool USBCDCEventHandler(USB_EVENT event, void *pdata, uint16_t size);
-# 653 "usb/usb_device_cdc.h"
-uint8_t getsUSBUSART(uint8_t *buffer, uint8_t len);
-# 695 "usb/usb_device_cdc.h"
-void putUSBUSART(uint8_t *data, uint8_t Length);
-# 736 "usb/usb_device_cdc.h"
-void putsUSBUSART(char *data);
-# 779 "usb/usb_device_cdc.h"
-void putrsUSBUSART(const char *data);
-# 831 "usb/usb_device_cdc.h"
-void CDCTxService(void);
-# 844 "usb/usb_device_cdc.h"
-typedef union _LINE_CODING
-{
-    struct
-    {
-        uint8_t _byte[0x07];
-    };
-    struct
-    {
-        uint32_t dwDTERate;
-        uint8_t bCharFormat;
-        uint8_t bParityType;
-        uint8_t bDataBits;
-    };
-} LINE_CODING;
-
-typedef union _CONTROL_SIGNAL_BITMAP
-{
-    uint8_t _byte;
-    struct
-    {
-        unsigned DTE_PRESENT:1;
-        unsigned CARRIER_CONTROL:1;
-    };
-} CONTROL_SIGNAL_BITMAP;
-
-
-
-
-
-typedef struct _USB_CDC_HEADER_FN_DSC
-{
-    uint8_t bFNLength;
-    uint8_t bDscType;
-    uint8_t bDscSubType;
-    uint16_t bcdCDC;
-} USB_CDC_HEADER_FN_DSC;
-
-
-typedef struct _USB_CDC_ACM_FN_DSC
-{
-    uint8_t bFNLength;
-    uint8_t bDscType;
-    uint8_t bDscSubType;
-    uint8_t bmCapabilities;
-} USB_CDC_ACM_FN_DSC;
-
-
-typedef struct _USB_CDC_UNION_FN_DSC
-{
-    uint8_t bFNLength;
-    uint8_t bDscType;
-    uint8_t bDscSubType;
-    uint8_t bMasterIntf;
-    uint8_t bSaveIntf0;
-} USB_CDC_UNION_FN_DSC;
-
-
-typedef struct _USB_CDC_CALL_MGT_FN_DSC
-{
-    uint8_t bFNLength;
-    uint8_t bDscType;
-    uint8_t bDscSubType;
-    uint8_t bmCapabilities;
-    uint8_t bDataInterface;
-} USB_CDC_CALL_MGT_FN_DSC;
-
-typedef union _CDC_NOTICE
-{
-    LINE_CODING GetLineCoding;
-    LINE_CODING SetLineCoding;
-    unsigned char packet[10];
-} CDC_NOTICE, *PCDC_NOTICE;
-
-
-typedef union
-{
-    uint8_t byte;
-    struct
-    {
-        uint8_t DCD :1;
-        uint8_t DSR :1;
-        uint8_t BreakState :1;
-        uint8_t RingDetect :1;
-        uint8_t FramingError :1;
-        uint8_t ParityError :1;
-        uint8_t Overrun :1;
-        uint8_t Reserved :1;
-    }bits;
-}BM_SERIAL_STATE;
-
-
-typedef struct
-{
-    uint8_t bmRequestType;
-    uint8_t bNotification;
-    uint16_t wValue;
-    uint16_t wIndex;
-    uint16_t wLength;
-    BM_SERIAL_STATE SerialState;
-    uint8_t Reserved;
-}SERIAL_STATE_NOTIFICATION;
-
-
-
-extern uint8_t cdc_rx_len;
-extern void* lastTransmission;
-
-extern uint8_t cdc_trf_state;
-extern POINTER pCDCSrc;
-extern uint8_t cdc_tx_len;
-extern uint8_t cdc_mem_type;
-
-extern CDC_NOTICE cdc_notice;
-extern LINE_CODING line_coding;
-
-extern volatile CTRL_TRF_SETUP SetupPkt;
-extern const uint8_t configDescriptor1[];
-# 151 "usb/usb_descriptors.c" 2
-
-
-
-
-
-
-
-
-const USB_DEVICE_DESCRIPTOR device_dsc=
-{
-    0x12,
-    0x01,
-    0x0200,
-    0x02,
-    0x00,
-    0x00,
-    8,
-    0x04D8,
-    0x000A,
-    0x0100,
-    0x01,
-    0x02,
-    0x00,
-    0x01
-};
-
-
-const uint8_t configDescriptor1[]={
-
-    0x09,
-    0x02,
-    67,0,
-    2,
-    1,
-    0,
-    (0x01<<7) | (0x01<<6),
-    50,
-
-
-    9,
-    0x04,
-    0,
-    0,
-    1,
-    0x02,
-    0x02,
-    0x01,
-    0,
-
-
-    sizeof(USB_CDC_HEADER_FN_DSC),
-    0x24,
-    0x00,
-    0x10,0x01,
-
-    sizeof(USB_CDC_ACM_FN_DSC),
-    0x24,
-    0x02,
-    0x00 | 0x00 | 0x02 | 0x00,
-
-    sizeof(USB_CDC_UNION_FN_DSC),
-    0x24,
-    0x06,
-    0x0,
-    0x01,
-
-    sizeof(USB_CDC_CALL_MGT_FN_DSC),
-    0x24,
-    0x01,
-    0x00,
-    0x01,
-
-
-
-    0x07,
-    0x05,
-    0x81,
-    0x03,
-    0x0A,0x00,
-    0x02,
-
-
-    9,
-    0x04,
-    1,
-    0,
-    2,
-    0x0A,
-    0,
-    0x00,
-    0,
-
-
-
-    0x07,
-    0x05,
-    0x02,
-    0x02,
-    0x40,0x00,
-    0x00,
-
-
-
-    0x07,
-    0x05,
-    0x82,
-    0x02,
-    0x40,0x00,
-    0x00,
+const CMD_MSG com[] = {
+ { RS485_CMD_STATUS, RS485_AD_SLEVE01, 0, 3 +2 +6 },
+ { RS485_CMD_STATUS, RS485_AD_SLEVE02, 0, 3 +2 +6 },
+ { RS485_CMD_VERSION, RS485_AD_SLEVE01, 0, 3 +2 +7 },
+ { RS485_CMD_VERSION, RS485_AD_SLEVE02, 0, 3 +2 +7 },
+ { RS485_CMD_MESUR, RS485_AD_SLEVE01, 1, 3 +2 +3 },
+ { RS485_CMD_MESUR, RS485_AD_SLEVE02, 1, 3 +2 +3 },
+ { RS485_CMD_STATUS, RS485_AD_SLEVE01, 0, 3 +2 +6 },
+ { RS485_CMD_STATUS, RS485_AD_SLEVE02, 0, 3 +2 +6 },
+ { RS485_CMD_MESUR_DATA, RS485_AD_SLEVE01, 0, 3 +2 +7 },
+ { RS485_CMD_MESUR_DATA, RS485_AD_SLEVE02, 0, 3 +2 +7 },
+ { RS485_CMD_MAX, 0, 0, 0 }
 };
 
 
 
-const struct{uint8_t bLength;uint8_t bDscType;uint16_t string[1];}sd000={
-sizeof(sd000),0x03,{0x0409}};
+
+uint8_t Get_rcv_data(void);
 
 
-const struct{uint8_t bLength;uint8_t bDscType;uint16_t string[25];}sd001={
-sizeof(sd001),0x03,
-{'M','i','c','r','o','c','h','i','p',' ',
-'T','e','c','h','n','o','l','o','g','y',' ','I','n','c','.'
-}};
 
 
-const struct{uint8_t bLength;uint8_t bDscType;uint16_t string[25];}sd002={
-sizeof(sd002),0x03,
-{'C','D','C',' ','R','S','-','2','3','2',' ',
-'E','m','u','l','a','t','i','o','n',' ','D','e','m','o'}
-};
-# 293 "usb/usb_descriptors.c"
-const uint8_t *const USB_CD_Ptr[]=
+
+
+void Set_rcv_data(uint8_t dt)
 {
-    (const uint8_t *const)&configDescriptor1
-};
+    rcvbuf[rcv_wpt] = dt;
+    rcvnum ++;
+    rcv_wpt ++ ;
+    if( rcv_wpt > 128 ){
+        rcv_wpt = 0;
+    }
+}
 
-const uint8_t *const USB_SD_Ptr[3]=
+
+
+
+
+uint8_t Get_rcv_data(void)
 {
-    (const uint8_t *const)&sd000,
-    (const uint8_t *const)&sd001,
-    (const uint8_t *const)&sd002
+    uint8_t dt;
+    rcvnum --;
+    dt = rcvbuf[rcv_rpt];
+    rcv_rpt ++ ;
+    if( rcv_rpt > 128 ){
+        rcv_rpt = 0;
+    }
+    return dt;
 
-};
+}
+
+
+
+
+
+COM_STEP command_rcv(void)
+{
+    uint8_t dt;
+    uint8_t i = 0;
+    uint8_t sum = 0;
+
+    if( rcsta != RCSTA1){
+        rcsta = RCSTA1;
+        printf("UART485_RCSTA=%02x\r\n",rcsta);
+    }
+
+    if( txsta != TXSTA1){
+        txsta = TXSTA1;
+        printf("UART485_TXSTA=%02x\r\n",txsta);
+    }
+
+
+
+
+
+    if( rcvnum > 0 ){
+        dt = Get_rcv_data();
+
+        switch( com_step_flg ){
+            case COM_RCV_INIT:
+                if( dt == '#' ){
+                    cmd_mesg[cmd_ptr] = dt;
+                    com_step_flg = COM_RCV_ADD_ID;
+                    cmd_ptr ++;
+                }
+                break;
+            case COM_RCV_ADD_ID:
+                cmd_mesg[cmd_ptr] = dt;
+                com_step_flg = COM_RCV_ADD_ID_DIST;
+                cmd_ptr ++;
+                break;
+
+            case COM_RCV_ADD_ID_DIST:
+                cmd_mesg[cmd_ptr] = dt;
+                com_step_flg = COM_RCV_ADD_ID_SOURCE;
+                cmd_ptr ++;
+                break;
+
+            case COM_RCV_ADD_ID_SOURCE:
+                if( dt == '*' ){
+                    cmd_mesg[cmd_ptr] = dt;
+                    com_step_flg = COM_RCV_CMD_ID;
+                    cmd_ptr ++;
+                }
+                else{
+                    com_step_flg = COM_RCV_INIT;
+                    cmd_ptr = 0;
+                }
+                break;
+
+            case COM_RCV_CMD_ID:
+                cmd_mesg[cmd_ptr] = dt;
+                com_step_flg = COM_RCV_COMMAND;
+                cmd_ptr ++;
+                break;
+
+            case COM_RCV_COMMAND:
+                if( dt == '$' ){
+                    cmd_mesg[cmd_ptr] = dt;
+                    com_step_flg = COM_RCV_CSUM_ID;
+                    cmd_ptr ++;
+                }
+                else{
+                    cmd_mesg[cmd_ptr] = dt;
+                    com_step_flg = COM_RCV_COMMAND;
+                    cmd_ptr ++;
+                }
+                break;
+            case COM_RCV_CSUM_ID:
+
+                i = 0;
+                sum = 0;
+                while(cmd_mesg[i] != '$'){
+                    sum += cmd_mesg[i];
+                }
+
+                if( sum == dt ){
+                    cmd_mesg[cmd_ptr] = dt;
+                    com_step_flg = COM_RCV_COMPLITE;
+                    cmd_ptr ++;
+
+
+                    printf("cmd_mesg= ");
+                    for( i=0; i<cmd_ptr; i++ ){
+                        printf("%02x ",cmd_mesg[i]);
+                        cmd_char[i] = ((cmd_mesg[i]<0x20||cmd_mesg[i]>=0x7f)? '.': cmd_mesg[i]);
+                    }
+                    cmd_char[i+1] = '\0';
+                    printf(" :: %s\r\n", cmd_char);
+
+
+                }
+                else{
+                    com_step_flg = COM_RCV_INIT;
+                    cmd_ptr = 0;
+                }
+
+            case COM_RCV_COMPLITE:
+            default:
+                break;
+        }
+
+        printf("dt=0x%02x, com_step_flg=%d\r\n", dt, com_step_flg);
+
+    }
+
+    return com_step_flg;
+}
+
+
+
+
+void Send_RS485(uint8_t *msg, uint8_t num)
+{
+    uint8_t i;
+
+    LATAbits.LATA2 = 1;
+    for( i=0; i < num; i++){
+        while (!TXSTA1bits.TRMT);
+        TXREG1 = msg[i];
+    }
+    while (!TXSTA1bits.TRMT);
+    LATAbits.LATA2 = 0;
+}
+
+
+
+
+
+void rs485_com_task(void)
+{
+
+    uint8_t i = 0;
+    uint8_t num = 0;
+
+    uint8_t sum = 0;
+    float dt = 10.25;
+    uint32_t dt32;
+
+    dt32 = (uint32_t)dt;
+
+
+    if( command_rcv() == COM_RCV_COMPLITE){
+        if( cmd_mesg[0x00 +1] == RS485_AD_SLEVE01 ){
+           switch( cmd_mesg[0x03 +1] ){
+            case RS485_CMD_STATUS:
+                Res_mesg[num++] = '#';
+                Res_mesg[num++] = RS485_AD_MASTER;
+                Res_mesg[num++] = RS485_AD_SLEVE01;
+
+                Res_mesg[num++] = '*';
+                Res_mesg[num++] = cmd_mesg[0x03 +1];
+                Res_mesg[num++] = 0;
+
+                Res_mesg[num++] = SLV_STATUS_IDLE;
+                Res_mesg[num++] = 0;
+                Res_mesg[num++] = SENS_NON;
+
+                for( i=0; i < num; i++){
+                    sum += Res_mesg[i];
+                }
+
+                Res_mesg[num++] = '$';
+                Res_mesg[num++] = sum;
+
+                Send_RS485(Res_mesg, num);
+
+                break;
+            case RS485_CMD_VERSION:
+                i = 0;
+                Res_mesg[num++] = '#';
+                Res_mesg[num++] = RS485_AD_MASTER;
+                Res_mesg[num++] = RS485_AD_SLEVE01;
+
+                Res_mesg[num++] = '*';
+                Res_mesg[num++] = cmd_mesg[0x03 +1];
+                Res_mesg[num++] = 0;
+
+                Res_mesg[num++] = 0x0110 & 0x00ff;
+                Res_mesg[num++] = 0x0110 >> 8;
+                Res_mesg[num++] = 0;
+                Res_mesg[num++] = 0;
+
+                for( i=0; i < num; i++){
+                    sum += Res_mesg[i];
+                }
+
+                Res_mesg[num++] = '$';
+                Res_mesg[num++] = sum;
+
+                Send_RS485(Res_mesg, num);
+
+                break;
+            case RS485_CMD_MESUR:
+                i = 0;
+                Res_mesg[num++] = '#';
+                Res_mesg[num++] = RS485_AD_MASTER;
+                Res_mesg[num++] = RS485_AD_SLEVE01;
+
+                Res_mesg[num++] = '*';
+                Res_mesg[num++] = cmd_mesg[0x03 +1];
+                Res_mesg[num++] = 0;
+
+
+                for( i=0; i < num; i++){
+                    sum += Res_mesg[i];
+                }
+
+                Res_mesg[num++] = '$';
+                Res_mesg[num++] = sum;
+
+                Send_RS485(Res_mesg, num);
+
+                break;
+            case RS485_CMD_MESUR_DATA:
+                i = 0;
+                Res_mesg[num++] = '#';
+                Res_mesg[num++] = RS485_AD_MASTER;
+                Res_mesg[num++] = RS485_AD_SLEVE01;
+
+                Res_mesg[num++] = '*';
+                Res_mesg[num++] = cmd_mesg[0x03 +1];
+                Res_mesg[num++] = 0;
+
+                Res_mesg[num++] = (uint8_t) dt32;
+                Res_mesg[num++] = (uint8_t) ( dt32 >> 8 );
+                Res_mesg[num++] = (uint8_t) ( dt32 >> 16 );
+                Res_mesg[num++] = (uint8_t) ( dt32 >> 24 );
+
+                for( i=0; i < num; i++){
+                    sum += Res_mesg[i];
+                }
+
+                Res_mesg[num++] = '$';
+                Res_mesg[num++] = sum;
+
+                Send_RS485(Res_mesg, num);
+
+                break;
+            default:
+                break;
+           }
+
+        }
+        else{
+            com_step_flg = COM_RCV_INIT;
+            cmd_ptr = 0;
+        }
+    }
+}

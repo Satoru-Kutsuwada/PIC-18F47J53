@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=app_device_cdc_basic.c app_led_usb_status.c debug_main.c main.c rtc_main.c system.c uart_main.c bsp/buttons.c bsp/leds.c usb/usb_descriptors.c usb/usb_device.c usb/usb_device_cdc.c usb/usb_events.c
+SOURCEFILES_QUOTED_IF_SPACED=app_device_cdc_basic.c app_led_usb_status.c debug_main.c main.c rtc_main.c system.c uart_main.c bsp/buttons.c bsp/leds.c usb/usb_descriptors.c usb/usb_device.c usb/usb_device_cdc.c usb/usb_events.c usr_rs485_main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/app_device_cdc_basic.p1 ${OBJECTDIR}/app_led_usb_status.p1 ${OBJECTDIR}/debug_main.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/rtc_main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/uart_main.p1 ${OBJECTDIR}/bsp/buttons.p1 ${OBJECTDIR}/bsp/leds.p1 ${OBJECTDIR}/usb/usb_descriptors.p1 ${OBJECTDIR}/usb/usb_device.p1 ${OBJECTDIR}/usb/usb_device_cdc.p1 ${OBJECTDIR}/usb/usb_events.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/app_device_cdc_basic.p1.d ${OBJECTDIR}/app_led_usb_status.p1.d ${OBJECTDIR}/debug_main.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/rtc_main.p1.d ${OBJECTDIR}/system.p1.d ${OBJECTDIR}/uart_main.p1.d ${OBJECTDIR}/bsp/buttons.p1.d ${OBJECTDIR}/bsp/leds.p1.d ${OBJECTDIR}/usb/usb_descriptors.p1.d ${OBJECTDIR}/usb/usb_device.p1.d ${OBJECTDIR}/usb/usb_device_cdc.p1.d ${OBJECTDIR}/usb/usb_events.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/app_device_cdc_basic.p1 ${OBJECTDIR}/app_led_usb_status.p1 ${OBJECTDIR}/debug_main.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/rtc_main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/uart_main.p1 ${OBJECTDIR}/bsp/buttons.p1 ${OBJECTDIR}/bsp/leds.p1 ${OBJECTDIR}/usb/usb_descriptors.p1 ${OBJECTDIR}/usb/usb_device.p1 ${OBJECTDIR}/usb/usb_device_cdc.p1 ${OBJECTDIR}/usb/usb_events.p1 ${OBJECTDIR}/usr_rs485_main.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/app_device_cdc_basic.p1.d ${OBJECTDIR}/app_led_usb_status.p1.d ${OBJECTDIR}/debug_main.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/rtc_main.p1.d ${OBJECTDIR}/system.p1.d ${OBJECTDIR}/uart_main.p1.d ${OBJECTDIR}/bsp/buttons.p1.d ${OBJECTDIR}/bsp/leds.p1.d ${OBJECTDIR}/usb/usb_descriptors.p1.d ${OBJECTDIR}/usb/usb_device.p1.d ${OBJECTDIR}/usb/usb_device_cdc.p1.d ${OBJECTDIR}/usb/usb_events.p1.d ${OBJECTDIR}/usr_rs485_main.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/app_device_cdc_basic.p1 ${OBJECTDIR}/app_led_usb_status.p1 ${OBJECTDIR}/debug_main.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/rtc_main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/uart_main.p1 ${OBJECTDIR}/bsp/buttons.p1 ${OBJECTDIR}/bsp/leds.p1 ${OBJECTDIR}/usb/usb_descriptors.p1 ${OBJECTDIR}/usb/usb_device.p1 ${OBJECTDIR}/usb/usb_device_cdc.p1 ${OBJECTDIR}/usb/usb_events.p1
+OBJECTFILES=${OBJECTDIR}/app_device_cdc_basic.p1 ${OBJECTDIR}/app_led_usb_status.p1 ${OBJECTDIR}/debug_main.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/rtc_main.p1 ${OBJECTDIR}/system.p1 ${OBJECTDIR}/uart_main.p1 ${OBJECTDIR}/bsp/buttons.p1 ${OBJECTDIR}/bsp/leds.p1 ${OBJECTDIR}/usb/usb_descriptors.p1 ${OBJECTDIR}/usb/usb_device.p1 ${OBJECTDIR}/usb/usb_device_cdc.p1 ${OBJECTDIR}/usb/usb_events.p1 ${OBJECTDIR}/usr_rs485_main.p1
 
 # Source Files
-SOURCEFILES=app_device_cdc_basic.c app_led_usb_status.c debug_main.c main.c rtc_main.c system.c uart_main.c bsp/buttons.c bsp/leds.c usb/usb_descriptors.c usb/usb_device.c usb/usb_device_cdc.c usb/usb_events.c
+SOURCEFILES=app_device_cdc_basic.c app_led_usb_status.c debug_main.c main.c rtc_main.c system.c uart_main.c bsp/buttons.c bsp/leds.c usb/usb_descriptors.c usb/usb_device.c usb/usb_device_cdc.c usb/usb_events.c usr_rs485_main.c
 
 
 
@@ -192,6 +192,14 @@ ${OBJECTDIR}/usb/usb_events.p1: usb/usb_events.c  nbproject/Makefile-${CND_CONF}
 	@-${MV} ${OBJECTDIR}/usb/usb_events.d ${OBJECTDIR}/usb/usb_events.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/usb/usb_events.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/usr_rs485_main.p1: usr_rs485_main.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/usr_rs485_main.p1.d 
+	@${RM} ${OBJECTDIR}/usr_rs485_main.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"." -I"usb" -I"bsp" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/usr_rs485_main.p1 usr_rs485_main.c 
+	@-${MV} ${OBJECTDIR}/usr_rs485_main.d ${OBJECTDIR}/usr_rs485_main.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/usr_rs485_main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/app_device_cdc_basic.p1: app_device_cdc_basic.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
@@ -296,6 +304,14 @@ ${OBJECTDIR}/usb/usb_events.p1: usb/usb_events.c  nbproject/Makefile-${CND_CONF}
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"." -I"usb" -I"bsp" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/usb/usb_events.p1 usb/usb_events.c 
 	@-${MV} ${OBJECTDIR}/usb/usb_events.d ${OBJECTDIR}/usb/usb_events.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/usb/usb_events.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/usr_rs485_main.p1: usr_rs485_main.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/usr_rs485_main.p1.d 
+	@${RM} ${OBJECTDIR}/usr_rs485_main.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -I"." -I"usb" -I"bsp" -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/usr_rs485_main.p1 usr_rs485_main.c 
+	@-${MV} ${OBJECTDIR}/usr_rs485_main.d ${OBJECTDIR}/usr_rs485_main.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/usr_rs485_main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

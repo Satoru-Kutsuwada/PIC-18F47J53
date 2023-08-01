@@ -11813,7 +11813,7 @@ typedef enum
     SYSTEM_STATE_USB_SUSPEND,
     SYSTEM_STATE_USB_RESUME
 } SYSTEM_STATE;
-# 286 "./system.h"
+# 290 "./system.h"
 typedef enum{
     LOG_DISP_I2C,
     LOG_DISP_I2C_STAT,
@@ -11837,7 +11837,7 @@ typedef enum{
 
     RASING_MODE_MAX
 }RASING_MODE;
-# 323 "./system.h"
+# 327 "./system.h"
 void SYSTEM_Initialize( SYSTEM_STATE state );
 
 uint16_t Get_Timer(int sel);
@@ -12941,6 +12941,7 @@ extern void Clear1secTaskFlg(void);
 extern _Bool Check1secTask(void);
 extern void log_init(void);
 
+void rs485_com_task(void);
 
 
 
@@ -13018,7 +13019,7 @@ void T100msecMainTask(void)
     }
 
 }
-# 161 "main.c"
+# 162 "main.c"
 void main(void)
 {
 
@@ -13061,7 +13062,7 @@ void main(void)
     uart485_start_dispg();
 
     log_init();
-# 226 "main.c"
+# 227 "main.c"
     USBDeviceInit();
 
 
@@ -13083,7 +13084,7 @@ void main(void)
     Timer1_init();
 
     Init_Timer();
-# 262 "main.c"
+# 263 "main.c"
     printf("  SSPADD=%x\r\n",SSP2ADD);
     printf("  true=%x\r\n",1);
     printf("  false=%x\r\n",0);
@@ -13119,13 +13120,16 @@ void main(void)
 
 
          debug_main();
-         debug_main485();
-# 324 "main.c"
+
+
+
+         rs485_com_task();
+# 327 "main.c"
         APP_DeviceCDCBasicDemoTasks();
-# 335 "main.c"
+# 338 "main.c"
     }
 }
-# 485 "main.c"
+# 488 "main.c"
 void Wait(uint16_t num)
 {
      int i ;

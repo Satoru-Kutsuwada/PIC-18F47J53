@@ -64,6 +64,7 @@ extern void Clear1secTaskFlg(void);
 extern bool Check1secTask(void);
 extern void log_init(void);
 
+void rs485_com_task(void);
 
 /** Local ProtoType *******************************************************/
 
@@ -294,9 +295,11 @@ MAIN_RETURN main(void)
         //  allways
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
          debug_main();
-         debug_main485();
          
+         //debug_main485();
 
+         rs485_com_task();
+         
        //vl53l0x_test();
 
 

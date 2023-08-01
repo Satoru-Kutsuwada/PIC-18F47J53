@@ -276,6 +276,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13679
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13679: extern volatile unsigned char SPBRG1 __attribute__((address(0xFB0)));
 [v _SPBRG1 `Vuc ~T0 @X0 0 e@4016 ]
+"11931
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11931:     struct {
+[s S549 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S549 . TMR1IE TMR2IE CCP1IE SSP1IE TX1IE RC1IE ADIE PMPIE ]
+"11941
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11941:     struct {
+[s S550 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S550 . . SSPIE TXIE RCIE ]
+"11947
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11947:     struct {
+[s S551 :7 `uc 1 :1 `uc 1 ]
+[n S551 . . PSPIE ]
+"11930
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11930: typedef union {
+[u S548 `S549 1 `S550 1 `S551 1 ]
+[n S548 . . . . ]
+"11952
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11952: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
+[v _PIE1bits `VS548 ~T0 @X0 0 e@3997 ]
+"12115
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12115:     struct {
+[s S557 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S557 . TMR1IP TMR2IP CCP1IP SSP1IP TX1IP RC1IP ADIP PMPIP ]
+"12125
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12125:     struct {
+[s S558 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S558 . . SSPIP TXIP RCIP ]
+"12131
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12131:     struct {
+[s S559 :7 `uc 1 :1 `uc 1 ]
+[n S559 . . PSPIP ]
+"12114
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12114: typedef union {
+[u S556 `S557 1 `S558 1 `S559 1 ]
+[n S556 . . . . ]
+"12136
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12136: extern volatile IPR1bits_t IPR1bits __attribute__((address(0xF9F)));
+[v _IPR1bits `VS556 ~T0 @X0 0 e@3999 ]
 "55 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 55: __asm("ADCTRIG equ 0EB8h");
 [; <" ADCTRIG equ 0EB8h ;# ">
@@ -1602,7 +1640,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;uart_main.c: 232:     TXSTA1bits.BRGH = dt.BRGHx;
 [e = . . _TXSTA1bits 0 2 . _dt 0 ]
 "234
-[; ;uart_main.c: 234: }
+[; ;uart_main.c: 234:     PIR1bits.RC1IF = 0;
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+"235
+[; ;uart_main.c: 235:     PIE1bits.RC1IE = 1;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+"236
+[; ;uart_main.c: 236:     IPR1bits.RC1IP = 1;
+[e = . . _IPR1bits 0 5 -> -> 1 `i `uc ]
+"239
+[; ;uart_main.c: 239: }
 [e :UE 937 ]
 }
 [p f _printf 12582912 ]

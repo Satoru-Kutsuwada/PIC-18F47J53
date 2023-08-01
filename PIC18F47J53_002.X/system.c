@@ -271,6 +271,8 @@ void Interrupt_Rx1(void);
 void Interrupt_Tx1(void);
 void Interrupt_USB(void);
 
+void Set_rcv_data(uint8_t dt);
+
 #ifdef ___I2C_MAIN
 void interrupt_i2c_bcl(void);
 void interrupt_i2c_ssp(void);
@@ -461,7 +463,16 @@ void __interrupt(high_priority) high_isr(void)
         
         PIE3bits.RTCCIE = 1;        // 割込みを有効化
     }
- 
+    
+     //==============================
+    // UART Rx
+    //==============================
+    if( PIR1bits.RC1IF ){
+        PIR1bits.RC1IF = 0;         // 割込みフラグをクリア
+        // コールバック関数
+        Interrupt_Rx1();
+    }
+
     //==============================
     // USB
     //==============================
@@ -476,8 +487,8 @@ void __interrupt(high_priority) high_isr(void)
         PIE2bits.USBIE = 1;         // 割込みを有効化
     }
 #endif  // __USB_CDC    
-  
 
+    
 #ifdef __I2C_MASTER  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #ifdef __SSP_ISR_HIGH
@@ -639,11 +650,14 @@ void Interrupt_RTC(void)
     //printf("RTC Interrupt");
 }
 
-#ifdef ___NOP
 void Interrupt_Rx1(void)
 {
+    Set_rcv_data(UART485_RCREG);
     //printf("RX Interrupt");
 }
+
+
+#ifdef ___NOP
 void Interrupt_Tx1(void)
 {
     //printf("TX Interrupt");

@@ -231,4 +231,9 @@ void uart485_init(void)
     UART485_SPBRG  = dt.SPBRGx;
     UART485_TXSTA_BRGH = dt.BRGHx;
 
+    UART485_RCIF = 0;
+    UART485_RCIE = 1;
+    UART485_RCIP = 1;
+    
+
 }

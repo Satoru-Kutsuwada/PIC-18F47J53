@@ -11813,7 +11813,7 @@ typedef enum
     SYSTEM_STATE_USB_SUSPEND,
     SYSTEM_STATE_USB_RESUME
 } SYSTEM_STATE;
-# 286 "./system.h"
+# 290 "./system.h"
 typedef enum{
     LOG_DISP_I2C,
     LOG_DISP_I2C_STAT,
@@ -11837,7 +11837,7 @@ typedef enum{
 
     RASING_MODE_MAX
 }RASING_MODE;
-# 323 "./system.h"
+# 327 "./system.h"
 void SYSTEM_Initialize( SYSTEM_STATE state );
 
 uint16_t Get_Timer(int sel);
@@ -12783,6 +12783,8 @@ void Interrupt_Rx1(void);
 void Interrupt_Tx1(void);
 void Interrupt_USB(void);
 
+void Set_rcv_data(uint8_t dt);
+
 
 
 
@@ -12804,13 +12806,13 @@ uint8_t task1sec_flg = 0;
 
 
 extern RTC_DATA RTCdt;
-# 317 "system.c"
+# 319 "system.c"
 void SYSTEM_Initialize( SYSTEM_STATE state )
 {
     switch(state)
     {
         case SYSTEM_STATE_USB_START:
-# 343 "system.c"
+# 345 "system.c"
              {
 
 
@@ -12846,7 +12848,7 @@ void SYSTEM_Initialize( SYSTEM_STATE state )
             break;
     }
 }
-# 411 "system.c"
+# 413 "system.c"
 void __attribute__((picinterrupt(("high_priority")))) high_isr(void)
 {
 
@@ -12904,6 +12906,15 @@ void __attribute__((picinterrupt(("high_priority")))) high_isr(void)
 
 
 
+    if( PIR1bits.RC1IF ){
+        PIR1bits.RC1IF = 0;
+
+        Interrupt_Rx1();
+    }
+
+
+
+
 
     if( PIR2bits.USBIF ){
         PIR2bits.USBIF = 0;
@@ -12914,7 +12925,7 @@ void __attribute__((picinterrupt(("high_priority")))) high_isr(void)
 
         PIE2bits.USBIE = 1;
     }
-# 505 "system.c"
+# 516 "system.c"
 }
 
 
@@ -12922,12 +12933,12 @@ void __attribute__((picinterrupt(("high_priority")))) high_isr(void)
 
 void __attribute__((picinterrupt(("low_priority")))) low_isr(void)
 {
-# 553 "system.c"
+# 564 "system.c"
 }
-# 565 "system.c"
+# 576 "system.c"
 void Interrupt_Timer0(void)
 {
-# 579 "system.c"
+# 590 "system.c"
     RTCdt.usec ++;
     if( RTCdt.usec > 10 )
     {
@@ -12957,7 +12968,7 @@ void Interrupt_Timer0(void)
 void Interrupt_Timer1(void)
 {
     timer1_cnt ++;
-# 620 "system.c"
+# 631 "system.c"
     timer100msec --;
     if( timer100msec == 0 ){
         timer100msec = 10;
@@ -12979,7 +12990,13 @@ void Interrupt_RTC(void)
 {
 
 }
-# 654 "system.c"
+
+void Interrupt_Rx1(void)
+{
+    Set_rcv_data(RCREG1);
+
+}
+# 668 "system.c"
 void Interrupt_USB(void)
 {
      USBDeviceTasks();
@@ -13010,7 +13027,7 @@ void Clear1secTaskFlg(void)
 {
     task1sec_flg = 0;
 }
-# 693 "system.c"
+# 707 "system.c"
 typedef enum{
     ST_TIMER_IDLE,
     ST_TIMER_USING
@@ -13064,7 +13081,7 @@ int Set_Timer(uint16_t dt)
             break;
         }
     }
-# 754 "system.c"
+# 768 "system.c"
     return rtn;
 }
 

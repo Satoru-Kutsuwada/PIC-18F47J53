@@ -229,6 +229,8 @@ typedef enum
 #define UART485_RCSTA_ADDEN       RCSTA2bits.ADDEN
 #define UART485_RCSTA_CREN        RCSTA2bits.CREN
 #define UART485_RCSTA_RX9D        RCSTA2bits.RX9D
+#define UART485_RCSTA_FERR        RCSTA2bits.FERR
+#define UART485_RCSTA_OERR        RCSTA2bits.OERR
 #define UART485_BAUDCON           BAUDCON2
 #define UART485_BAUDCON_BRG16     BAUDCON2bits.BRG16
 #define UART485_SPBRGH            SPBRGH2
@@ -263,6 +265,8 @@ typedef enum
 #define UART485_RCSTA_ADDEN       RCSTA1bits.ADDEN
 #define UART485_RCSTA_CREN        RCSTA1bits.CREN
 #define UART485_RCSTA_RX9D        RCSTA1bits.RX9D
+#define UART485_RCSTA_FERR        RCSTA1bits.FERR
+#define UART485_RCSTA_OERR        RCSTA1bits.OERR
 #define UART485_BAUDCON           BAUDCON1
 #define UART485_BAUDCON_BRG16     BAUDCON1bits.BRG16
 #define UART485_SPBRGH            SPBRGH1
@@ -273,7 +277,7 @@ typedef enum
 // 割込みモジュールの設定
 #define UART485_RCIF              PIR1bits.RC1IF
 #define UART485_RCIE              PIE1bits.RC1IE
-#define UART485_RCIP              PIR1bits.RC1IP
+#define UART485_RCIP              IPR1bits.RC1IP
 #define UART485_TXIF              PIR1bits.TX1IF
 #define UART485_TXIE              PIE1bits.TX1IE
 #define UART485_TXIP              PIR1bits.TX1IP

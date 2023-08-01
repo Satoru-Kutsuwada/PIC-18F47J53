@@ -1,77 +1,31 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"25 ./rtc_main.h
-[; ;./rtc_main.h: 25: typedef struct{
-[s S986 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `us 1 `uc 1 ]
-[n S986 . year month day wday hour min sec msec usec ]
-"9871 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9871:     struct {
-[s S467 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S467 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"9881
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9881:     struct {
-[s S468 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S468 . PMD0 PMD1 PMD2 PMD3 PMD4 PMD5 PMD6 PMD7 ]
-"9891
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9891:     struct {
-[s S469 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S469 . SCL2 SDA2 RP19 RP20 RP21 RP22 RP23 RP24 ]
-"9901
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9901:     struct {
-[s S470 :7 `uc 1 :1 `uc 1 ]
-[n S470 . . SS2 ]
-"9870
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9870: typedef union {
-[u S466 `S467 1 `S468 1 `S469 1 `S470 1 ]
-[n S466 . . . . . ]
-"9906
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9906: extern volatile PORTDbits_t PORTDbits __attribute__((address(0xF83)));
-[v _PORTDbits `VS466 ~T0 @X0 0 e@3971 ]
+"124 usr_rs485_main.c
+[; ;usr_rs485_main.c: 124: COM_STEP com_step_flg;
+[c E7190 0 1 2 3 4 5 6 7 8 .. ]
+[n E7190 . COM_RCV_INIT COM_RCV_ADD_ID COM_RCV_ADD_ID_DIST COM_RCV_ADD_ID_SOURCE COM_RCV_CMD_ID COM_RCV_COMMAND COM_RCV_CSUM_ID COM_RCV_CSUM COM_RCV_COMPLITE  ]
+"127
+[; ;usr_rs485_main.c: 127: typedef struct {
+[s S920 `uc 1 `uc 1 `uc 1 `uc 1 `us 1 `us 1 `f 1 ]
+[n S920 . resp_dt status status_err sens_kind slv_ver sens_ver sens_dt ]
+"169
+[; ;usr_rs485_main.c: 169: const CMD_MSG com[] = {
+[c E7163 1 2 3 4 5 .. ]
+[n E7163 . RS485_CMD_STATUS RS485_CMD_VERSION RS485_CMD_MESUR RS485_CMD_MESUR_DATA RS485_CMD_MAX  ]
+[c E7157 0 1 2 3 .. ]
+[n E7157 . RS485_AD_MASTER RS485_AD_SLEVE01 RS485_AD_SLEVE02 RS485_AD_MAX  ]
+"85
+[; ;usr_rs485_main.c: 85: typedef struct{
+[s S919 `E7163 1 `E7157 1 `uc 1 `uc 1 ]
+[n S919 . command address sub1 rcv_byte ]
+"12977 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12977: extern volatile unsigned char RCSTA1 __attribute__((address(0xFAC)));
+[v _RCSTA1 `Vuc ~T0 @X0 0 e@4012 ]
 "107 C:\Program Files\Microchip\xc8\v2.41\pic\include\c99\stdio.h
 [; ;C:\Program Files\Microchip\xc8\v2.41\pic\include\c99\stdio.h: 107: int printf(const char *restrict, ...);
 [v _printf `(i ~T0 @X0 0 ev`*Cuc ]
-"8978 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 8978:     struct {
-[s S436 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S436 . RA0 RA1 RA2 RA3 . RA5 RA6 RA7 ]
-"8988
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 8988:     struct {
-[s S437 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S437 . AN0 AN1 AN2 AN3 . AN4 OSC2 OSC1 ]
-"8998
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 8998:     struct {
-[s S438 :5 `uc 1 :1 `uc 1 ]
-[n S438 . . NOT_SS1 ]
-"9002
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9002:     struct {
-[s S439 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S439 . C1INA C2INA VREF_MINUS VREF_PLUS . nSS1 CLKO CLKI ]
-"9012
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9012:     struct {
-[s S440 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S440 . PMA6 PMA7 CVREF C1INB . HLVDIN ]
-"9020
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9020:     struct {
-[s S441 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
-[n S441 . RP0 RP1 C2INB . RCV ]
-"9027
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9027:     struct {
-[s S442 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
-[n S442 . ULPWU VBG C1IND . RP2 ]
-"9034
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9034:     struct {
-[s S443 :2 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 ]
-[n S443 . . C3INB . C1INC ]
-"9040
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9040:     struct {
-[s S444 :1 `uc 1 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S444 . ULPWUIN . LVDIN . RJPU ]
-"8977
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 8977: typedef union {
-[u S435 `S436 1 `S437 1 `S438 1 `S439 1 `S440 1 `S441 1 `S442 1 `S443 1 `S444 1 ]
-[n S435 . . . . . . . . . . ]
-"9048
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9048: extern volatile PORTAbits_t PORTAbits __attribute__((address(0xF80)));
-[v _PORTAbits `VS435 ~T0 @X0 0 e@3968 ]
+"13315 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13315: extern volatile unsigned char TXSTA1 __attribute__((address(0xFAD)));
+[v _TXSTA1 `Vuc ~T0 @X0 0 e@4013 ]
 "10431
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 10431:     struct {
 [s S490 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -87,290 +41,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 "10452
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 10452: extern volatile LATAbits_t LATAbits __attribute__((address(0xF89)));
 [v _LATAbits `VS489 ~T0 @X0 0 e@3977 ]
-"111 C:\Program Files\Microchip\xc8\v2.41\pic\include\c99\stdio.h
-[; ;C:\Program Files\Microchip\xc8\v2.41\pic\include\c99\stdio.h: 111: int sprintf(char *restrict, const char *restrict, ...);
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"56 main.c
-[; ;main.c: 56: extern void print_usb(char *pt);
-[v _print_usb `(v ~T0 @X0 0 ef1`*uc ]
-"11295 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11295:     struct {
-[s S520 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S520 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
-"11294
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11294: typedef union {
-[u S519 `S520 1 ]
-[n S519 . . ]
-"11306
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11306: extern volatile TRISDbits_t TRISDbits __attribute__((address(0xF95)));
-[v _TRISDbits `VS519 ~T0 @X0 0 e@3989 ]
-"7561
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 7561: extern volatile unsigned char SSP2STAT __attribute__((address(0xF73)));
-[v _SSP2STAT `Vuc ~T0 @X0 0 e@3955 ]
-"7441
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 7441: extern volatile unsigned char SSP2CON1 __attribute__((address(0xF72)));
-[v _SSP2CON1 `Vuc ~T0 @X0 0 e@3954 ]
-"7263
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 7263: extern volatile unsigned char SSP2CON2 __attribute__((address(0xF71)));
-[v _SSP2CON2 `Vuc ~T0 @X0 0 e@3953 ]
-"7863
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 7863: extern volatile unsigned char SSP2ADD __attribute__((address(0xF74)));
-[v _SSP2ADD `Vuc ~T0 @X0 0 e@3956 ]
-"40 ./rtc_main.h
-[; ;./rtc_main.h: 40: extern void Rtc_Read(RTC_DATA *rtc);
-[v _Rtc_Read `(v ~T0 @X0 0 ef1`*S986 ]
-[p mainexit ]
-"167 main.c
-[; ;main.c: 167:     SYSTEM_Initialize(SYSTEM_STATE_USB_START);
-[c E7123 0 1 2 .. ]
-[n E7123 . SYSTEM_STATE_USB_START SYSTEM_STATE_USB_SUSPEND SYSTEM_STATE_USB_RESUME  ]
-"327 ./system.h
-[; ;./system.h: 327: void SYSTEM_Initialize( SYSTEM_STATE state );
-[v _SYSTEM_Initialize `(v ~T0 @X0 0 ef1`E7123 ]
-"21957 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 21957: extern volatile __bit PLLEN __attribute__((address(0x7CDE)));
-[v _PLLEN `Vb ~T0 @X0 0 e@31966 ]
-"21090
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 21090: extern volatile __bit FSEN __attribute__((address(0x79CA)));
-[v _FSEN `Vb ~T0 @X0 0 e@31178 ]
-"22314
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 22314: extern volatile __bit RBPU __attribute__((address(0x7F8F)));
-[v _RBPU `Vb ~T0 @X0 0 e@32655 ]
-"18061
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18061: extern volatile unsigned char OSCCON __attribute__((address(0xFD3)));
-[v _OSCCON `Vuc ~T0 @X0 0 e@4051 ]
-"5458
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 5458: extern volatile unsigned char ANCON0 __attribute__((address(0xF48)));
-[v _ANCON0 `Vuc ~T0 @X0 0 e@3912 ]
-"5520
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 5520: extern volatile unsigned char ANCON1 __attribute__((address(0xF49)));
-[v _ANCON1 `Vuc ~T0 @X0 0 e@3913 ]
-"11125
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11125: extern volatile unsigned char TRISA __attribute__((address(0xF92)));
-[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
-"11182
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11182: extern volatile unsigned char TRISB __attribute__((address(0xF93)));
-[v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
-"11244
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11244: extern volatile unsigned char TRISC __attribute__((address(0xF94)));
-[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
-"11289
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11289: extern volatile unsigned char TRISD __attribute__((address(0xF95)));
-[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
-"8972
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 8972: extern volatile unsigned char PORTA __attribute__((address(0xF80)));
-[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
-"9253
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9253: extern volatile unsigned char PORTB __attribute__((address(0xF81)));
-[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
-"9599
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9599: extern volatile unsigned char PORTC __attribute__((address(0xF82)));
-[v _PORTC `Vuc ~T0 @X0 0 e@3970 ]
-"9865
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 9865: extern volatile unsigned char PORTD __attribute__((address(0xF83)));
-[v _PORTD `Vuc ~T0 @X0 0 e@3971 ]
-"11131
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11131:     struct {
-[s S514 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S514 . TRISA0 TRISA1 TRISA2 TRISA3 . TRISA5 TRISA6 TRISA7 ]
-"11130
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11130: typedef union {
-[u S513 `S514 1 ]
-[n S513 . . ]
-"11142
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11142: extern volatile TRISAbits_t TRISAbits __attribute__((address(0xF92)));
-[v _TRISAbits `VS513 ~T0 @X0 0 e@3986 ]
-"11188
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11188:     struct {
-[s S516 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S516 . TRISB0 TRISB1 TRISB2 TRISB3 TRISB4 TRISB5 TRISB6 TRISB7 ]
-"11187
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11187: typedef union {
-[u S515 `S516 1 ]
-[n S515 . . ]
-"11199
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11199: extern volatile TRISBbits_t TRISBbits __attribute__((address(0xF93)));
-[v _TRISBbits `VS515 ~T0 @X0 0 e@3987 ]
-"335 ./system.h
-[; ;./system.h: 335: void Wait(uint16_t num);
-[v _Wait `(v ~T0 @X0 0 ef1`us ]
-"43 main.c
-[; ;main.c: 43: extern void uart_init(void);
-[v _uart_init `(v ~T0 @X0 0 ef ]
-"45
-[; ;main.c: 45: extern void uart_start_dispg(void);
-[v _uart_start_dispg `(v ~T0 @X0 0 ef ]
-"44
-[; ;main.c: 44: extern void uart485_init(void);
-[v _uart485_init `(v ~T0 @X0 0 ef ]
-"46
-[; ;main.c: 46: extern void uart485_start_dispg(void);
-[v _uart485_start_dispg `(v ~T0 @X0 0 ef ]
-"65
-[; ;main.c: 65: extern void log_init(void);
-[v _log_init `(v ~T0 @X0 0 ef ]
-"245 usb\usb_device.h
-[v _USBDeviceInit `(v ~T0 @X0 0 ef ]
-"685
-[v _USBDeviceAttach `(v ~T0 @X0 0 ef ]
-"48 main.c
-[; ;main.c: 48: extern void USB_start_dispg(void);
-[v _USB_start_dispg `(v ~T0 @X0 0 ef ]
-"349 usb\usb_device.h
-[v _USBDeviceTasks `(v ~T0 @X0 0 ef ]
-"77 main.c
-[; ;main.c: 77: void rtc_data_init(void);
-[v _rtc_data_init `(v ~T0 @X0 0 ef ]
-"72
-[; ;main.c: 72: void Timer0_init(void);
-[v _Timer0_init `(v ~T0 @X0 0 ef ]
-"73
-[; ;main.c: 73: void Timer1_init(void);
-[v _Timer1_init `(v ~T0 @X0 0 ef ]
-"55
-[; ;main.c: 55: extern void Init_Timer(void);
-[v _Init_Timer `(v ~T0 @X0 0 ef ]
-"47
-[; ;main.c: 47: extern void main_loop_disp(void);
-[v _main_loop_disp `(v ~T0 @X0 0 ef ]
-"75
-[; ;main.c: 75: _Bool Check100msTask(void);
-[v _Check100msTask `(a ~T0 @X0 0 ef ]
-"76
-[; ;main.c: 76: void Clear100msTaskFlg(void);
-[v _Clear100msTaskFlg `(v ~T0 @X0 0 ef ]
-"64
-[; ;main.c: 64: extern _Bool Check1secTask(void);
-[v _Check1secTask `(a ~T0 @X0 0 ef ]
-"63
-[; ;main.c: 63: extern void Clear1secTaskFlg(void);
-[v _Clear1secTaskFlg `(v ~T0 @X0 0 ef ]
-"57
-[; ;main.c: 57: extern void debug_main(void);
-[v _debug_main `(v ~T0 @X0 0 ef ]
-"67
-[; ;main.c: 67: void rs485_com_task(void);
-[v _rs485_com_task `(v ~T0 @X0 0 ef ]
-"56 ./app_device_cdc_basic.h
-[; ;./app_device_cdc_basic.h: 56: void APP_DeviceCDCBasicDemoTasks(void);
-[v _APP_DeviceCDCBasicDemoTasks `(v ~T0 @X0 0 ef ]
-[v F192 `(v ~T0 @X0 1 tf1`ul ]
-"12 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\builtins.h
-[v __delay `JF192 ~T0 @X0 0 e ]
-[p i __delay ]
-"18138 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18138: extern volatile unsigned char T0CON __attribute__((address(0xFD5)));
-[v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
-"18144
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18144:     struct {
-[s S838 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S838 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"18152
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18152:     struct {
-[s S839 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S839 . T0PS0 T0PS1 T0PS2 ]
-"18143
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18143: typedef union {
-[u S837 `S838 1 `S839 1 ]
-[n S837 . . . ]
-"18158
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18158: extern volatile T0CONbits_t T0CONbits __attribute__((address(0xFD5)));
-[v _T0CONbits `VS837 ~T0 @X0 0 e@4053 ]
-"18235
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18235: extern volatile unsigned char TMR0H __attribute__((address(0xFD7)));
-[v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
-"18215
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18215: extern volatile unsigned char TMR0L __attribute__((address(0xFD6)));
-[v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
-"18966
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18966:     struct {
-[s S893 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S893 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
-"18976
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18976:     struct {
-[s S894 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S894 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
-"18986
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18986:     struct {
-[s S895 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S895 . . GIEL GIEH ]
-"18965
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18965: typedef union {
-[u S892 `S893 1 `S894 1 `S895 1 ]
-[n S892 . . . . ]
-"18992
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 18992: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
-[v _INTCONbits `VS892 ~T0 @X0 0 e@4082 ]
-"17232
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17232: extern volatile unsigned char T1CON __attribute__((address(0xFCD)));
-[v _T1CON `Vuc ~T0 @X0 0 e@4045 ]
-"17238
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17238:     struct {
-[s S799 :2 `uc 1 :1 `uc 1 ]
-[n S799 . . NOT_T1SYNC ]
-"17242
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17242:     struct {
-[s S800 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :2 `uc 1 ]
-[n S800 . TMR1ON RD16 nT1SYNC T1OSCEN T1CKPS TMR1CS ]
-"17250
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17250:     struct {
-[s S801 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S801 . . T1CKPS0 T1CKPS1 TMR1CS0 TMR1CS1 ]
-"17257
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17257:     struct {
-[s S802 :3 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S802 . . SOSCEN . T1RD16 ]
-"17237
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17237: typedef union {
-[u S798 `S799 1 `S800 1 `S801 1 `S802 1 ]
-[n S798 . . . . . ]
-"17264
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17264: extern volatile T1CONbits_t T1CONbits __attribute__((address(0xFCD)));
-[v _T1CONbits `VS798 ~T0 @X0 0 e@4045 ]
-"17361
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17361: extern volatile unsigned char TMR1H __attribute__((address(0xFCF)));
-[v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
-"17341
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 17341: extern volatile unsigned char TMR1L __attribute__((address(0xFCE)));
-[v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
-"12023
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12023:     struct {
-[s S553 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S553 . TMR1IF TMR2IF CCP1IF SSP1IF TX1IF RC1IF ADIF PMPIF ]
-"12033
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12033:     struct {
-[s S554 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S554 . . SSPIF TXIF RCIF ]
-"12039
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12039:     struct {
-[s S555 :7 `uc 1 :1 `uc 1 ]
-[n S555 . . PSPIF ]
-"12022
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12022: typedef union {
-[u S552 `S553 1 `S554 1 `S555 1 ]
-[n S552 . . . . ]
-"12044
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 12044: extern volatile PIR1bits_t PIR1bits __attribute__((address(0xF9E)));
-[v _PIR1bits `VS552 ~T0 @X0 0 e@3998 ]
-"11931
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11931:     struct {
-[s S549 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S549 . TMR1IE TMR2IE CCP1IE SSP1IE TX1IE RC1IE ADIE PMPIE ]
-"11941
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11941:     struct {
-[s S550 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S550 . . SSPIE TXIE RCIE ]
-"11947
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11947:     struct {
-[s S551 :7 `uc 1 :1 `uc 1 ]
-[n S551 . . PSPIE ]
-"11930
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11930: typedef union {
-[u S548 `S549 1 `S550 1 `S551 1 ]
-[n S548 . . . . ]
-"11952
-[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 11952: extern volatile PIE1bits_t PIE1bits __attribute__((address(0xF9D)));
-[v _PIE1bits `VS548 ~T0 @X0 0 e@3997 ]
+"13326
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13326:     struct {
+[s S613 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S613 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
+"13336
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13336:     struct {
+[s S614 :1 `uc 1 :5 `uc 1 :1 `uc 1 ]
+[n S614 . TXD8 . TX8_9 ]
+"13341
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13341:     struct {
+[s S615 :6 `uc 1 :1 `uc 1 ]
+[n S615 . . NOT_TX8 ]
+"13345
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13345:     struct {
+[s S616 :6 `uc 1 :1 `uc 1 ]
+[n S616 . . nTX8 ]
+"13349
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13349:     struct {
+[s S617 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S617 . TX9D1 TRMT1 BRGH1 SENDB1 SYNC1 TXEN1 TX91 CSRC1 ]
+"13325
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13325: typedef union {
+[u S612 `S613 1 `S614 1 `S615 1 `S616 1 `S617 1 ]
+[n S612 . . . . . . ]
+"13360
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13360: extern volatile TXSTA1bits_t TXSTA1bits __attribute__((address(0xFAD)));
+[v _TXSTA1bits `VS612 ~T0 @X0 0 e@4013 ]
+"13603
+[; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 13603: extern volatile unsigned char TXREG1 __attribute__((address(0xFAE)));
+[v _TXREG1 `Vuc ~T0 @X0 0 e@4014 ]
+"383 usr_rs485_main.c
+[; ;usr_rs485_main.c: 383:                 Res_mesg[num++] = SLV_STATUS_IDLE;
+[c E7174 0 1 2 .. ]
+[n E7174 . SLV_STATUS_IDLE SLV_STATUS_MESURING SLV_STATUS_ERROR  ]
+"385
+[; ;usr_rs485_main.c: 385:                 Res_mesg[num++] = SENS_NON;
+[c E7179 0 1 2 .. ]
+[n E7179 . SENS_NON SENS_VL530X SENS_SONIX  ]
 "55 C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 55: __asm("ADCTRIG equ 0EB8h");
 [; <" ADCTRIG equ 0EB8h ;# ">
@@ -1403,471 +1111,925 @@ Version 4.0 HI-TECH Software Intermediate Code
 "19386
 [; ;C:/Program Files/Microchip/MPLABX/v6.05/packs/Microchip/PIC18F-J_DFP/1.5.44/xc8\pic\include\proc\pic18f47j53.h: 19386: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"82 main.c
-[; ;main.c: 82: uint8_t main_status =0;
-[v _main_status `uc ~T0 @X0 1 e ]
-[i _main_status
+"124 usr_rs485_main.c
+[; ;usr_rs485_main.c: 124: COM_STEP com_step_flg;
+[v _com_step_flg `E7190 ~T0 @X0 1 e ]
+"140
+[; ;usr_rs485_main.c: 140: SLAVE_DATA slv_dt[RS485_AD_MAX];
+[v _slv_dt `S920 ~T0 @X0 -> 3 `i e ]
+"145
+[; ;usr_rs485_main.c: 145: uint8_t rcvbuf[128];
+[v _rcvbuf `uc ~T0 @X0 -> 128 `i e ]
+"146
+[; ;usr_rs485_main.c: 146: uint8_t rcvnum = 0;
+[v _rcvnum `uc ~T0 @X0 1 e ]
+[i _rcvnum
 -> -> 0 `i `uc
 ]
-"88
-[; ;main.c: 88: void T1secMainTask(void)
-[v _T1secMainTask `(v ~T0 @X0 1 ef ]
-"89
-[; ;main.c: 89: {
-{
-[e :U _T1secMainTask ]
-[f ]
-"97
-[; ;main.c: 97: }
-[e :UE 987 ]
-}
-"101
-[; ;main.c: 101: void T100msecMainTask(void)
-[v _T100msecMainTask `(v ~T0 @X0 1 ef ]
-"102
-[; ;main.c: 102: {
-{
-[e :U _T100msecMainTask ]
-[f ]
-"103
-[; ;main.c: 103:     char string[50];
-[v _string `uc ~T0 @X0 -> 50 `i a ]
-"104
-[; ;main.c: 104:     RTC_DATA rtc;
-[v _rtc `S986 ~T0 @X0 1 a ]
-"106
-[; ;main.c: 106:     if( PORTDbits.RD2==0 ){
-[e $ ! == -> . . _PORTDbits 0 2 `i -> 0 `i 989  ]
-{
-"107
-[; ;main.c: 107:         printf("Button2\r\n");
-[e ( _printf :s 1C ]
-"109
-[; ;main.c: 109:         if( PORTAbits.RA0 )
-[e $ ! != -> . . _PORTAbits 0 0 `i -> 0 `i 990  ]
-"110
-[; ;main.c: 110:             LATAbits.LATA0 = 0;
-[e = . . _LATAbits 0 0 -> -> 0 `i `uc ]
-[e $U 991  ]
-"111
-[; ;main.c: 111:         else
-[e :U 990 ]
-"112
-[; ;main.c: 112:             LATAbits.LATA0 = 1;
-[e = . . _LATAbits 0 0 -> -> 1 `i `uc ]
-[e :U 991 ]
-"115
-[; ;main.c: 115:         sprintf(string,"I2C regista display\r\n");
-[e ( _sprintf (1 , &U _string :s 2C ]
-"116
-[; ;main.c: 116:         print_usb(string);
-[e ( _print_usb (1 &U _string ]
-"117
-[; ;main.c: 117:         sprintf(string,"  SCL=%x\r\n",TRISDbits.TRISD0 );
-[e ( _sprintf (1 , (. , &U _string :s 3C -> . . _TRISDbits 0 0 `i ]
-"118
-[; ;main.c: 118:         print_usb(string);
-[e ( _print_usb (1 &U _string ]
-"119
-[; ;main.c: 119:         sprintf(string,"  SDA=%x\r\n",TRISDbits.TRISD1 );
-[e ( _sprintf (1 , (. , &U _string :s 4C -> . . _TRISDbits 0 1 `i ]
-"120
-[; ;main.c: 120:         print_usb(string);
-[e ( _print_usb (1 &U _string ]
-"121
-[; ;main.c: 121:         sprintf(string,"  SSP2STAT=%x\r\n",SSP2STAT);
-[e ( _sprintf (1 , (. , &U _string :s 5C -> _SSP2STAT `i ]
-"122
-[; ;main.c: 122:         print_usb(string);
-[e ( _print_usb (1 &U _string ]
-"123
-[; ;main.c: 123:         sprintf(string,"  SSP2CON1=%x\r\n",SSP2CON1);
-[e ( _sprintf (1 , (. , &U _string :s 6C -> _SSP2CON1 `i ]
-"124
-[; ;main.c: 124:         print_usb(string);
-[e ( _print_usb (1 &U _string ]
-"125
-[; ;main.c: 125:         sprintf(string,"  SSP2CON2=%x\r\n",SSP2CON2);
-[e ( _sprintf (1 , (. , &U _string :s 7C -> _SSP2CON2 `i ]
-"126
-[; ;main.c: 126:         print_usb(string);
-[e ( _print_usb (1 &U _string ]
-"127
-[; ;main.c: 127:         sprintf(string,"  SSP2ADD=%x\r\n",SSP2ADD );
-[e ( _sprintf (1 , (. , &U _string :s 8C -> _SSP2ADD `i ]
-"128
-[; ;main.c: 128:         print_usb(string);
-[e ( _print_usb (1 &U _string ]
-"131
-[; ;main.c: 131:     }
-}
-[e :U 989 ]
-"133
-[; ;main.c: 133:     if( PORTDbits.RD3==0 ){
-[e $ ! == -> . . _PORTDbits 0 3 `i -> 0 `i 992  ]
-{
-"134
-[; ;main.c: 134:         if( PORTAbits.RA1 )
-[e $ ! != -> . . _PORTAbits 0 1 `i -> 0 `i 993  ]
-"135
-[; ;main.c: 135:             LATAbits.LATA1 = 0;
-[e = . . _LATAbits 0 1 -> -> 0 `i `uc ]
-[e $U 994  ]
-"136
-[; ;main.c: 136:         else
-[e :U 993 ]
-"137
-[; ;main.c: 137:             LATAbits.LATA1 = 1;
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-[e :U 994 ]
-"139
-[; ;main.c: 139:         printf("Button1\r\n");
-[e ( _printf :s 9C ]
-"140
-[; ;main.c: 140:         Rtc_Read(&rtc);
-[e ( _Rtc_Read (1 &U _rtc ]
-"141
-[; ;main.c: 141:         printf("\r\n20%d/%d/%d %d:%d:%d\r\n",rtc.year,rtc.month,rtc.day,rtc.hour,rtc.min,rtc.sec);
-[e ( _printf , , , , , , (. :s 10C -> . _rtc 0 `i -> . _rtc 1 `i -> . _rtc 2 `i -> . _rtc 4 `i -> . _rtc 5 `i -> . _rtc 6 `i ]
-"142
-[; ;main.c: 142:     }
-}
-[e :U 992 ]
-"144
-[; ;main.c: 144: }
-[e :UE 988 ]
-}
-[v $root$_main `(v ~T0 @X0 0 e ]
+"147
+[; ;usr_rs485_main.c: 147: uint8_t rcv_wpt = 0;
+[v _rcv_wpt `uc ~T0 @X0 1 e ]
+[i _rcv_wpt
+-> -> 0 `i `uc
+]
+"148
+[; ;usr_rs485_main.c: 148: uint8_t rcv_rpt = 0;
+[v _rcv_rpt `uc ~T0 @X0 1 e ]
+[i _rcv_rpt
+-> -> 0 `i `uc
+]
+"156
+[; ;usr_rs485_main.c: 156: uint8_t cmd_mesg[20];
+[v _cmd_mesg `uc ~T0 @X0 -> 20 `i e ]
+"157
+[; ;usr_rs485_main.c: 157: uint8_t Res_mesg[20];
+[v _Res_mesg `uc ~T0 @X0 -> 20 `i e ]
+"158
+[; ;usr_rs485_main.c: 158: uint8_t cmd_char[20];
+[v _cmd_char `uc ~T0 @X0 -> 20 `i e ]
+"159
+[; ;usr_rs485_main.c: 159: uint8_t cmd_ptr = 0;
+[v _cmd_ptr `uc ~T0 @X0 1 e ]
+[i _cmd_ptr
+-> -> 0 `i `uc
+]
+"161
+[; ;usr_rs485_main.c: 161: uint8_t rcsta;
+[v _rcsta `uc ~T0 @X0 1 e ]
 "162
-[; ;main.c: 162: void main(void)
-[v _main `(v ~T0 @X0 1 ef ]
-"163
-[; ;main.c: 163: {
-{
-[e :U _main ]
-[f ]
-"167
-[; ;main.c: 167:     SYSTEM_Initialize(SYSTEM_STATE_USB_START);
-[e ( _SYSTEM_Initialize (1 . `E7123 0 ]
-"170
-[; ;main.c: 170:     PLLEN = 1 ;
-[e = _PLLEN -> -> 1 `i `b ]
-"171
-[; ;main.c: 171:     FSEN = 1 ;
-[e = _FSEN -> -> 1 `i `b ]
-"172
-[; ;main.c: 172:     RBPU = 0 ;
-[e = _RBPU -> -> 0 `i `b ]
-"173
-[; ;main.c: 173:     OSCCON = 0b01110000 ;
-[e = _OSCCON -> -> 112 `i `uc ]
-"174
-[; ;main.c: 174:     ANCON0 = 0b00011111 ;
-[e = _ANCON0 -> -> 31 `i `uc ]
-"175
-[; ;main.c: 175:     ANCON1 = 0b00011111 ;
-[e = _ANCON1 -> -> 31 `i `uc ]
-"176
-[; ;main.c: 176:     TRISA = 0b00000000 ;
-[e = _TRISA -> -> 0 `i `uc ]
-"177
-[; ;main.c: 177:     TRISB = 0b00110000 ;
-[e = _TRISB -> -> 48 `i `uc ]
-"178
-[; ;main.c: 178:     TRISC = 0b00000000 ;
-[e = _TRISC -> -> 0 `i `uc ]
-"179
-[; ;main.c: 179:     TRISD = 0b00001111 ;
-[e = _TRISD -> -> 15 `i `uc ]
-"180
-[; ;main.c: 180:     PORTA = 0b00000000 ;
-[e = _PORTA -> -> 0 `i `uc ]
-"181
-[; ;main.c: 181:     PORTB = 0b00000000 ;
-[e = _PORTB -> -> 0 `i `uc ]
-"182
-[; ;main.c: 182:     PORTC = 0b00000000 ;
-[e = _PORTC -> -> 0 `i `uc ]
-"183
-[; ;main.c: 183:     PORTD = 0b00000000 ;
-[e = _PORTD -> -> 0 `i `uc ]
-"185
-[; ;main.c: 185:     TRISAbits.TRISA0 = 0;
-[e = . . _TRISAbits 0 0 -> -> 0 `i `uc ]
-"186
-[; ;main.c: 186:     TRISAbits.TRISA1 = 0;
-[e = . . _TRISAbits 0 1 -> -> 0 `i `uc ]
-"187
-[; ;main.c: 187:     TRISAbits.TRISA2 = 0;
-[e = . . _TRISAbits 0 2 -> -> 0 `i `uc ]
-"188
-[; ;main.c: 188:     TRISBbits.TRISB2 = 0;
-[e = . . _TRISBbits 0 2 -> -> 0 `i `uc ]
-"189
-[; ;main.c: 189:     LATAbits.LATA0 = 1;
-[e = . . _LATAbits 0 0 -> -> 1 `i `uc ]
-"190
-[; ;main.c: 190:     LATAbits.LATA1 = 1;
-[e = . . _LATAbits 0 1 -> -> 1 `i `uc ]
-"192
-[; ;main.c: 192:     TRISDbits.TRISD3 = 1;
-[e = . . _TRISDbits 0 3 -> -> 1 `i `uc ]
+[; ;usr_rs485_main.c: 162: uint8_t txsta;
+[v _txsta `uc ~T0 @X0 1 e ]
+"169
+[; ;usr_rs485_main.c: 169: const CMD_MSG com[] = {
+[v _com `CS919 ~T0 @X0 -> 11 `i e ]
+[i _com
+:U ..
+:U ..
+. `E7163 0
+. `E7157 1
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 6 `i `uc
+..
+:U ..
+. `E7163 0
+. `E7157 2
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 6 `i `uc
+..
+:U ..
+. `E7163 1
+. `E7157 1
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 7 `i `uc
+..
+:U ..
+. `E7163 1
+. `E7157 2
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 7 `i `uc
+..
+:U ..
+. `E7163 2
+. `E7157 1
+-> -> 1 `i `uc
+-> + + -> 3 `i -> 2 `i -> 3 `i `uc
+..
+:U ..
+. `E7163 2
+. `E7157 2
+-> -> 1 `i `uc
+-> + + -> 3 `i -> 2 `i -> 3 `i `uc
+..
+:U ..
+. `E7163 0
+. `E7157 1
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 6 `i `uc
+..
+:U ..
+. `E7163 0
+. `E7157 2
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 6 `i `uc
+..
+:U ..
+. `E7163 3
+. `E7157 1
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 7 `i `uc
+..
+:U ..
+. `E7163 3
+. `E7157 2
+-> -> 0 `i `uc
+-> + + -> 3 `i -> 2 `i -> 7 `i `uc
+..
+:U ..
+. `E7163 4
+-> -> 0 `i `E7157
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+..
+]
 "193
-[; ;main.c: 193:     TRISDbits.TRISD2 = 1;
-[e = . . _TRISDbits 0 2 -> -> 1 `i `uc ]
+[; ;usr_rs485_main.c: 193: void Set_rcv_data(uint8_t dt)
+[v _Set_rcv_data `(v ~T0 @X0 1 ef1`uc ]
+"194
+[; ;usr_rs485_main.c: 194: {
+{
+[e :U _Set_rcv_data ]
+"193
+[; ;usr_rs485_main.c: 193: void Set_rcv_data(uint8_t dt)
+[v _dt `uc ~T0 @X0 1 r1 ]
+"194
+[; ;usr_rs485_main.c: 194: {
+[f ]
 "195
-[; ;main.c: 195:     Wait(10);
-[e ( _Wait (1 -> -> 10 `i `us ]
+[; ;usr_rs485_main.c: 195:     rcvbuf[rcv_wpt] = dt;
+[e = *U + &U _rcvbuf * -> _rcv_wpt `ux -> -> # *U &U _rcvbuf `ui `ux _dt ]
+"196
+[; ;usr_rs485_main.c: 196:     rcvnum ++;
+[e ++ _rcvnum -> -> 1 `i `uc ]
 "197
-[; ;main.c: 197:     uart_init();
-[e ( _uart_init ..  ]
+[; ;usr_rs485_main.c: 197:     rcv_wpt ++ ;
+[e ++ _rcv_wpt -> -> 1 `i `uc ]
 "198
-[; ;main.c: 198:     uart_start_dispg();
-[e ( _uart_start_dispg ..  ]
+[; ;usr_rs485_main.c: 198:     if( rcv_wpt > 128 ){
+[e $ ! > -> _rcv_wpt `i -> 128 `i 922  ]
+{
+"199
+[; ;usr_rs485_main.c: 199:         rcv_wpt = 0;
+[e = _rcv_wpt -> -> 0 `i `uc ]
 "200
-[; ;main.c: 200:     uart485_init();
-[e ( _uart485_init ..  ]
+[; ;usr_rs485_main.c: 200:     }
+}
+[e :U 922 ]
 "201
-[; ;main.c: 201:     uart485_start_dispg();
-[e ( _uart485_start_dispg ..  ]
-"203
-[; ;main.c: 203:     log_init();
-[e ( _log_init ..  ]
+[; ;usr_rs485_main.c: 201: }
+[e :UE 921 ]
+}
+"207
+[; ;usr_rs485_main.c: 207: uint8_t Get_rcv_data(void)
+[v _Get_rcv_data `(uc ~T0 @X0 1 ef ]
+"208
+[; ;usr_rs485_main.c: 208: {
+{
+[e :U _Get_rcv_data ]
+[f ]
+"209
+[; ;usr_rs485_main.c: 209:     uint8_t dt;
+[v _dt `uc ~T0 @X0 1 a ]
+"210
+[; ;usr_rs485_main.c: 210:     rcvnum --;
+[e -- _rcvnum -> -> 1 `i `uc ]
+"211
+[; ;usr_rs485_main.c: 211:     dt = rcvbuf[rcv_rpt];
+[e = _dt *U + &U _rcvbuf * -> _rcv_rpt `ux -> -> # *U &U _rcvbuf `ui `ux ]
+"212
+[; ;usr_rs485_main.c: 212:     rcv_rpt ++ ;
+[e ++ _rcv_rpt -> -> 1 `i `uc ]
+"213
+[; ;usr_rs485_main.c: 213:     if( rcv_rpt > 128 ){
+[e $ ! > -> _rcv_rpt `i -> 128 `i 924  ]
+{
+"214
+[; ;usr_rs485_main.c: 214:         rcv_rpt = 0;
+[e = _rcv_rpt -> -> 0 `i `uc ]
+"215
+[; ;usr_rs485_main.c: 215:     }
+}
+[e :U 924 ]
+"216
+[; ;usr_rs485_main.c: 216:     return dt;
+[e ) _dt ]
+[e $UE 923  ]
+"218
+[; ;usr_rs485_main.c: 218: }
+[e :UE 923 ]
+}
+"224
+[; ;usr_rs485_main.c: 224: COM_STEP command_rcv(void)
+[v _command_rcv `(E7190 ~T0 @X0 1 ef ]
+"225
+[; ;usr_rs485_main.c: 225: {
+{
+[e :U _command_rcv ]
+[f ]
+"226
+[; ;usr_rs485_main.c: 226:     uint8_t dt;
+[v _dt `uc ~T0 @X0 1 a ]
 "227
-[; ;main.c: 227:     USBDeviceInit();
-[e ( _USBDeviceInit ..  ]
+[; ;usr_rs485_main.c: 227:     uint8_t i = 0;
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+"228
+[; ;usr_rs485_main.c: 228:     uint8_t sum = 0;
+[v _sum `uc ~T0 @X0 1 a ]
+[e = _sum -> -> 0 `i `uc ]
 "230
-[; ;main.c: 230:     USBDeviceAttach();
-[e ( _USBDeviceAttach ..  ]
+[; ;usr_rs485_main.c: 230:     if( rcsta != RCSTA1){
+[e $ ! != -> _rcsta `i -> _RCSTA1 `i 926  ]
+{
+"231
+[; ;usr_rs485_main.c: 231:         rcsta = RCSTA1;
+[e = _rcsta _RCSTA1 ]
+"232
+[; ;usr_rs485_main.c: 232:         printf("UART485_RCSTA=%02x\r\n",rcsta);
+[e ( _printf , (. :s 1C -> _rcsta `i ]
 "233
-[; ;main.c: 233:     main_status =1;
-[e = _main_status -> -> 1 `i `uc ]
+[; ;usr_rs485_main.c: 233:     }
+}
+[e :U 926 ]
 "235
-[; ;main.c: 235:     USB_start_dispg();
-[e ( _USB_start_dispg ..  ]
+[; ;usr_rs485_main.c: 235:     if( txsta != TXSTA1){
+[e $ ! != -> _txsta `i -> _TXSTA1 `i 927  ]
+{
+"236
+[; ;usr_rs485_main.c: 236:         txsta = TXSTA1;
+[e = _txsta _TXSTA1 ]
+"237
+[; ;usr_rs485_main.c: 237:         printf("UART485_TXSTA=%02x\r\n",txsta);
+[e ( _printf , (. :s 2C -> _txsta `i ]
 "238
-[; ;main.c: 238:     USBDeviceTasks();
-[e ( _USBDeviceTasks ..  ]
-"242
-[; ;main.c: 242:     rtc_data_init();
-[e ( _rtc_data_init ..  ]
-"243
-[; ;main.c: 243:     printf("Timer_init()\r\n");
-[e ( _printf :s 11C ]
+[; ;usr_rs485_main.c: 238:     }
+}
+[e :U 927 ]
 "244
-[; ;main.c: 244:     Timer0_init();
-[e ( _Timer0_init ..  ]
+[; ;usr_rs485_main.c: 244:     if( rcvnum > 0 ){
+[e $ ! > -> _rcvnum `i -> 0 `i 928  ]
+{
 "245
-[; ;main.c: 245:     Timer1_init();
-[e ( _Timer1_init ..  ]
+[; ;usr_rs485_main.c: 245:         dt = Get_rcv_data();
+[e = _dt ( _Get_rcv_data ..  ]
 "247
-[; ;main.c: 247:     Init_Timer();
-[e ( _Init_Timer ..  ]
+[; ;usr_rs485_main.c: 247:         switch( com_step_flg ){
+[e $U 930  ]
+{
+"248
+[; ;usr_rs485_main.c: 248:             case COM_RCV_INIT:
+[e :U 931 ]
+"249
+[; ;usr_rs485_main.c: 249:                 if( dt == '#' ){
+[e $ ! == -> _dt `ui -> 35 `ui 932  ]
+{
+"250
+[; ;usr_rs485_main.c: 250:                     cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
+"251
+[; ;usr_rs485_main.c: 251:                     com_step_flg = COM_RCV_ADD_ID;
+[e = _com_step_flg . `E7190 1 ]
+"252
+[; ;usr_rs485_main.c: 252:                     cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
+"253
+[; ;usr_rs485_main.c: 253:                 }
+}
+[e :U 932 ]
+"254
+[; ;usr_rs485_main.c: 254:                 break;
+[e $U 929  ]
+"255
+[; ;usr_rs485_main.c: 255:             case COM_RCV_ADD_ID:
+[e :U 933 ]
+"256
+[; ;usr_rs485_main.c: 256:                 cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
+"257
+[; ;usr_rs485_main.c: 257:                 com_step_flg = COM_RCV_ADD_ID_DIST;
+[e = _com_step_flg . `E7190 2 ]
+"258
+[; ;usr_rs485_main.c: 258:                 cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
+"259
+[; ;usr_rs485_main.c: 259:                 break;
+[e $U 929  ]
+"261
+[; ;usr_rs485_main.c: 261:             case COM_RCV_ADD_ID_DIST:
+[e :U 934 ]
+"262
+[; ;usr_rs485_main.c: 262:                 cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
 "263
-[; ;main.c: 263:     printf("  SSPADD=%x\r\n",SSP2ADD);
-[e ( _printf , (. :s 12C -> _SSP2ADD `i ]
+[; ;usr_rs485_main.c: 263:                 com_step_flg = COM_RCV_ADD_ID_SOURCE;
+[e = _com_step_flg . `E7190 3 ]
 "264
-[; ;main.c: 264:     printf("  true=%x\r\n",1);
-[e ( _printf , (. :s 13C -> 1 `i ]
+[; ;usr_rs485_main.c: 264:                 cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
 "265
-[; ;main.c: 265:     printf("  false=%x\r\n",0);
-[e ( _printf , (. :s 14C -> 0 `i ]
+[; ;usr_rs485_main.c: 265:                 break;
+[e $U 929  ]
 "267
-[; ;main.c: 267:     printf("main_loop_disp()\r\n");
-[e ( _printf :s 15C ]
+[; ;usr_rs485_main.c: 267:             case COM_RCV_ADD_ID_SOURCE:
+[e :U 935 ]
+"268
+[; ;usr_rs485_main.c: 268:                 if( dt == '*' ){
+[e $ ! == -> _dt `ui -> 42 `ui 936  ]
+{
 "269
-[; ;main.c: 269:     main_loop_disp();
-[e ( _main_loop_disp ..  ]
+[; ;usr_rs485_main.c: 269:                     cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
+"270
+[; ;usr_rs485_main.c: 270:                     com_step_flg = COM_RCV_CMD_ID;
+[e = _com_step_flg . `E7190 4 ]
 "271
-[; ;main.c: 271:     while(1)
-[e :U 997 ]
+[; ;usr_rs485_main.c: 271:                     cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
 "272
-[; ;main.c: 272:     {
+[; ;usr_rs485_main.c: 272:                 }
+}
+[e $U 937  ]
+"273
+[; ;usr_rs485_main.c: 273:                 else{
+[e :U 936 ]
 {
+"274
+[; ;usr_rs485_main.c: 274:                     com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"275
+[; ;usr_rs485_main.c: 275:                     cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"276
+[; ;usr_rs485_main.c: 276:                 }
+}
+[e :U 937 ]
+"277
+[; ;usr_rs485_main.c: 277:                 break;
+[e $U 929  ]
 "279
-[; ;main.c: 279:         if( Check100msTask() == 1 )
-[e $ ! == -> ( _Check100msTask ..  `i -> 1 `i 999  ]
+[; ;usr_rs485_main.c: 279:             case COM_RCV_CMD_ID:
+[e :U 938 ]
 "280
-[; ;main.c: 280:         {
-{
+[; ;usr_rs485_main.c: 280:                 cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
 "281
-[; ;main.c: 281:             Clear100msTaskFlg();
-[e ( _Clear100msTaskFlg ..  ]
+[; ;usr_rs485_main.c: 281:                 com_step_flg = COM_RCV_COMMAND;
+[e = _com_step_flg . `E7190 5 ]
 "282
-[; ;main.c: 282:             T100msecMainTask();
-[e ( _T100msecMainTask ..  ]
+[; ;usr_rs485_main.c: 282:                 cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
 "283
-[; ;main.c: 283:         }
-}
-[e :U 999 ]
+[; ;usr_rs485_main.c: 283:                 break;
+[e $U 929  ]
+"285
+[; ;usr_rs485_main.c: 285:             case COM_RCV_COMMAND:
+[e :U 939 ]
+"286
+[; ;usr_rs485_main.c: 286:                 if( dt == '$' ){
+[e $ ! == -> _dt `ui -> 36 `ui 940  ]
+{
+"287
+[; ;usr_rs485_main.c: 287:                     cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
 "288
-[; ;main.c: 288:         if( Check1secTask() == 1 )
-[e $ ! == -> ( _Check1secTask ..  `i -> 1 `i 1000  ]
+[; ;usr_rs485_main.c: 288:                     com_step_flg = COM_RCV_CSUM_ID;
+[e = _com_step_flg . `E7190 6 ]
 "289
-[; ;main.c: 289:         {
-{
+[; ;usr_rs485_main.c: 289:                     cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
 "290
-[; ;main.c: 290:             Clear1secTaskFlg();
-[e ( _Clear1secTaskFlg ..  ]
+[; ;usr_rs485_main.c: 290:                 }
+}
+[e $U 941  ]
 "291
-[; ;main.c: 291:             T1secMainTask();
-[e ( _T1secMainTask ..  ]
+[; ;usr_rs485_main.c: 291:                 else{
+[e :U 940 ]
+{
 "292
-[; ;main.c: 292:         }
+[; ;usr_rs485_main.c: 292:                     cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
+"293
+[; ;usr_rs485_main.c: 293:                     com_step_flg = COM_RCV_COMMAND;
+[e = _com_step_flg . `E7190 5 ]
+"294
+[; ;usr_rs485_main.c: 294:                     cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
+"295
+[; ;usr_rs485_main.c: 295:                 }
 }
-[e :U 1000 ]
+[e :U 941 ]
+"296
+[; ;usr_rs485_main.c: 296:                 break;
+[e $U 929  ]
 "297
-[; ;main.c: 297:          debug_main();
-[e ( _debug_main ..  ]
+[; ;usr_rs485_main.c: 297:             case COM_RCV_CSUM_ID:
+[e :U 942 ]
+"299
+[; ;usr_rs485_main.c: 299:                 i = 0;
+[e = _i -> -> 0 `i `uc ]
+"300
+[; ;usr_rs485_main.c: 300:                 sum = 0;
+[e = _sum -> -> 0 `i `uc ]
 "301
-[; ;main.c: 301:          rs485_com_task();
-[e ( _rs485_com_task ..  ]
+[; ;usr_rs485_main.c: 301:                 while(cmd_mesg[i] != '$'){
+[e $U 943  ]
+[e :U 944 ]
+{
+"302
+[; ;usr_rs485_main.c: 302:                     sum += cmd_mesg[i];
+[e =+ _sum -> *U + &U _cmd_mesg * -> _i `ux -> -> # *U &U _cmd_mesg `ui `ux `uc ]
+"303
+[; ;usr_rs485_main.c: 303:                 }
+}
+[e :U 943 ]
+"301
+[; ;usr_rs485_main.c: 301:                 while(cmd_mesg[i] != '$'){
+[e $ != -> *U + &U _cmd_mesg * -> _i `ux -> -> # *U &U _cmd_mesg `ui `ux `ui -> 36 `ui 944  ]
+[e :U 945 ]
+"305
+[; ;usr_rs485_main.c: 305:                 if( sum == dt ){
+[e $ ! == -> _sum `i -> _dt `i 946  ]
+{
+"306
+[; ;usr_rs485_main.c: 306:                     cmd_mesg[cmd_ptr] = dt;
+[e = *U + &U _cmd_mesg * -> _cmd_ptr `ux -> -> # *U &U _cmd_mesg `ui `ux _dt ]
+"307
+[; ;usr_rs485_main.c: 307:                     com_step_flg = COM_RCV_COMPLITE;
+[e = _com_step_flg . `E7190 8 ]
+"308
+[; ;usr_rs485_main.c: 308:                     cmd_ptr ++;
+[e ++ _cmd_ptr -> -> 1 `i `uc ]
+"311
+[; ;usr_rs485_main.c: 311:                     printf("cmd_mesg= ");
+[e ( _printf :s 3C ]
+"312
+[; ;usr_rs485_main.c: 312:                     for( i=0; i<cmd_ptr; i++ ){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 950  ]
+[e :U 947 ]
+{
+"313
+[; ;usr_rs485_main.c: 313:                         printf("%02x ",cmd_mesg[i]);
+[e ( _printf , (. :s 4C -> *U + &U _cmd_mesg * -> _i `ux -> -> # *U &U _cmd_mesg `ui `ux `i ]
+"314
+[; ;usr_rs485_main.c: 314:                         cmd_char[i] = ((cmd_mesg[i]<0x20||cmd_mesg[i]>=0x7f)? '.': cmd_mesg[i]);
+[e = *U + &U _cmd_char * -> _i `ux -> -> # *U &U _cmd_char `ui `ux -> ? || < -> *U + &U _cmd_mesg * -> _i `ux -> -> # *U &U _cmd_mesg `ui `ux `i -> 32 `i >= -> *U + &U _cmd_mesg * -> _i `ux -> -> # *U &U _cmd_mesg `ui `ux `i -> 127 `i : -> 46 `ui -> *U + &U _cmd_mesg * -> _i `ux -> -> # *U &U _cmd_mesg `ui `ux `ui `uc ]
+"315
+[; ;usr_rs485_main.c: 315:                     }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 950 ]
+[e $ < -> _i `i -> _cmd_ptr `i 947  ]
+[e :U 948 ]
+}
+"316
+[; ;usr_rs485_main.c: 316:                     cmd_char[i+1] = '\0';
+[e = *U + &U _cmd_char * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _cmd_char `ui `ux -> -> 0 `ui `uc ]
+"317
+[; ;usr_rs485_main.c: 317:                     printf(" :: %s\r\n", cmd_char);
+[e ( _printf , (. :s 5C &U _cmd_char ]
+"320
+[; ;usr_rs485_main.c: 320:                 }
+}
+[e $U 951  ]
+"321
+[; ;usr_rs485_main.c: 321:                 else{
+[e :U 946 ]
+{
+"322
+[; ;usr_rs485_main.c: 322:                     com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"323
+[; ;usr_rs485_main.c: 323:                     cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"324
+[; ;usr_rs485_main.c: 324:                 }
+}
+[e :U 951 ]
+"326
+[; ;usr_rs485_main.c: 326:             case COM_RCV_COMPLITE:
+[e :U 952 ]
 "327
-[; ;main.c: 327:         APP_DeviceCDCBasicDemoTasks();
-[e ( _APP_DeviceCDCBasicDemoTasks ..  ]
-"338
-[; ;main.c: 338:     }
+[; ;usr_rs485_main.c: 327:             default:
+[e :U 953 ]
+"328
+[; ;usr_rs485_main.c: 328:                 break;
+[e $U 929  ]
+"329
+[; ;usr_rs485_main.c: 329:         }
 }
-[e :U 996 ]
-[e $U 997  ]
-[e :U 998 ]
-"339
-[; ;main.c: 339: }
-[e :UE 995 ]
+[e $U 929  ]
+[e :U 930 ]
+[e [\ -> _com_step_flg `ui , $ -> . `E7190 0 `ui 931
+ , $ -> . `E7190 1 `ui 933
+ , $ -> . `E7190 2 `ui 934
+ , $ -> . `E7190 3 `ui 935
+ , $ -> . `E7190 4 `ui 938
+ , $ -> . `E7190 5 `ui 939
+ , $ -> . `E7190 6 `ui 942
+ , $ -> . `E7190 8 `ui 952
+ 953 ]
+[e :U 929 ]
+"331
+[; ;usr_rs485_main.c: 331:         printf("dt=0x%02x, com_step_flg=%d\r\n", dt, com_step_flg);
+[e ( _printf , , (. :s 6C -> _dt `i -> _com_step_flg `ui ]
+"333
+[; ;usr_rs485_main.c: 333:     }
 }
-"488
-[; ;main.c: 488: void Wait(uint16_t num)
-[v _Wait `(v ~T0 @X0 1 ef1`us ]
-"489
-[; ;main.c: 489: {
+[e :U 928 ]
+"335
+[; ;usr_rs485_main.c: 335:     return com_step_flg;
+[e ) _com_step_flg ]
+[e $UE 925  ]
+"336
+[; ;usr_rs485_main.c: 336: }
+[e :UE 925 ]
+}
+"341
+[; ;usr_rs485_main.c: 341: void Send_RS485(uint8_t *msg, uint8_t num)
+[v _Send_RS485 `(v ~T0 @X0 1 ef2`*uc`uc ]
+"342
+[; ;usr_rs485_main.c: 342: {
 {
-[e :U _Wait ]
-"488
-[; ;main.c: 488: void Wait(uint16_t num)
-[v _num `us ~T0 @X0 1 r1 ]
-"489
-[; ;main.c: 489: {
+[e :U _Send_RS485 ]
+"341
+[; ;usr_rs485_main.c: 341: void Send_RS485(uint8_t *msg, uint8_t num)
+[v _msg `*uc ~T0 @X0 1 r1 ]
+[v _num `uc ~T0 @X0 1 r2 ]
+"342
+[; ;usr_rs485_main.c: 342: {
 [f ]
-"490
-[; ;main.c: 490:      int i ;
-[v _i `i ~T0 @X0 1 a ]
-"492
-[; ;main.c: 492:      for (i=0 ; i < num ; i++) {
+"343
+[; ;usr_rs485_main.c: 343:     uint8_t i;
+[v _i `uc ~T0 @X0 1 a ]
+"345
+[; ;usr_rs485_main.c: 345:     LATAbits.LATA2 = 1;
+[e = . . _LATAbits 0 2 -> -> 1 `i `uc ]
+"346
+[; ;usr_rs485_main.c: 346:     for( i=0; i < num; i++){
 {
-[e = _i -> 0 `i ]
-[e $U 1005  ]
-[e :U 1002 ]
+[e = _i -> -> 0 `i `uc ]
+[e $U 958  ]
+[e :U 955 ]
 {
-"493
-[; ;main.c: 493:           _delay((unsigned long)((10)*(48000000/4000.0))) ;
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
-"494
-[; ;main.c: 494:      }
+"347
+[; ;usr_rs485_main.c: 347:         while (!TXSTA1bits.TRMT);
+[e $U 959  ]
+[e :U 960 ]
+[e :U 959 ]
+[e $ ! != -> . . _TXSTA1bits 0 1 `i -> 0 `i 960  ]
+[e :U 961 ]
+"348
+[; ;usr_rs485_main.c: 348:         TXREG1 = msg[i];
+[e = _TXREG1 *U + _msg * -> _i `ux -> -> # *U _msg `ui `ux ]
+"349
+[; ;usr_rs485_main.c: 349:     }
 }
-[e ++ _i -> 1 `i ]
-[e :U 1005 ]
-[e $ < -> _i `ui -> _num `ui 1002  ]
-[e :U 1003 ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 958 ]
+[e $ < -> _i `i -> _num `i 955  ]
+[e :U 956 ]
 }
-"495
-[; ;main.c: 495: }
-[e :UE 1001 ]
+"350
+[; ;usr_rs485_main.c: 350:     while (!TXSTA1bits.TRMT);
+[e $U 962  ]
+[e :U 963 ]
+[e :U 962 ]
+[e $ ! != -> . . _TXSTA1bits 0 1 `i -> 0 `i 963  ]
+[e :U 964 ]
+"351
+[; ;usr_rs485_main.c: 351:     LATAbits.LATA2 = 0;
+[e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
+"352
+[; ;usr_rs485_main.c: 352: }
+[e :UE 954 ]
 }
-"502
-[; ;main.c: 502: void Timer0_init(void)
-[v _Timer0_init `(v ~T0 @X0 1 ef ]
-"503
-[; ;main.c: 503: {
+"358
+[; ;usr_rs485_main.c: 358: void rs485_com_task(void)
+[v _rs485_com_task `(v ~T0 @X0 1 ef ]
+"359
+[; ;usr_rs485_main.c: 359: {
 {
-[e :U _Timer0_init ]
+[e :U _rs485_com_task ]
 [f ]
-"504
-[; ;main.c: 504:     T0CON = 0;
-[e = _T0CON -> -> 0 `i `uc ]
-"505
-[; ;main.c: 505:     T0CONbits.TMR0ON = 1;
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"506
-[; ;main.c: 506:     T0CONbits.T08BIT = 0;
-[e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
-"507
-[; ;main.c: 507:     T0CONbits.PSA = 1;
-[e = . . _T0CONbits 0 1 -> -> 1 `i `uc ]
-"509
-[; ;main.c: 509:     TMR0H = 0xFB60 >> 8;
-[e = _TMR0H -> >> -> 64352 `ui -> 8 `i `uc ]
-"510
-[; ;main.c: 510:     TMR0L = 0xFB60 & 0x00ff;
-[e = _TMR0L -> & -> 64352 `ui -> -> 255 `i `ui `uc ]
-"516
-[; ;main.c: 516:     INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"517
-[; ;main.c: 517:     INTCONbits.TMR0IE = 1;
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"519
-[; ;main.c: 519: }
-[e :UE 1006 ]
-}
-"527
-[; ;main.c: 527: void Timer1_init(void)
-[v _Timer1_init `(v ~T0 @X0 1 ef ]
-"528
-[; ;main.c: 528: {
+"361
+[; ;usr_rs485_main.c: 361:     uint8_t i = 0;
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+"362
+[; ;usr_rs485_main.c: 362:     uint8_t num = 0;
+[v _num `uc ~T0 @X0 1 a ]
+[e = _num -> -> 0 `i `uc ]
+"364
+[; ;usr_rs485_main.c: 364:     uint8_t sum = 0;
+[v _sum `uc ~T0 @X0 1 a ]
+[e = _sum -> -> 0 `i `uc ]
+"365
+[; ;usr_rs485_main.c: 365:     float dt = 10.25;
+[v _dt `f ~T0 @X0 1 a ]
+[e = _dt -> .10.25 `f ]
+"366
+[; ;usr_rs485_main.c: 366:     uint32_t dt32;
+[v _dt32 `ul ~T0 @X0 1 a ]
+"368
+[; ;usr_rs485_main.c: 368:     dt32 = (uint32_t)dt;
+[e = _dt32 -> _dt `ul ]
+"371
+[; ;usr_rs485_main.c: 371:     if( command_rcv() == COM_RCV_COMPLITE){
+[e $ ! == -> ( _command_rcv ..  `ui -> . `E7190 8 `ui 966  ]
 {
-[e :U _Timer1_init ]
-[f ]
-"529
-[; ;main.c: 529:     T1CON = 0;
-[e = _T1CON -> -> 0 `i `uc ]
-"536
-[; ;main.c: 536:     T1CONbits.TMR1CS0 = 0;
-[e = . . _T1CONbits 2 3 -> -> 0 `i `uc ]
-"537
-[; ;main.c: 537:     T1CONbits.TMR1CS1 = 0;
-[e = . . _T1CONbits 2 4 -> -> 0 `i `uc ]
-"545
-[; ;main.c: 545:     T1CONbits.T1CKPS0 = 1;
-[e = . . _T1CONbits 2 1 -> -> 1 `i `uc ]
-"546
-[; ;main.c: 546:     T1CONbits.T1CKPS1 = 0;
-[e = . . _T1CONbits 2 2 -> -> 0 `i `uc ]
-"552
-[; ;main.c: 552:     T1CONbits.RD16 = 1;
-[e = . . _T1CONbits 1 1 -> -> 1 `i `uc ]
-"558
-[; ;main.c: 558:     T1CONbits.TMR1ON = 1;
-[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
-"560
-[; ;main.c: 560:     TMR1H = 0x15A0 >> 8;
-[e = _TMR1H -> >> -> 5536 `i -> 8 `i `uc ]
-"561
-[; ;main.c: 561:     TMR1L = 0x15A0 & 0x00ff;
-[e = _TMR1L -> & -> 5536 `i -> 255 `i `uc ]
-"567
-[; ;main.c: 567:     PIR1bits.TMR1IF = 0;
-[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-"568
-[; ;main.c: 568:     PIE1bits.TMR1IE = 1;
-[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-"569
-[; ;main.c: 569: }
-[e :UE 1007 ]
+"372
+[; ;usr_rs485_main.c: 372:         if( cmd_mesg[0x00 +1] == RS485_AD_SLEVE01 ){
+[e $ ! == -> *U + &U _cmd_mesg * -> -> + -> 0 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux `i -> . `E7157 1 `i 967  ]
+{
+"373
+[; ;usr_rs485_main.c: 373:            switch( cmd_mesg[0x03 +1] ){
+[e $U 969  ]
+{
+"374
+[; ;usr_rs485_main.c: 374:             case RS485_CMD_STATUS:
+[e :U 970 ]
+"375
+[; ;usr_rs485_main.c: 375:                 Res_mesg[num++] = '#';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
+"376
+[; ;usr_rs485_main.c: 376:                 Res_mesg[num++] = RS485_AD_MASTER;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
+"377
+[; ;usr_rs485_main.c: 377:                 Res_mesg[num++] = RS485_AD_SLEVE01;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
+"379
+[; ;usr_rs485_main.c: 379:                 Res_mesg[num++] = '*';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
+"380
+[; ;usr_rs485_main.c: 380:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
+"381
+[; ;usr_rs485_main.c: 381:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"383
+[; ;usr_rs485_main.c: 383:                 Res_mesg[num++] = SLV_STATUS_IDLE;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7174 0 `uc ]
+"384
+[; ;usr_rs485_main.c: 384:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"385
+[; ;usr_rs485_main.c: 385:                 Res_mesg[num++] = SENS_NON;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7179 0 `uc ]
+"387
+[; ;usr_rs485_main.c: 387:                 for( i=0; i < num; i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 974  ]
+[e :U 971 ]
+{
+"388
+[; ;usr_rs485_main.c: 388:                     sum += Res_mesg[i];
+[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
+"389
+[; ;usr_rs485_main.c: 389:                 }
 }
-[p f _printf 12583040 ]
-[p f _sprintf 12582912 ]
-[a 2C 73 50 67 32 114 101 103 105 115 116 97 32 100 105 115 112 108 97 121 13 10 0 ]
-[a 13C 32 32 116 114 117 101 61 37 120 13 10 0 ]
-[a 14C 32 32 102 97 108 115 101 61 37 120 13 10 0 ]
-[a 5C 32 32 83 83 80 50 83 84 65 84 61 37 120 13 10 0 ]
-[a 3C 32 32 83 67 76 61 37 120 13 10 0 ]
-[a 12C 32 32 83 83 80 65 68 68 61 37 120 13 10 0 ]
-[a 8C 32 32 83 83 80 50 65 68 68 61 37 120 13 10 0 ]
-[a 4C 32 32 83 68 65 61 37 120 13 10 0 ]
-[a 7C 32 32 83 83 80 50 67 79 78 50 61 37 120 13 10 0 ]
-[a 6C 32 32 83 83 80 50 67 79 78 49 61 37 120 13 10 0 ]
-[a 10C 13 10 50 48 37 100 47 37 100 47 37 100 32 37 100 58 37 100 58 37 100 13 10 0 ]
-[a 1C 66 117 116 116 111 110 50 13 10 0 ]
-[a 9C 66 117 116 116 111 110 49 13 10 0 ]
-[a 11C 84 105 109 101 114 95 105 110 105 116 40 41 13 10 0 ]
-[a 15C 109 97 105 110 95 108 111 111 112 95 100 105 115 112 40 41 13 10 0 ]
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 974 ]
+[e $ < -> _i `i -> _num `i 971  ]
+[e :U 972 ]
+}
+"391
+[; ;usr_rs485_main.c: 391:                 Res_mesg[num++] = '$';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
+"392
+[; ;usr_rs485_main.c: 392:                 Res_mesg[num++] = sum;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
+"394
+[; ;usr_rs485_main.c: 394:                 Send_RS485(Res_mesg, num);
+[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
+"396
+[; ;usr_rs485_main.c: 396:                 break;
+[e $U 968  ]
+"397
+[; ;usr_rs485_main.c: 397:             case RS485_CMD_VERSION:
+[e :U 975 ]
+"398
+[; ;usr_rs485_main.c: 398:                 i = 0;
+[e = _i -> -> 0 `i `uc ]
+"399
+[; ;usr_rs485_main.c: 399:                 Res_mesg[num++] = '#';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
+"400
+[; ;usr_rs485_main.c: 400:                 Res_mesg[num++] = RS485_AD_MASTER;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
+"401
+[; ;usr_rs485_main.c: 401:                 Res_mesg[num++] = RS485_AD_SLEVE01;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
+"403
+[; ;usr_rs485_main.c: 403:                 Res_mesg[num++] = '*';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
+"404
+[; ;usr_rs485_main.c: 404:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
+"405
+[; ;usr_rs485_main.c: 405:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"407
+[; ;usr_rs485_main.c: 407:                 Res_mesg[num++] = 0x0110 & 0x00ff;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> & -> 272 `i -> 255 `i `uc ]
+"408
+[; ;usr_rs485_main.c: 408:                 Res_mesg[num++] = 0x0110 >> 8;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> -> 272 `i -> 8 `i `uc ]
+"409
+[; ;usr_rs485_main.c: 409:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"410
+[; ;usr_rs485_main.c: 410:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"412
+[; ;usr_rs485_main.c: 412:                 for( i=0; i < num; i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 979  ]
+[e :U 976 ]
+{
+"413
+[; ;usr_rs485_main.c: 413:                     sum += Res_mesg[i];
+[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
+"414
+[; ;usr_rs485_main.c: 414:                 }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 979 ]
+[e $ < -> _i `i -> _num `i 976  ]
+[e :U 977 ]
+}
+"416
+[; ;usr_rs485_main.c: 416:                 Res_mesg[num++] = '$';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
+"417
+[; ;usr_rs485_main.c: 417:                 Res_mesg[num++] = sum;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
+"419
+[; ;usr_rs485_main.c: 419:                 Send_RS485(Res_mesg, num);
+[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
+"421
+[; ;usr_rs485_main.c: 421:                 break;
+[e $U 968  ]
+"422
+[; ;usr_rs485_main.c: 422:             case RS485_CMD_MESUR:
+[e :U 980 ]
+"423
+[; ;usr_rs485_main.c: 423:                 i = 0;
+[e = _i -> -> 0 `i `uc ]
+"424
+[; ;usr_rs485_main.c: 424:                 Res_mesg[num++] = '#';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
+"425
+[; ;usr_rs485_main.c: 425:                 Res_mesg[num++] = RS485_AD_MASTER;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
+"426
+[; ;usr_rs485_main.c: 426:                 Res_mesg[num++] = RS485_AD_SLEVE01;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
+"428
+[; ;usr_rs485_main.c: 428:                 Res_mesg[num++] = '*';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
+"429
+[; ;usr_rs485_main.c: 429:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
+"430
+[; ;usr_rs485_main.c: 430:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"433
+[; ;usr_rs485_main.c: 433:                 for( i=0; i < num; i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 984  ]
+[e :U 981 ]
+{
+"434
+[; ;usr_rs485_main.c: 434:                     sum += Res_mesg[i];
+[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
+"435
+[; ;usr_rs485_main.c: 435:                 }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 984 ]
+[e $ < -> _i `i -> _num `i 981  ]
+[e :U 982 ]
+}
+"437
+[; ;usr_rs485_main.c: 437:                 Res_mesg[num++] = '$';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
+"438
+[; ;usr_rs485_main.c: 438:                 Res_mesg[num++] = sum;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
+"440
+[; ;usr_rs485_main.c: 440:                 Send_RS485(Res_mesg, num);
+[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
+"442
+[; ;usr_rs485_main.c: 442:                 break;
+[e $U 968  ]
+"443
+[; ;usr_rs485_main.c: 443:             case RS485_CMD_MESUR_DATA:
+[e :U 985 ]
+"444
+[; ;usr_rs485_main.c: 444:                 i = 0;
+[e = _i -> -> 0 `i `uc ]
+"445
+[; ;usr_rs485_main.c: 445:                 Res_mesg[num++] = '#';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 35 `ui `uc ]
+"446
+[; ;usr_rs485_main.c: 446:                 Res_mesg[num++] = RS485_AD_MASTER;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 0 `uc ]
+"447
+[; ;usr_rs485_main.c: 447:                 Res_mesg[num++] = RS485_AD_SLEVE01;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> . `E7157 1 `uc ]
+"449
+[; ;usr_rs485_main.c: 449:                 Res_mesg[num++] = '*';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 42 `ui `uc ]
+"450
+[; ;usr_rs485_main.c: 450:                 Res_mesg[num++] = cmd_mesg[0x03 +1];
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux ]
+"451
+[; ;usr_rs485_main.c: 451:                 Res_mesg[num++] = 0;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 0 `i `uc ]
+"453
+[; ;usr_rs485_main.c: 453:                 Res_mesg[num++] = (uint8_t) dt32;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> _dt32 `uc ]
+"454
+[; ;usr_rs485_main.c: 454:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 8 );
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 8 `i `uc ]
+"455
+[; ;usr_rs485_main.c: 455:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 16 );
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 16 `i `uc ]
+"456
+[; ;usr_rs485_main.c: 456:                 Res_mesg[num++] = (uint8_t) ( dt32 >> 24 );
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> >> _dt32 -> 24 `i `uc ]
+"458
+[; ;usr_rs485_main.c: 458:                 for( i=0; i < num; i++){
+{
+[e = _i -> -> 0 `i `uc ]
+[e $U 989  ]
+[e :U 986 ]
+{
+"459
+[; ;usr_rs485_main.c: 459:                     sum += Res_mesg[i];
+[e =+ _sum -> *U + &U _Res_mesg * -> _i `ux -> -> # *U &U _Res_mesg `ui `ux `uc ]
+"460
+[; ;usr_rs485_main.c: 460:                 }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e :U 989 ]
+[e $ < -> _i `i -> _num `i 986  ]
+[e :U 987 ]
+}
+"462
+[; ;usr_rs485_main.c: 462:                 Res_mesg[num++] = '$';
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux -> -> 36 `ui `uc ]
+"463
+[; ;usr_rs485_main.c: 463:                 Res_mesg[num++] = sum;
+[e = *U + &U _Res_mesg * -> ++ _num -> -> 1 `i `uc `ux -> -> # *U &U _Res_mesg `ui `ux _sum ]
+"465
+[; ;usr_rs485_main.c: 465:                 Send_RS485(Res_mesg, num);
+[e ( _Send_RS485 (2 , &U _Res_mesg _num ]
+"467
+[; ;usr_rs485_main.c: 467:                 break;
+[e $U 968  ]
+"468
+[; ;usr_rs485_main.c: 468:             default:
+[e :U 990 ]
+"469
+[; ;usr_rs485_main.c: 469:                 break;
+[e $U 968  ]
+"470
+[; ;usr_rs485_main.c: 470:            }
+}
+[e $U 968  ]
+[e :U 969 ]
+[e [\ -> *U + &U _cmd_mesg * -> -> + -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _cmd_mesg `ui `ux `i , $ . `E7163 0 970
+ , $ . `E7163 1 975
+ , $ . `E7163 2 980
+ , $ . `E7163 3 985
+ 990 ]
+[e :U 968 ]
+"472
+[; ;usr_rs485_main.c: 472:         }
+}
+[e $U 991  ]
+"473
+[; ;usr_rs485_main.c: 473:         else{
+[e :U 967 ]
+{
+"474
+[; ;usr_rs485_main.c: 474:             com_step_flg = COM_RCV_INIT;
+[e = _com_step_flg . `E7190 0 ]
+"475
+[; ;usr_rs485_main.c: 475:             cmd_ptr = 0;
+[e = _cmd_ptr -> -> 0 `i `uc ]
+"476
+[; ;usr_rs485_main.c: 476:         }
+}
+[e :U 991 ]
+"477
+[; ;usr_rs485_main.c: 477:     }
+}
+[e :U 966 ]
+"478
+[; ;usr_rs485_main.c: 478: }
+[e :UE 965 ]
+}
+[p f _printf 12877956 ]
+[a 4C 37 48 50 120 32 0 ]
+[a 3C 99 109 100 95 109 101 115 103 61 32 0 ]
+[a 2C 85 65 82 84 52 56 53 95 84 88 83 84 65 61 37 48 50 120 13 10 0 ]
+[a 1C 85 65 82 84 52 56 53 95 82 67 83 84 65 61 37 48 50 120 13 10 0 ]
+[a 5C 32 58 58 32 37 115 13 10 0 ]
+[a 6C 100 116 61 48 120 37 48 50 120 44 32 99 111 109 95 115 116 101 112 95 102 108 103 61 37 100 13 10 0 ]

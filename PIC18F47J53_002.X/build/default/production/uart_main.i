@@ -11813,7 +11813,7 @@ typedef enum
     SYSTEM_STATE_USB_SUSPEND,
     SYSTEM_STATE_USB_RESUME
 } SYSTEM_STATE;
-# 286 "./system.h"
+# 290 "./system.h"
 typedef enum{
     LOG_DISP_I2C,
     LOG_DISP_I2C_STAT,
@@ -11837,7 +11837,7 @@ typedef enum{
 
     RASING_MODE_MAX
 }RASING_MODE;
-# 323 "./system.h"
+# 327 "./system.h"
 void SYSTEM_Initialize( SYSTEM_STATE state );
 
 uint16_t Get_Timer(int sel);
@@ -12132,5 +12132,10 @@ void uart485_init(void)
     SPBRGH1 = dt.SPBRGHx;
     SPBRG1 = dt.SPBRGx;
     TXSTA1bits.BRGH = dt.BRGHx;
+
+    PIR1bits.RC1IF = 0;
+    PIE1bits.RC1IE = 1;
+    IPR1bits.RC1IP = 1;
+
 
 }
