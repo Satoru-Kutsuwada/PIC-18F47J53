@@ -11942,19 +11942,34 @@ SLAVE_DATA slv_dt[RS485_AD_MAX];
 
 
 uint8_t rcvbuf[128];
+uint8_t work_buf[128];
 uint8_t rcvnum = 0;
 uint8_t rcv_wpt = 0;
 uint8_t rcv_rpt = 0;
+uint16_t work_buf_num = 0;
+
+typedef enum{
+ COM_PROTOCOL_SEND,
+ COM_PROTOCOL_RECIVE,
+ COM_PROTOCOL_RESPONS
+
+} COM_PROTOCOL_STEP;
+
+COM_PROTOCOL_STEP cp_step = COM_PROTOCOL_RECIVE;
+
+
+
+const char com_start_text[] = "COM-ST\0";
+const char res_start_text[] = "RES-ST\0";
+const char message_end_text[] = "MSGEND\0";
+char comp_buf[6 +1];
 
 
 
 
-
-
-
-uint8_t cmd_mesg[20];
-uint8_t Res_mesg[20];
-uint8_t cmd_char[20];
+uint8_t cmd_mesg[32];
+uint8_t Res_mesg[32];
+uint8_t cmd_char[32];
 uint8_t cmd_ptr = 0;
 
 uint8_t rcsta;
@@ -12140,16 +12155,23 @@ COM_STEP command_rcv(void)
 void Send_RS485(uint8_t *msg, uint8_t num)
 {
     uint8_t i;
-
-    printf("Send_RS485()\r\n");
-    printf("Res_msg = ");
+    uint8_t c[2];
 
     for( i=0; i < num; i++){
-        printf("%02x ",msg[i]);
         cmd_char[i] = ((msg[i]<0x20||msg[i]>=0x7f)? '.': msg[i]);
     }
-    cmd_char[i] = '\0';
-    printf(" :: %s\r\n", cmd_char);
+
+    printf("\r\nRESPONS MESSAGE = \r\n ");
+    for( i=0; i < num; i++){
+  printf("%02x ", msg[i]);
+ }
+    printf("\r\n ");
+    c[1] = '\0';
+    for( i=0; i < num; i++){
+        c[0] = cmd_char[i];
+  printf(" %s ", c);
+ }
+    printf("\r\n");
 
 
     LATAbits.LATA2 = 1;
@@ -12165,6 +12187,126 @@ void Send_RS485(uint8_t *msg, uint8_t num)
 
 
 
+uint16_t Get_end_test_pt(uint16_t num,uint8_t *buf )
+{
+ uint16_t i;
+ uint16_t rtn;
+
+ rtn = 0;
+
+ for( i=0; i<num; i++){
+  if( (i+6) > num ){
+   rtn = 0;
+   break;
+  }
+  else if( buf[i] == message_end_text[0]
+    && buf[i+1] == message_end_text[1]
+    && buf[i+2] == message_end_text[2]
+    && buf[i+3] == message_end_text[3]
+    && buf[i+4] == message_end_text[4]
+    && buf[i+5] == message_end_text[5] ){
+
+   rtn = i;
+   break;
+  }
+ }
+
+ return rtn;
+}
+
+
+
+RETURN_STATUS Check_Message(uint16_t num, uint8_t *src, uint8_t *dist)
+{
+ uint16_t i;
+ uint16_t j;
+ uint16_t start;
+ uint16_t end;
+    uint8_t c[2];
+
+    RETURN_STATUS status;
+    status = RET_FALSE;
+
+
+
+    start = 0xff;
+ for( i=0; i<num; i++){
+  if( src[i] == com_start_text[0]
+    && src[i+1] == com_start_text[1]
+    && src[i+2] == com_start_text[2]
+    && src[i+3] == com_start_text[3]
+    && src[i+4] == com_start_text[4]
+    && src[i+5] == com_start_text[5] ){
+
+            start = i;
+
+            if( src[i+5+2] == RS485_AD_SLEVE02 ){
+                status = RET_TRUE;
+            }
+
+   break;
+  }
+ }
+
+    if( start == 0xff ){
+        for( i=0; i<num; i++){
+            if( src[i] == res_start_text[0]
+                    && src[i+1] == res_start_text[1]
+                    && src[i+2] == res_start_text[2]
+                    && src[i+3] == res_start_text[3]
+                    && src[i+4] == res_start_text[4]
+                    && src[i+5] == res_start_text[5] ){
+
+                start = i;
+                break;
+            }
+        }
+    }
+
+ for( i=0; i<num; i++){
+  if( src[i] == message_end_text[0]
+    && src[i+1] == message_end_text[1]
+    && src[i+2] == message_end_text[2]
+    && src[i+3] == message_end_text[3]
+    && src[i+4] == message_end_text[4]
+    && src[i+5] == message_end_text[5] ){
+
+   end = i+5+1;
+   break;
+  }
+ }
+
+ j = 0;
+ for( i=start; i < end; i++){
+  dist[j++] = src[i];
+ }
+
+ for( i=0; i < j; i++){
+  cmd_char[i] = ((dist[i]<0x20||dist[i]>=0x7f)? '.': dist[i]);
+ }
+
+    printf("\r\nCOMMAND MESSAGE = \r\n ");
+    for( i=0; i < j; i++){
+  printf("%02x ",dist[i]);
+ }
+    printf("\r\n ");
+    c[1] = '\0';
+    for( i=0; i < j; i++){
+        c[0] = cmd_char[i];
+  printf(" %s ", c);
+ }
+    printf("\r\n");
+
+
+
+
+
+   return status;
+
+}
+
+
+
 void rs485_com_task(void)
 {
 
@@ -12177,128 +12319,98 @@ void rs485_com_task(void)
 
     dt32 = (uint32_t)dt;
 
+    uint8_t command ;
 
-    if( command_rcv() == COM_RCV_COMPLITE){
-        if( cmd_mesg[0x00 +1] == RS485_AD_SLEVE02 ){
-           switch( cmd_mesg[0x03 +1] ){
-            case RS485_CMD_STATUS:
-                printf("RS485_CMD_STATUS\r\n");
-                Res_mesg[num++] = '#';
-                Res_mesg[num++] = RS485_AD_MASTER;
-                Res_mesg[num++] = RS485_AD_SLEVE02;
 
-                Res_mesg[num++] = '*';
-                Res_mesg[num++] = cmd_mesg[0x03 +1];
-                Res_mesg[num++] = 0;
+    switch(cp_step){
+    case COM_PROTOCOL_RECIVE:
+        while( rcvnum > 0 ){
+            work_buf[work_buf_num ++] = Get_rcv_data();
 
-                Res_mesg[num++] = SLV_STATUS_IDLE;
-                Res_mesg[num++] = 0;
-                Res_mesg[num++] = SENS_NON;
-
-                for( i=0; i < num; i++){
-                    sum += Res_mesg[i];
+            if( Get_end_test_pt(work_buf_num, work_buf) != 0 ){
+                if( Check_Message(work_buf_num, work_buf, cmd_mesg) == RET_TRUE ){
+                    cp_step = COM_PROTOCOL_RESPONS;
                 }
-
-                Res_mesg[num++] = '$';
-                Res_mesg[num++] = sum;
-
-                Send_RS485(Res_mesg, num);
-
-                com_step_flg = COM_RCV_INIT;
-                cmd_ptr = 0;
-
-                break;
-            case RS485_CMD_VERSION:
-                printf("RS485_CMD_VERSION\r\n");
-                i = 0;
-                Res_mesg[num++] = '#';
-                Res_mesg[num++] = RS485_AD_MASTER;
-                Res_mesg[num++] = RS485_AD_SLEVE02;
-
-                Res_mesg[num++] = '*';
-                Res_mesg[num++] = cmd_mesg[0x03 +1];
-                Res_mesg[num++] = 0;
-
-                Res_mesg[num++] = 0x0110 & 0x00ff;
-                Res_mesg[num++] = 0x0110 >> 8;
-                Res_mesg[num++] = 0;
-                Res_mesg[num++] = 0;
-
-                for( i=0; i < num; i++){
-                    sum += Res_mesg[i];
+                else{
+                    printf("Discard received message \r\n");
                 }
-
-                Res_mesg[num++] = '$';
-                Res_mesg[num++] = sum;
-
-                Send_RS485(Res_mesg, num);
-
-                com_step_flg = COM_RCV_INIT;
-                cmd_ptr = 0;
+                work_buf_num = 0;
 
                 break;
-            case RS485_CMD_MESUR:
-                printf("RS485_CMD_MESUR\r\n");
-                i = 0;
-                Res_mesg[num++] = '#';
-                Res_mesg[num++] = RS485_AD_MASTER;
-                Res_mesg[num++] = RS485_AD_SLEVE02;
+            }
+        }
 
-                Res_mesg[num++] = '*';
-                Res_mesg[num++] = cmd_mesg[0x03 +1];
-                Res_mesg[num++] = 0;
+        break;
+    case COM_PROTOCOL_RESPONS:
+
+        command = cmd_mesg[ 6 + 0x03 + 1] ;
+        printf("COMMAND=%d\r\n", command);
 
 
-                for( i=0; i < num; i++){
-                    sum += Res_mesg[i];
-                }
+        for( i=0; i < 6; i++ ){
+            Res_mesg[i] = res_start_text[i];
+        }
 
-                Res_mesg[num++] = '$';
-                Res_mesg[num++] = sum;
+        num = 6;
+        Res_mesg[num++] = '#';
+        Res_mesg[num++] = RS485_AD_MASTER;
+        Res_mesg[num++] = RS485_AD_SLEVE02;
 
-                Send_RS485(Res_mesg, num);
+        Res_mesg[num++] = '*';
+        Res_mesg[num++] = command;
 
-                com_step_flg = COM_RCV_INIT;
-                cmd_ptr = 0;
 
-                break;
-            case RS485_CMD_MESUR_DATA:
-                printf("RS485_CMD_MESUR_DATA\r\n");
-                i = 0;
-                Res_mesg[num++] = '#';
-                Res_mesg[num++] = RS485_AD_MASTER;
-                Res_mesg[num++] = RS485_AD_SLEVE02;
+        switch( command ){
+        case RS485_CMD_STATUS:
+            Res_mesg[num++] = 0;
+            Res_mesg[num++] = SLV_STATUS_IDLE;
+            Res_mesg[num++] = 0;
+            Res_mesg[num++] = SENS_NON;
+            break;
 
-                Res_mesg[num++] = '*';
-                Res_mesg[num++] = cmd_mesg[0x03 +1];
-                Res_mesg[num++] = 0;
+        case RS485_CMD_VERSION:
+            Res_mesg[num++] = 0;
+            Res_mesg[num++] = 0x0110 & 0x00ff;
+            Res_mesg[num++] = 0x0110 >> 8;
+            Res_mesg[num++] = 0;
+            Res_mesg[num++] = 0;
+            break;
 
-                Res_mesg[num++] = (uint8_t) dt32;
-                Res_mesg[num++] = (uint8_t) ( dt32 >> 8 );
-                Res_mesg[num++] = (uint8_t) ( dt32 >> 16 );
-                Res_mesg[num++] = (uint8_t) ( dt32 >> 24 );
+        case RS485_CMD_MESUR:
+            Res_mesg[num++] = 0;
+            break;
 
-                for( i=0; i < num; i++){
-                    sum += Res_mesg[i];
-                }
-
-                Res_mesg[num++] = '$';
-                Res_mesg[num++] = sum;
-
-                Send_RS485(Res_mesg, num);
-
-                com_step_flg = COM_RCV_INIT;
-                cmd_ptr = 0;
-
-                break;
-            default:
-                break;
-           }
+        case RS485_CMD_MESUR_DATA:
+            Res_mesg[num++] = 0;
+            Res_mesg[num++] = (uint8_t) dt32;
+            Res_mesg[num++] = (uint8_t) ( dt32 >> 8 );
+            Res_mesg[num++] = (uint8_t) ( dt32 >> 16 );
+            Res_mesg[num++] = (uint8_t) ( dt32 >> 24 );
+            break;
+        default:
+            break;
 
         }
-        else{
-            com_step_flg = COM_RCV_INIT;
-            cmd_ptr = 0;
+
+
+        for( i=6; i < num; i++){
+            sum += Res_mesg[i];
         }
+
+        Res_mesg[num++] = '$';
+        Res_mesg[num++] = sum;
+
+
+  for( i=0; i < 6; i++ ){
+   Res_mesg[num++] = message_end_text[i];
+  }
+
+
+        Send_RS485(Res_mesg, num);
+
+        cp_step = COM_PROTOCOL_RECIVE;
+
+        break;
     }
+
 }

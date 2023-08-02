@@ -281,7 +281,13 @@ COM_RCV_CSUM_ID 6
 COM_RCV_CSUM 7
 COM_RCV_COMPLITE 8
 ]
-"169
+"159
+[e E7218 . `uc
+COM_PROTOCOL_SEND 0
+COM_PROTOCOL_RECIVE 1
+COM_PROTOCOL_RESPONS 2
+]
+"184
 [e E7163 . `uc
 RS485_CMD_STATUS 1
 RS485_CMD_VERSION 2
@@ -295,13 +301,18 @@ RS485_AD_SLEVE01 1
 RS485_AD_SLEVE02 2
 RS485_AD_MAX 3
 ]
-"395
+"420
+[e E7170 . `uc
+RET_FALSE 0
+RET_TRUE 1
+]
+"567
 [e E7174 . `uc
 SLV_STATUS_IDLE 0
 SLV_STATUS_MESURING 1
 SLV_STATUS_ERROR 2
 ]
-"397
+"569
 [e E7179 . `uc
 SENS_NON 0
 SENS_VL530X 1
@@ -592,15 +603,17 @@ SENS_SONIX 2
 "54 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usb/usb_events.c
 [v _USER_USB_CALLBACK_EVENT_HANDLER USER_USB_CALLBACK_EVENT_HANDLER `(a  1 e 1 0 ]
 [v i2_USER_USB_CALLBACK_EVENT_HANDLER USER_USB_CALLBACK_EVENT_HANDLER `(a  1 e 1 0 ]
-"193 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
+"208 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
 [v _Set_rcv_data Set_rcv_data `(v  1 e 1 0 ]
-"207
+"222
 [v _Get_rcv_data Get_rcv_data `(uc  1 e 1 0 ]
-"224
-[v _command_rcv command_rcv `(E7190  1 e 1 0 ]
-"341
+"356
 [v _Send_RS485 Send_RS485 `(v  1 e 1 0 ]
-"369
+"391
+[v _Get_end_test_pt Get_end_test_pt `(us  1 e 2 0 ]
+"420
+[v _Check_Message Check_Message `(E7170  1 e 1 0 ]
+"511
 [v _rs485_com_task rs485_com_task `(v  1 e 1 0 ]
 "38 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\app_device_cdc_basic.c
 [v _buttonPressed buttonPressed `a  1 s 1 buttonPressed ]
@@ -1849,22 +1862,34 @@ SENS_SONIX 2
 "145
 [v _rcvbuf rcvbuf `[128]uc  1 e 128 0 ]
 "146
-[v _rcvnum rcvnum `uc  1 e 1 0 ]
+[v _work_buf work_buf `[128]uc  1 e 128 0 ]
 "147
-[v _rcv_wpt rcv_wpt `uc  1 e 1 0 ]
+[v _rcvnum rcvnum `uc  1 e 1 0 ]
 "148
+[v _rcv_wpt rcv_wpt `uc  1 e 1 0 ]
+"149
 [v _rcv_rpt rcv_rpt `uc  1 e 1 0 ]
-"156
-[v _cmd_mesg cmd_mesg `[20]uc  1 e 20 0 ]
-"157
-[v _Res_mesg Res_mesg `[20]uc  1 e 20 0 ]
-"158
-[v _cmd_char cmd_char `[20]uc  1 e 20 0 ]
+"150
+[v _work_buf_num work_buf_num `us  1 e 2 0 ]
 "159
+[v _cp_step cp_step `E7218  1 e 1 0 ]
+"163
+[v _com_start_text com_start_text `C[8]uc  1 e 8 0 ]
+"164
+[v _res_start_text res_start_text `C[8]uc  1 e 8 0 ]
+"165
+[v _message_end_text message_end_text `C[8]uc  1 e 8 0 ]
+"171
+[v _cmd_mesg cmd_mesg `[32]uc  1 e 32 0 ]
+"172
+[v _Res_mesg Res_mesg `[32]uc  1 e 32 0 ]
+"173
+[v _cmd_char cmd_char `[32]uc  1 e 32 0 ]
+"174
 [v _cmd_ptr cmd_ptr `uc  1 e 1 0 ]
-"161
+"176
 [v _rcsta rcsta `uc  1 e 1 0 ]
-"162
+"177
 [v _txsta txsta `uc  1 e 1 0 ]
 "162 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\main.c
 [v _main main `(v  1 e 1 0 ]
@@ -1904,38 +1929,22 @@ SENS_SONIX 2
 {
 "232
 } 0
-"369 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
+"511 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
 [v _rs485_com_task rs485_com_task `(v  1 e 1 0 ]
 {
-"377
-[v rs485_com_task@dt32 dt32 `ul  1 a 4 4 ]
-"376
+"519
+[v rs485_com_task@dt32 dt32 `ul  1 a 4 6 ]
+"518
 [v rs485_com_task@dt dt `f  1 a 4 0 ]
-"373
-[v rs485_com_task@num num `uc  1 a 1 10 ]
-"372
-[v rs485_com_task@i i `uc  1 a 1 9 ]
-"375
-[v rs485_com_task@sum sum `uc  1 a 1 8 ]
-"505
-} 0
-"224
-[v _command_rcv command_rcv `(E7190  1 e 1 0 ]
-{
-"226
-[v command_rcv@dt dt `uc  1 a 1 110 ]
-"227
-[v command_rcv@i i `uc  1 a 1 109 ]
-"228
-[v command_rcv@sum sum `uc  1 a 1 108 ]
-"336
-} 0
-"207
-[v _Get_rcv_data Get_rcv_data `(uc  1 e 1 0 ]
-{
-"209
-[v Get_rcv_data@dt dt `uc  1 a 1 1 ]
-"218
+"515
+[v rs485_com_task@num num `uc  1 a 1 11 ]
+"514
+[v rs485_com_task@i i `uc  1 a 1 10 ]
+"523
+[v rs485_com_task@command command `uc  1 a 1 5 ]
+"517
+[v rs485_com_task@sum sum `uc  1 a 1 4 ]
+"617
 } 0
 "43 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\fltol.c
 [v ___fltol __fltol `(l  1 e 4 0 ]
@@ -1947,15 +1956,57 @@ SENS_SONIX 2
 [v ___fltol@f1 f1 `d  1 p 4 1 ]
 "70
 } 0
-"341 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
+"356 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
 [v _Send_RS485 Send_RS485 `(v  1 e 1 0 ]
 {
-"343
-[v Send_RS485@i i `uc  1 a 1 107 ]
-"341
+"359
+[v Send_RS485@c c `[2]uc  1 a 2 107 ]
+"358
+[v Send_RS485@i i `uc  1 a 1 109 ]
+"356
 [v Send_RS485@msg msg `*.39uc  1 p 2 101 ]
 [v Send_RS485@num num `uc  1 p 1 103 ]
-"363
+"385
+} 0
+"222
+[v _Get_rcv_data Get_rcv_data `(uc  1 e 1 0 ]
+{
+"224
+[v Get_rcv_data@dt dt `uc  1 a 1 1 ]
+"233
+} 0
+"391
+[v _Get_end_test_pt Get_end_test_pt `(us  1 e 2 0 ]
+{
+"393
+[v Get_end_test_pt@i i `us  1 a 2 10 ]
+"394
+[v Get_end_test_pt@rtn rtn `us  1 a 2 8 ]
+"391
+[v Get_end_test_pt@num num `us  1 p 2 1 ]
+[v Get_end_test_pt@buf buf `*.39uc  1 p 2 3 ]
+"416
+} 0
+"420
+[v _Check_Message Check_Message `(E7170  1 e 1 0 ]
+{
+"422
+[v Check_Message@i i `us  1 a 2 121 ]
+"423
+[v Check_Message@j j `us  1 a 2 119 ]
+"426
+[v Check_Message@c c `[2]uc  1 a 2 114 ]
+"424
+[v Check_Message@start start `us  1 a 2 117 ]
+"425
+[v Check_Message@end end `us  1 a 2 110 ]
+"428
+[v Check_Message@status status `E7170  1 a 1 116 ]
+"420
+[v Check_Message@num num `us  1 p 2 101 ]
+[v Check_Message@src src `*.39uc  1 p 2 103 ]
+[v Check_Message@dist dist `*.39uc  1 p 2 105 ]
+"507
 } 0
 "604 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\debug_main.c
 [v _main_loop_disp main_loop_disp `(v  1 e 1 0 ]
@@ -2525,10 +2576,10 @@ SENS_SONIX 2
 "9 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
-[u S5624 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
+[u S5661 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
 "13
-[s S5627 _IO_FILE 12 `S5624 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
-[v sprintf@f f `S5627  1 a 12 93 ]
+[s S5664 _IO_FILE 12 `S5661 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
+[v sprintf@f f `S5664  1 a 12 93 ]
 "12
 [v sprintf@ap ap `[1]*.39v  1 a 2 91 ]
 "9
@@ -2627,9 +2678,9 @@ SENS_SONIX 2
 {
 "1549
 [v vfprintf@cfmt cfmt `*.32uc  1 a 2 83 ]
-[s S5659 _IO_FILE 0 ]
+[s S5696 _IO_FILE 0 ]
 "1546
-[v vfprintf@fp fp `*.39S5659  1 p 2 77 ]
+[v vfprintf@fp fp `*.39S5696  1 p 2 77 ]
 [v vfprintf@fmt fmt `*.32Cuc  1 p 2 79 ]
 [v vfprintf@ap ap `*.39*.39v  1 p 2 81 ]
 "1569
@@ -2637,16 +2688,16 @@ SENS_SONIX 2
 "1048
 [v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
 {
-[u S5688 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `*.2v 1 vp 3 0 `d 1 f 4 0 ]
+[u S5725 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `*.2v 1 vp 3 0 `d 1 f 4 0 ]
 "1059
-[v vfpfcnvrt@convarg convarg `S5688  1 a 4 71 ]
+[v vfpfcnvrt@convarg convarg `S5725  1 a 4 71 ]
 "1050
 [v vfpfcnvrt@cp cp `*.32uc  1 a 2 75 ]
 "1051
 [v vfpfcnvrt@done done `i  1 a 2 67 ]
-[s S5659 _IO_FILE 0 ]
+[s S5696 _IO_FILE 0 ]
 "1048
-[v vfpfcnvrt@fp fp `*.39S5659  1 p 2 59 ]
+[v vfpfcnvrt@fp fp `*.39S5696  1 p 2 59 ]
 [v vfpfcnvrt@fmt fmt `*.39*.32uc  1 p 2 61 ]
 [v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 63 ]
 "1543
@@ -2660,9 +2711,9 @@ SENS_SONIX 2
 [v xtoa@p p `i  1 a 2 52 ]
 "959
 [v xtoa@c c `uc  1 a 1 58 ]
-[s S5659 _IO_FILE 0 ]
+[s S5696 _IO_FILE 0 ]
 "955
-[v xtoa@fp fp `*.39S5659  1 p 2 43 ]
+[v xtoa@fp fp `*.39S5696  1 p 2 43 ]
 [v xtoa@d d `ui  1 p 2 45 ]
 "1024
 } 0
@@ -2691,9 +2742,9 @@ SENS_SONIX 2
 "865
 [v stoa@w w `i  1 a 2 39 ]
 [v stoa@i i `i  1 a 2 37 ]
-[s S5659 _IO_FILE 0 ]
+[s S5696 _IO_FILE 0 ]
 "862
-[v stoa@fp fp `*.39S5659  1 p 2 25 ]
+[v stoa@fp fp `*.39S5696  1 p 2 25 ]
 [v stoa@s s `*.34uc  1 p 2 27 ]
 "864
 [v stoa@F1156 F1156 `[7]uc  1 s 7 F1156 ]
@@ -2739,9 +2790,9 @@ SENS_SONIX 2
 [v dtoa@p p `i  1 a 2 49 ]
 "472
 [v dtoa@s s `uc  1 a 1 53 ]
-[s S5659 _IO_FILE 0 ]
+[s S5696 _IO_FILE 0 ]
 "470
-[v dtoa@fp fp `*.39S5659  1 p 2 43 ]
+[v dtoa@fp fp `*.39S5696  1 p 2 43 ]
 [v dtoa@d d `i  1 p 2 45 ]
 "527
 } 0
@@ -2751,9 +2802,9 @@ SENS_SONIX 2
 "154
 [v pad@w w `i  1 a 2 41 ]
 [v pad@i i `i  1 a 2 39 ]
-[s S5659 _IO_FILE 0 ]
+[s S5696 _IO_FILE 0 ]
 "152
-[v pad@fp fp `*.39S5659  1 p 2 32 ]
+[v pad@fp fp `*.39S5696  1 p 2 32 ]
 [v pad@buf buf `*.39uc  1 p 2 34 ]
 [v pad@p p `i  1 p 2 36 ]
 "183
@@ -2767,18 +2818,18 @@ SENS_SONIX 2
 [v fputs@c c `uc  1 a 1 29 ]
 "8
 [v fputs@s s `*.39Cuc  1 p 2 25 ]
-[u S5624 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
-[s S5627 _IO_FILE 12 `S5624 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
-[v fputs@fp fp `*.39S5627  1 p 2 27 ]
+[u S5661 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
+[s S5664 _IO_FILE 12 `S5661 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
+[v fputs@fp fp `*.39S5664  1 p 2 27 ]
 "19
 } 0
 "8 C:\Program Files\Microchip\xc8\v2.41\pic\sources\c99\common\nf_fputc.c
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 16 ]
-[u S5624 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
-[s S5627 _IO_FILE 12 `S5624 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
-[v fputc@fp fp `*.39S5627  1 p 2 18 ]
+[u S5661 . 3 `*.2uc 1 buffer 3 0 `*.2Cuc 1 source 3 0 ]
+[s S5664 _IO_FILE 12 `S5661 1 . 3 0 `i 1 count 2 3 `[3]uc 1 ungetbuf 3 5 `i 1 ungetcnt 2 8 `i 1 limit 2 10 ]
+[v fputc@fp fp `*.39S5664  1 p 2 18 ]
 "24
 } 0
 "117 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\app_device_cdc_basic.c
@@ -3293,14 +3344,14 @@ SENS_SONIX 2
 {
 "657
 } 0
-"193 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
+"208 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\usr_rs485_main.c
 [v _Set_rcv_data Set_rcv_data `(v  1 e 1 0 ]
 {
 [v Set_rcv_data@dt dt `uc  1 a 1 wreg ]
 [v Set_rcv_data@dt dt `uc  1 a 1 wreg ]
-"195
+"210
 [v Set_rcv_data@dt dt `uc  1 a 1 0 ]
-"201
+"216
 } 0
 "648 D:\PIC\PIC-18F47J53\PIC18F47J53_002.X\system.c
 [v _Interrupt_RTC Interrupt_RTC `(v  1 e 1 0 ]
