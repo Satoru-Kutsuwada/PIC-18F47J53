@@ -11853,6 +11853,65 @@ void Wait(uint16_t num);
 # 15 "usr_rs485_main.c" 2
 
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 1 3
+# 25 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 411 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 26 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 2 3
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+
+
+
+
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 17 "usr_rs485_main.c" 2
+
 
 
 
@@ -11899,14 +11958,14 @@ typedef enum {
     SENS_SONIX = 0x02
 
 }SENS_KIND;
-# 85 "usr_rs485_main.c"
+# 86 "usr_rs485_main.c"
 typedef struct{
  RA485_COMMAND command;
  RA485_ADDRESS address;
  uint8_t sub1;
  uint8_t rcv_byte;
 } CMD_MSG;
-# 111 "usr_rs485_main.c"
+# 112 "usr_rs485_main.c"
 typedef enum {
     COM_RCV_INIT = 0,
     COM_RCV_ADD_ID,
@@ -11965,17 +12024,75 @@ const char message_end_text[] = "MSGEND\0";
 char comp_buf[6 +1];
 
 
+typedef enum{
+
+ COM_START_TXT_00 = 0,
+ COM_START_TXT_01,
+ COM_START_TXT_02,
+ COM_START_TXT_03,
+ COM_START_TXT_04,
+ COM_START_TXT_05,
 
 
-uint8_t cmd_mesg[32];
-uint8_t Res_mesg[32];
-uint8_t cmd_char[32];
+ COM_COUNTER_L,
+ COM_COUNTER_H,
+
+
+ COM_ADDRESS_ID,
+ COM_ADDRESS_DIST,
+ COM_ADDRESS_SORC,
+ COM_ADDRESS_RESERVD,
+
+
+ COM_COMMAND_ID,
+ COM_COMMAND,
+ COM_COMMAND_RESP,
+ COM_COMMAND_01,
+ COM_COMMAND_02,
+ COM_COMMAND_03,
+ COM_COMMAND_04,
+ COM_COMMAND_05,
+ COM_COMMAND_06,
+ COM_COMMAND_07,
+ COM_COMMAND_08,
+ COM_COMMAND_09,
+ COM_COMMAND_10,
+ COM_COMMAND_11,
+
+
+ COM_CHKSUM_ID,
+ COM_CHKSUM,
+
+
+ COM_END_TXT_00,
+ COM_END_TXT_01,
+ COM_END_TXT_02,
+ COM_END_TXT_03,
+ COM_END_TXT_04,
+ COM_END_TXT_05,
+
+ COM_TABLE_MAX
+
+}COM_TABLE;
+# 249 "usr_rs485_main.c"
+uint8_t Cmd_mesg[COM_TABLE_MAX];
+uint8_t Res_mesg[COM_TABLE_MAX];
+uint8_t cmd_char[COM_TABLE_MAX];
 uint8_t cmd_ptr = 0;
+uint8_t res_ptr = 0;
+uint16_t com_counter = 0;
+
+
 
 uint8_t rcsta;
 uint8_t txsta;
 
 
+typedef enum{
+ RS485_DATA_COMMAND = 0,
+ RS485_DATA_RESPONS,
+ RS485_DATA_NONE
+}COMUNICATION_DATA_KIND;
 
 
 
@@ -12035,144 +12152,11 @@ uint8_t Get_rcv_data(void)
 
 
 
-COM_STEP command_rcv(void)
-{
-    uint8_t dt;
-    uint8_t i = 0;
-    uint8_t sum = 0;
-
-    if( rcsta != RCSTA1){
-        rcsta = RCSTA1;
-        printf("UART485_RCSTA=%02x\r\n",rcsta);
-    }
-
-    if( txsta != TXSTA1){
-        txsta = TXSTA1;
-        printf("UART485_TXSTA=%02x\r\n",txsta);
-    }
-
-
-
-
-
-    while( rcvnum > 0 ){
-        dt = Get_rcv_data();
-
-        switch( com_step_flg ){
-            case COM_RCV_INIT:
-                if( dt == '#' ){
-                    cmd_mesg[cmd_ptr] = dt;
-                    com_step_flg = COM_RCV_ADD_ID;
-                    cmd_ptr ++;
-                }
-                break;
-            case COM_RCV_ADD_ID:
-                cmd_mesg[cmd_ptr] = dt;
-                com_step_flg = COM_RCV_ADD_ID_DIST;
-                cmd_ptr ++;
-                break;
-
-            case COM_RCV_ADD_ID_DIST:
-                cmd_mesg[cmd_ptr] = dt;
-                com_step_flg = COM_RCV_ADD_ID_SOURCE;
-                cmd_ptr ++;
-                break;
-
-            case COM_RCV_ADD_ID_SOURCE:
-                if( dt == '*' ){
-                    cmd_mesg[cmd_ptr] = dt;
-                    com_step_flg = COM_RCV_CMD_ID;
-                    cmd_ptr ++;
-                }
-                else{
-                    com_step_flg = COM_RCV_INIT;
-                    cmd_ptr = 0;
-                }
-                break;
-
-            case COM_RCV_CMD_ID:
-                cmd_mesg[cmd_ptr] = dt;
-                com_step_flg = COM_RCV_COMMAND;
-                cmd_ptr ++;
-                break;
-
-            case COM_RCV_COMMAND:
-                if( dt == '$' ){
-                    cmd_mesg[cmd_ptr] = dt;
-                    com_step_flg = COM_RCV_CSUM_ID;
-                    cmd_ptr ++;
-                }
-                else{
-                    cmd_mesg[cmd_ptr] = dt;
-                    com_step_flg = COM_RCV_COMMAND;
-                    cmd_ptr ++;
-                }
-                break;
-            case COM_RCV_CSUM_ID:
-
-
-                sum = 0;
-                for( i = 0; i< (cmd_ptr -1); i++){
-                    sum += cmd_mesg[i];
-                }
-
-                if( sum == dt ){
-                    cmd_mesg[cmd_ptr] = dt;
-                    com_step_flg = COM_RCV_COMPLITE;
-                    cmd_ptr ++;
-
-
-                    printf("cmd_mesg= ");
-                    for( i=0; i<cmd_ptr; i++ ){
-                        printf("%02x ",cmd_mesg[i]);
-                        cmd_char[i] = ((cmd_mesg[i]<0x20||cmd_mesg[i]>=0x7f)? '.': cmd_mesg[i]);
-                    }
-                    cmd_char[i+1] = '\0';
-                    printf(" :: %s\r\n", cmd_char);
-
-
-                }
-                else{
-                    com_step_flg = COM_RCV_INIT;
-                    cmd_ptr = 0;
-                }
-
-            case COM_RCV_COMPLITE:
-            default:
-                break;
-        }
-
-        printf("dt=0x%02x, com_step_flg=%d,rcvnum=%d\r\n", dt, com_step_flg,rcvnum);
-
-    }
-
-    return com_step_flg;
-}
-
-
-
 
 void Send_RS485(uint8_t *msg, uint8_t num)
 {
     uint8_t i;
     uint8_t c[2];
-
-    for( i=0; i < num; i++){
-        cmd_char[i] = ((msg[i]<0x20||msg[i]>=0x7f)? '.': msg[i]);
-    }
-
-    printf("\r\nRESPONS MESSAGE = \r\n ");
-    for( i=0; i < num; i++){
-  printf("%02x ", msg[i]);
- }
-    printf("\r\n ");
-    c[1] = '\0';
-    for( i=0; i < num; i++){
-        c[0] = cmd_char[i];
-  printf(" %s ", c);
- }
-    printf("\r\n");
-
 
     LATAbits.LATA2 = 1;
     for( i=0; i < num; i++){
@@ -12216,53 +12200,85 @@ uint16_t Get_end_test_pt(uint16_t num,uint8_t *buf )
 
 
 
-RETURN_STATUS Check_Message(uint16_t num, uint8_t *src, uint8_t *dist)
+
+uint8_t Get_command_chksum(uint8_t start, uint8_t end,uint8_t *dt )
 {
+ uint8_t sum = 0;
+ uint8_t i;
+
+ for( i=start; i<end; i++){
+  sum += dt[i];
+
+ }
+
+
+ return sum;
+}
+
+
+
+
+RETURN_STATUS Check_Message(uint16_t num, uint8_t *src)
+{
+    RETURN_STATUS status = RET_TRUE;
  uint16_t i;
  uint16_t j;
  uint16_t start;
  uint16_t end;
     uint8_t c[2];
-
-    RETURN_STATUS status;
-    status = RET_FALSE;
-
+    uint8_t flg = RS485_DATA_NONE;
+    uint8_t *pt;
 
 
-    start = 0xff;
- for( i=0; i<num; i++){
-  if( src[i] == com_start_text[0]
-    && src[i+1] == com_start_text[1]
-    && src[i+2] == com_start_text[2]
-    && src[i+3] == com_start_text[3]
-    && src[i+4] == com_start_text[4]
-    && src[i+5] == com_start_text[5] ){
 
+
+
+ start = 0xffff;
+    for( i=0; i<num; i++){
+        if( src[i] == res_start_text[0]
+                && src[i+1] == res_start_text[1]
+                && src[i+2] == res_start_text[2]
+                && src[i+3] == res_start_text[3]
+                && src[i+4] == res_start_text[4]
+                && src[i+5] == res_start_text[5] ){
+
+
+            flg = RS485_DATA_RESPONS;
+            status = RET_FALSE;
             start = i;
+            break;
+        }
+    }
 
-            if( src[i+5+2] == RS485_AD_SLEVE02 ){
-                status = RET_TRUE;
-            }
 
-   break;
-  }
- }
 
-    if( start == 0xff ){
+
+ if(start == 0xffff){
         for( i=0; i<num; i++){
-            if( src[i] == res_start_text[0]
-                    && src[i+1] == res_start_text[1]
-                    && src[i+2] == res_start_text[2]
-                    && src[i+3] == res_start_text[3]
-                    && src[i+4] == res_start_text[4]
-                    && src[i+5] == res_start_text[5] ){
+            if( src[i] == com_start_text[0]
+                    && src[i+1] == com_start_text[1]
+                    && src[i+2] == com_start_text[2]
+                    && src[i+3] == com_start_text[3]
+                    && src[i+4] == com_start_text[4]
+                    && src[i+5] == com_start_text[5] ){
 
+                flg = RS485_DATA_COMMAND;
                 start = i;
                 break;
             }
         }
     }
 
+    if( start == 0xffff ){
+  status = RET_FALSE;
+  printf("Error : Respons Data start txt none \r\n");
+ }
+
+
+
+
+
+    end = 0xffff;
  for( i=0; i<num; i++){
   if( src[i] == message_end_text[0]
     && src[i+1] == message_end_text[1]
@@ -12276,28 +12292,82 @@ RETURN_STATUS Check_Message(uint16_t num, uint8_t *src, uint8_t *dist)
   }
  }
 
- j = 0;
- for( i=start; i < end; i++){
-  dist[j++] = src[i];
+    if( end == 0xffff ){
+  status = RET_FALSE;
+  printf("Error : Command / Respons Data end txt none \r\n");
  }
 
- for( i=0; i < j; i++){
-  cmd_char[i] = ((dist[i]<0x20||dist[i]>=0x7f)? '.': dist[i]);
+
+    if( status == RET_TRUE ){
+
+
+
+            for( i=0; i < COM_TABLE_MAX; i++ ){
+                Cmd_mesg[i] = 0;
+            }
+
+
+
+
+        j = 0;
+        for( i=start; i < end; i++){
+            if( j < COM_TABLE_MAX ){
+                Cmd_mesg[j] = src[i];
+            }
+            else{
+                status = RET_FALSE;
+                printf("Error : Respons data size over\r\n");
+            }
+            j++;
+        }
+    }
+
+
+
+    if( status == RET_TRUE ){
+        if( Cmd_mesg[COM_CHKSUM] != Get_command_chksum(COM_COUNTER_L, COM_CHKSUM_ID, Cmd_mesg)){
+            status = RET_FALSE;
+            printf("Error : Respons data chksum eoor");
+        }
+    }
+
+
+
+ for( i=0; i < COM_TABLE_MAX ; i++ ){
+  cmd_char[i] = (uint8_t)((Cmd_mesg[i]<0x20||Cmd_mesg[i]>=0x7f)? '.': Cmd_mesg[i]);
  }
 
-    printf("\r\nCOMMAND MESSAGE = \r\n ");
-    for( i=0; i < j; i++){
-  printf("%02x ",dist[i]);
+    if( Cmd_mesg[COM_ADDRESS_DIST]== RS485_AD_SLEVE02 ){
+        printf("\r\nCOMMAND MESSAGE : Master->My Device \r\n ");
+    }
+    else{
+        printf("\r\nCOMMAND MESSAGE : Master->Another Device \r\n ");
+    }
+
+ for( i=0; i < COM_TABLE_MAX ; i++){
+  printf("%02x ", Cmd_mesg[i]);
  }
-    printf("\r\n ");
-    c[1] = '\0';
-    for( i=0; i < j; i++){
-        c[0] = cmd_char[i];
+ printf("\r\n ");
+ c[1] = '\0';
+ for( i=0; i < COM_TABLE_MAX ; i++){
+  c[0] = cmd_char[i];
   printf(" %s ", c);
  }
-    printf("\r\n");
+ printf("\r\n");
 
 
+
+
+
+    if( flg == RS485_DATA_RESPONS ){
+        status = RET_FALSE;
+    }
+
+
+
+    if( Cmd_mesg[COM_ADDRESS_DIST] != RS485_AD_SLEVE02 ){
+        status = RET_FALSE;
+    }
 
 
 
@@ -12307,19 +12377,72 @@ RETURN_STATUS Check_Message(uint16_t num, uint8_t *src, uint8_t *dist)
 
 
 
+void rs485_init(void)
+{
+
+    float dtf;
+    uint8_t dt8[10];
+    uint8_t *pt;
+    float *ptf;
+
+
+
+    dtf = 3.14;
+    printf("  dtf= %f\r\n",dtf);
+    printf("  dtf= %e\r\n",dtf);
+    printf("  dtf= %g\r\n",dtf);
+    printf("  dtf= %d\r\n\r\n",dtf);
+
+    pt = (uint8_t *)&dtf;
+    dt8[0]=*pt;
+    pt++;
+    dt8[1]=*pt;
+    pt++;
+    dt8[2]=*pt;
+    pt++;
+    dt8[3]=*pt;
+
+    printf("dt8[]= %02x %02x %02x %02x \r\n",dt8[0],dt8[1],dt8[2],dt8[3]);
+
+    ptf=(float *)dt8;
+    printf("  *ptf= %g\r\n\r\n", *ptf);
+
+    pt = (uint8_t *)&dtf;
+    dt8[3]=*pt;
+    pt++;
+    dt8[2]=*pt;
+    pt++;
+    dt8[1]=*pt;
+    pt++;
+    dt8[0]=*pt;
+
+    printf("dt8[]= %02x %02x %02x %02x \r\n",dt8[0],dt8[1],dt8[2],dt8[3]);
+
+    ptf=(float *)dt8;
+    printf("  *ptf= %g\r\n", *ptf);
+
+printf("char=%d\r\n",sizeof(char));
+printf("short=%d\r\n",sizeof(short));
+printf("int=%d\r\n",sizeof(int));
+printf("long=%d\r\n",sizeof(long));
+printf("float=%d\r\n",sizeof(float));
+printf("double=%d\r\n",sizeof(double));
+
+
+}
+
+
+
+
 void rs485_com_task(void)
 {
 
-    uint8_t i = 0;
-    uint8_t num = 0;
-
-    uint8_t sum = 0;
-    float dt = 10.25;
-    uint32_t dt32;
-
-    dt32 = (uint32_t)dt;
-
+    uint8_t i, j;
+    float dtf;
     uint8_t command ;
+    uint8_t c[2] ;
+    uint8_t *dt;
+
 
 
     switch(cp_step){
@@ -12328,8 +12451,10 @@ void rs485_com_task(void)
             work_buf[work_buf_num ++] = Get_rcv_data();
 
             if( Get_end_test_pt(work_buf_num, work_buf) != 0 ){
-                if( Check_Message(work_buf_num, work_buf, cmd_mesg) == RET_TRUE ){
+                if( Check_Message(work_buf_num, work_buf) == RET_TRUE ){
                     cp_step = COM_PROTOCOL_RESPONS;
+                    command = Cmd_mesg[COM_COMMAND];
+                    printf("COMMAND= %d\r\n", command);
                 }
                 else{
                     printf("Discard received message \r\n");
@@ -12343,70 +12468,117 @@ void rs485_com_task(void)
         break;
     case COM_PROTOCOL_RESPONS:
 
-        command = cmd_mesg[ 6 + 0x03 + 1] ;
-        printf("COMMAND=%d\r\n", command);
+
+
+        for( i=0; i < COM_TABLE_MAX; i++ ){
+            Res_mesg[i] = 0;
+        }
+
+
 
 
         for( i=0; i < 6; i++ ){
-            Res_mesg[i] = res_start_text[i];
+            j = COM_START_TXT_00 + i ;
+            Res_mesg[j] = res_start_text[i];
         }
 
-        num = 6;
-        Res_mesg[num++] = '#';
-        Res_mesg[num++] = RS485_AD_MASTER;
-        Res_mesg[num++] = RS485_AD_SLEVE02;
-
-        Res_mesg[num++] = '*';
-        Res_mesg[num++] = command;
 
 
-        switch( command ){
+
+        Res_mesg[COM_COUNTER_L] = Cmd_mesg[COM_COUNTER_L];
+        Res_mesg[COM_COUNTER_H] = Cmd_mesg[COM_COUNTER_H];
+
+
+
+
+        Res_mesg[COM_ADDRESS_ID] = '#';
+        Res_mesg[COM_ADDRESS_DIST] = RS485_AD_MASTER;
+        Res_mesg[COM_ADDRESS_SORC] = RS485_AD_SLEVE02;
+
+
+
+
+        switch(command){
         case RS485_CMD_STATUS:
-            Res_mesg[num++] = 0;
-            Res_mesg[num++] = SLV_STATUS_IDLE;
-            Res_mesg[num++] = 0;
-            Res_mesg[num++] = SENS_NON;
+            Res_mesg[COM_COMMAND_ID] = '*';
+            Res_mesg[COM_COMMAND] = command;
+            Res_mesg[COM_COMMAND_RESP] = SLV_STATUS_IDLE;
+            Res_mesg[COM_COMMAND_01] = 0;
+            Res_mesg[COM_COMMAND_02] = SENS_NON;
             break;
-
         case RS485_CMD_VERSION:
-            Res_mesg[num++] = 0;
-            Res_mesg[num++] = 0x0110 & 0x00ff;
-            Res_mesg[num++] = 0x0110 >> 8;
-            Res_mesg[num++] = 0;
-            Res_mesg[num++] = 0;
-            break;
+            Res_mesg[COM_COMMAND_ID] = '*';
+            Res_mesg[COM_COMMAND] = command;
+            Res_mesg[COM_COMMAND_RESP] = 0;
 
+            Res_mesg[COM_COMMAND_01] = 0x12;
+            Res_mesg[COM_COMMAND_02] = 0x01;
+            Res_mesg[COM_COMMAND_03] = 0x34;
+            Res_mesg[COM_COMMAND_04] = 0x20;
+
+            break;
         case RS485_CMD_MESUR:
-            Res_mesg[num++] = 0;
-            break;
+            Res_mesg[COM_COMMAND_ID] = '*';
+            Res_mesg[COM_COMMAND] = command;
+            Res_mesg[COM_COMMAND_RESP] = 0;
 
+            break;
         case RS485_CMD_MESUR_DATA:
-            Res_mesg[num++] = 0;
-            Res_mesg[num++] = (uint8_t) dt32;
-            Res_mesg[num++] = (uint8_t) ( dt32 >> 8 );
-            Res_mesg[num++] = (uint8_t) ( dt32 >> 16 );
-            Res_mesg[num++] = (uint8_t) ( dt32 >> 24 );
+            Res_mesg[COM_COMMAND_ID] = '*';
+            Res_mesg[COM_COMMAND] = command;
+            Res_mesg[COM_COMMAND_RESP] = 0;
+
+            dtf = 10.25;
+            dt = (uint8_t *)&dtf;
+            printf("dtf=%d \r\n",dtf);
+
+            Res_mesg[COM_COMMAND_01] = dt[0];
+            Res_mesg[COM_COMMAND_02] = dt[1];
+            Res_mesg[COM_COMMAND_03] = dt[2];
+            Res_mesg[COM_COMMAND_04] = dt[3];
+
+
             break;
         default:
             break;
-
         }
 
 
-        for( i=6; i < num; i++){
-            sum += Res_mesg[i];
+
+
+        Res_mesg[COM_CHKSUM_ID] = '$';
+        Res_mesg[COM_CHKSUM] = Get_command_chksum(COM_COUNTER_L, COM_CHKSUM_ID, Res_mesg);
+
+
+
+
+        for( i=0; i < 6; i++ ){
+            j = COM_END_TXT_00 + i ;
+            Res_mesg[j] = message_end_text[i];
         }
 
-        Res_mesg[num++] = '$';
-        Res_mesg[num++] = sum;
 
 
-  for( i=0; i < 6; i++ ){
-   Res_mesg[num++] = message_end_text[i];
-  }
+
+        for( i=0; i < COM_TABLE_MAX ; i++ ){
+            cmd_char[i] = (uint8_t)((Res_mesg[i]<0x20||Res_mesg[i]>=0x7f)? '.': Res_mesg[i]);
+        }
+
+        printf("\r\nRESPONS MESSAGE : My Device -> Master\r\n ");
+        for( i=0; i < COM_TABLE_MAX ; i++){
+            printf("%02x ", Res_mesg[i]);
+        }
+        printf("\r\n ");
+        c[1] = '\0';
+        for( i=0; i < COM_TABLE_MAX ; i++){
+            c[0] = cmd_char[i];
+            printf(" %s ", c);
+        }
+        printf("\r\n");
 
 
-        Send_RS485(Res_mesg, num);
+
+        Send_RS485( Res_mesg, COM_TABLE_MAX );
 
         cp_step = COM_PROTOCOL_RECIVE;
 

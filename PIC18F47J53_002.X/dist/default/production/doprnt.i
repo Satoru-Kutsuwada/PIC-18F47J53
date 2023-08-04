@@ -839,7 +839,7 @@ union flui {
 
 };
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\sources\\c99\\common\\doprnt.c"
-static char dbuf[32];
+static char dbuf[80];
 
 
 
@@ -930,6 +930,291 @@ static void dtoa(FILE *fp, vfpf_sint_t d)
 
 
     return (void) pad(fp, &dbuf[i], w);
+}
+
+
+
+static void efgtoa(FILE *fp, long double f, char c)
+{
+    char mode, nmode, pp, sign, esign;
+    int d, e, i, m, n, ne, p, t, w;
+    long double h, l;
+ union flui g, u, ou;
+
+
+    sign = 0;
+    g.f = f;
+    if (g.f < 0.0) {
+        sign = 1;
+        g.f = -g.f;
+    }
+
+
+    n = 0;
+    w = width;
+    if (sign
+
+
+
+   ) {
+  sign = sign ? '-' : '+';
+    }
+
+
+
+
+
+
+
+    if (( __fpclassifyf(g.f) == 1 )) {
+  if (sign) {
+   dbuf[0] = sign;
+   w--;
+   n = 1;
+  }
+
+
+
+
+
+
+  {
+            strcpy(&dbuf[n], "inf");
+        }
+        w -= ((sizeof("inf")/sizeof("inf"[0]))-1);
+        return (void) pad(fp, &dbuf[0], w);
+    }
+    if (( __fpclassifyf(g.f) == 0 )) {
+  if (sign) {
+   dbuf[0] = sign;
+   w--;
+   n = 1;
+  }
+
+
+
+
+
+
+  {
+            strcpy(&dbuf[n], "nan");
+        }
+        w -= ((sizeof("nan")/sizeof("nan"[0]))-1);
+        return (void) pad(fp, &dbuf[0], w);
+    }
+
+
+    u.f = 1.0;
+    e = 0;
+ if (!(g.f == 0.0)) {
+  while ((labs((g).u-((ou.f = u.f*10.0,ou)).u) <= 1) || g.f > ou.f) {
+   u = ou;
+   ++e;
+  }
+  if ((labs((g).u-(u).u) <= 1)) {
+   g = u;
+  }
+  else {
+   while (g.f < u.f) {
+    u.f = u.f/10.0;
+    --e;
+    if ((labs((g).u-(u).u) <= 1)) {
+     g = u;
+     break;
+    }
+   }
+  }
+    }
+
+
+
+
+
+ mode = c;
+
+    nmode = mode;
+
+    if (mode == 'g') {
+  if (prec == 0) {
+   prec = 1;
+  }
+        p = (0 < prec) ? prec : 6;
+    }
+ else
+
+ {
+        p = (prec < 0) ? 6 : prec;
+    }
+
+
+
+    if (mode == 'g') {
+        if (!(e < -4) && !((p - 1) < e)) {
+            nmode = 'f';
+        } else {
+            nmode = 'e';
+        }
+    }
+
+
+
+    m = p;
+
+    if (!(mode == 'g') || ((nmode == 'f') && (e < 0)))
+
+ {
+        ++m;
+    }
+
+
+
+    if (nmode == 'f') {
+        if (e < 0) {
+            u.f = 1.0;
+            e = 0;
+        }
+        if (!(mode == 'g')) {
+            m += e;
+        }
+    }
+
+
+
+    i = 0;
+    h = g.f;
+    ou = u;
+    while (i < m) {
+        l = floorf(h/u.f);
+        d = (int)l;
+        h -= l*u.f;
+        u.f = u.f/10.0;
+        ++i;
+    }
+
+
+    l = u.f*5.0;
+    if (h < l) {
+        l = 0.0;
+    } else {
+
+        if ((h == l) && !(d % 2)) {
+            l = 0.0;
+        }
+    }
+
+
+    h = g.f + l;
+
+ if (h >= (ou.f*10.0)) {
+  e++;
+  ou.f *= 10.0;
+
+  if (nmode == 'f') {
+
+   m++;
+  }
+
+ }
+
+
+    u = ou;
+
+    ne = (nmode == 'e') ? 0 : e;
+
+
+
+    pp = 0;
+    t = 0;
+    i = 0;
+    while ((i < m) && (n < (80 - 5))) {
+        l = floorf(h/u.f);
+        d = (int)l > 9 ? 9 : (int)l;
+
+        if (!d && (mode == 'g') && (ne < 0)
+
+
+
+    ) {
+            ++t;
+        }
+  else
+
+  {
+            if (!pp && (ne < 0)) {
+                dbuf[n++] = '.';
+                --w;
+                pp = 1;
+            }
+            while (t) {
+                dbuf[n++] = '0';
+                --w;
+                --t;
+            }
+            dbuf[n++] = (char)((int)'0' + d);
+            --w;
+        }
+        h -= l*u.f;
+        u.f = u.f/10.0;
+        --ne;
+        ++i;
+    }
+
+
+
+
+
+ i = sizeof(dbuf) - 1;
+    dbuf[i] = '\0';
+
+
+
+    if (nmode == 'e') {
+        esign = 0;
+        if (e < 0) {
+            esign = 1;
+            e = -e;
+        }
+        p = 2;
+        while (e || (0 < p)) {
+            --i;
+            dbuf[i] = '0' + (e % 10);
+            e = e / 10;
+            --p;
+            --w;
+        }
+        --i;
+        dbuf[i] = esign ? '-' : '+';
+        --w;
+        --i;
+
+
+
+  dbuf[i] = 'e';
+
+        --w;
+    }
+
+
+ memcpy(&dbuf[i-n], &dbuf[0], (size_t)n);
+ n = i-n;
+ i = sign == 0 ? 0 : 1;
+
+
+ if (flags & (1 << 1)) {
+  while (w > i && n > i) {
+   dbuf[--n] = '0';
+   w--;
+  }
+ }
+
+
+ if (sign) {
+  dbuf[--n] = sign;
+ }
+ w -= i;
+
+
+    return (void) pad(fp, &dbuf[n], w);
 }
 # 862 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\sources\\c99\\common\\doprnt.c"
 static void stoa(FILE *fp, char *s)
@@ -1132,6 +1417,107 @@ vfpfcnvrt(FILE *fp, char *fmt[], va_list ap)
    *fmt += *fmt[0] == 's' ? 1 : ((sizeof("lls")/sizeof("lls"[0]))-1);
             return (void) stoa(fp, (*(char * *)__va_arg(*(char * **)ap, (char *)0)));
         }
+
+
+
+
+  cp = *fmt;
+  c = *cp;
+  switch(c) {
+
+   case 'l':
+   case 'L':
+    cp++;
+    break;
+
+
+
+
+
+
+
+   case 'e':
+
+
+
+
+
+   case 'f':
+
+
+
+
+
+   case 'g':
+
+
+
+
+    c = 'l';
+    break;
+   default:
+    c = 0;
+    break;
+  }
+
+  if (0
+
+
+
+
+
+
+
+    || *cp == 'e'
+
+
+
+
+
+    || *cp == 'f'
+
+
+
+
+
+    || *cp == 'g'
+
+
+
+
+    ) {
+   switch (c) {
+    case 'l':
+     convarg.f = (long double)(*(double *)__va_arg(*(double **)ap, (double)0));
+     break;
+    case 'L':
+     convarg.f = (long double)(*(long double *)__va_arg(*(long double **)ap, (long double)0));
+     break;
+   }
+   *fmt = cp+1;
+   switch (*cp) {
+# 1502 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\sources\\c99\\common\\doprnt.c"
+    case 'e':
+
+
+
+
+
+    case 'f':
+
+
+
+
+
+    case 'g':
+
+
+
+
+     return (void) efgtoa(fp, convarg.f, *cp);
+
+   }
+  }
 # 1535 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\sources\\c99\\common\\doprnt.c"
         ++*fmt;
         return (void) 0;
